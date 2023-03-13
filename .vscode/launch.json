@@ -1,0 +1,41 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        
+    
+    
+    
+        {
+            "name": "hive_demo-main-bool",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "hive_demo-main-bool (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "hive_demo-main-bool (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },  {
+            "name": "Flutter (GRAVITY 3 SE)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "Flutter (SM G998B)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+
+    ]
+}
