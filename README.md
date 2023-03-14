@@ -1,35 +1,49 @@
-# Hive Demo
+NIMBUS
+Nimbus is a Flutter coded app that controls LED lights by sending an array to an ESP32 microcontroller. This app provides an easy-to-use interface to switch ON/OFF and adjust the color and brightness of the LED lights.
 
-This is a demo **Flutter** project using [Hive](https://pub.dev/packages/hive) as the persistent local database.
+Requirements
+To use this app, you will need the following components:
 
-The app consists of three screens:
+ESP32 microcontroller
+LED lights
+Breadboard
+Jumper wires
+Installation
+Clone the repository to your local machine.
 
-1. **InfoScreen:** for showing the Via information that is present in Hive database, and a button for deleting a specific Via data.
-2. **AddScreen:** for storing the information of a Via on the database.
-3. **UpdateScreen:** for updating the information of a Via on the database.
+Open the project in your preferred IDE.
 
-## App in action
+Connect your ESP32 microcontroller to your computer via USB cable.
 
-![](screenshots/Nimbus.gif)
+Install the necessary dependencies by running the following command:
 
-## License
+csharp
+Copy code
+flutter pub get
+Connect the LED lights to your ESP32 microcontroller according to the schematic provided in the project.
 
-Copyright (c) 2021 Souvik Biswas
+Compile and upload the code provided in the ESP32_Code folder to your ESP32 microcontroller.
 
-Permission is hereby granted, free of charge, to any Via obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit Vias to whom the Software is
-furnished to do so, subject to the following conditions:
+Run the app on your device by running the following command:
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+flutter run
+Usage
+Open the app and connect to the ESP32 microcontroller.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+Turn the LED lights on or off by tapping the power button.
+
+Adjust the brightness and color of the LED lights by moving the corresponding sliders.
+
+Press the save button to save the current settings.
+
+Press the reset button to reset the LED lights to their default settings.
+
+Contributing
+Contributions are welcome! Please feel free to submit a pull request.
+
+License
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+
+
+
