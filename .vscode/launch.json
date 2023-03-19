@@ -34,7 +34,7 @@
             "name": "Flutter (SM G998B)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "release"
+            "flutterMode": "debug"
         }
 
     ]

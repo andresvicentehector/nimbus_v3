@@ -1,6 +1,6 @@
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
-import '../models/via.dart';
+import '../models/ListadoVias/hive/via.dart';
 
 /*String quePared = "Pared de 25 Grados";
 String fondo = "images/fondo_trans25.png";

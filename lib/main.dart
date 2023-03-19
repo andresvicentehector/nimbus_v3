@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:Nimbus/models/via.dart';
+import 'package:Nimbus/models/ListadoVias/hive/via.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:Nimbus/template/T8Colors.dart';
-import 'screens/info_screen.dart';
+import 'views/listadoVias/listado_screen.dart';
 
 main() async {
   // Initialize hive
@@ -37,7 +37,11 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: t8_colorPrimary,
       ),
       debugShowCheckedModeBanner: false,
-      home: InfoScreen(),
+      home: ListadoScreen(),
+      initialRoute: ListadoScreen.id,
+      routes: {
+        ListadoScreen.id: (context) => ListadoScreen(),
+      },
     );
   }
 }
