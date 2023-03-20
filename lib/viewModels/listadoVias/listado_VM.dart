@@ -118,7 +118,7 @@ class ViasListVM extends ChangeNotifier {
       colorBbloque = t8_colorPrimary;
       colorBtrave = t8_colorPrimary;
       colorDificultad = Colors.transparent;
-      fetchVias(version + "/");
+      fetchVias("quepared=" + version + "&isbloque=Travesía&dificultad=verde");
       notifyListeners();
     } else {
       /*list = raw.values
@@ -173,7 +173,8 @@ class ViasListVM extends ChangeNotifier {
                 entry.value.dificultad == Colors.pink.value) &&
             entry.value.quepared == int.parse(version)));*/
 
-        fetchVias(version + "/morado");
+        fetchVias("quepared=" + version + "&dificultad=morado");
+
         colorDificultad = Colors.pink;
       } else if (color == Colors.orangeAccent.value ||
           color == Colors.orange.value) {
@@ -188,7 +189,7 @@ class ViasListVM extends ChangeNotifier {
                       entry.value.quepared == int.parse(version)));*/
 
         colorDificultad = Colors.orange;
-        fetchVias(version + "/naranja");
+        fetchVias("quepared=" + version + "&dificultad=naranja");
       } else if (color == Colors.green) {
         //list = raw!.values.where((item) => item.dificultad == color).toList();
         /* filteredraw = Map.fromEntries(raw!.entries.where((entry) =>
@@ -196,7 +197,7 @@ class ViasListVM extends ChangeNotifier {
             entry.value.quepared == int.parse(version)));*/
 
         colorDificultad = Color(color);
-        fetchVias(version + "/green");
+        fetchVias("quepared=" + version + "&dificultad=verde");
       } else if (color == Colors.yellow) {
         //list = raw!.values.where((item) => item.dificultad == color).toList();
 
@@ -205,7 +206,7 @@ class ViasListVM extends ChangeNotifier {
                     entry.value.quepared == int.parse(version)));*/
 
         colorDificultad = Color(color);
-        fetchVias(version + "/yellow");
+        fetchVias("quepared=" + version + "&dificultad=amarillo");
       } else if (color == Colors.black) {
         //list = raw!.values.where((item) => item.dificultad == color).toList();
 
@@ -214,7 +215,7 @@ class ViasListVM extends ChangeNotifier {
                       entry.value.quepared == int.parse(version)));*/
 
         colorDificultad = Color(color);
-        fetchVias(version + "/black");
+        fetchVias("quepared=" + version + "&dificultad=negro");
       }
     }
 
@@ -234,6 +235,7 @@ class ViasListVM extends ChangeNotifier {
             entry.value.isbloque == "Bloque"));*/
 
         colorDificultad = Colors.pink;
+        fetchVias("quepared=" + version + "&isbloque=Bloque&dificultad=morado");
       } else if (color == Colors.orangeAccent.value ||
           color == Colors.orange.value) {
         /*list = raw!.values
@@ -250,6 +252,8 @@ class ViasListVM extends ChangeNotifier {
             entry.value.isbloque == "Bloque"));*/
 
         colorDificultad = Colors.orange;
+        fetchVias(
+            "quepared=" + version + "&isbloque=Bloque&dificultad=naranja");
       } else if (color == Colors.green) {
         /*list = raw!.values
               .where((item) =>
@@ -262,10 +266,14 @@ class ViasListVM extends ChangeNotifier {
             entry.value.isbloque == "Bloque"));*/
 
         colorDificultad = Color(color);
+        fetchVias("quepared=" + version + "&isbloque=Bloque&dificultad=verde");
       } else if (color == Colors.yellow) {
         colorDificultad = Color(color);
+        fetchVias(
+            "quepared=" + version + "&isbloque=Bloque&dificultad=amarillo");
       } else if (color == Colors.black) {
         colorDificultad = Color(color);
+        fetchVias("quepared=" + version + "&isbloque=Bloque&dificultad=negro");
       }
     }
 
@@ -285,6 +293,8 @@ class ViasListVM extends ChangeNotifier {
             entry.value.isbloque == "Travesía"));*/
 
         colorDificultad = Colors.pink;
+        fetchVias(
+            "quepared=" + version + "&isbloque=Travesía&dificultad=morado");
       } else if (color == Colors.orangeAccent.value ||
           color == Colors.orange.value) {
         /*  list = raw!.values
@@ -301,6 +311,8 @@ class ViasListVM extends ChangeNotifier {
             entry.value.isbloque == "Travesía"));*/
 
         colorDificultad = Colors.orange;
+        fetchVias(
+            "quepared=" + version + "&isbloque=Travesía&dificultad=naranja");
       } else if (color == Colors.green) {
         /*list = raw!.values
               .where((item) =>
@@ -313,10 +325,16 @@ class ViasListVM extends ChangeNotifier {
             entry.value.isbloque == "Travesía"));*/
 
         colorDificultad = Color(color);
+        fetchVias(
+            "quepared=" + version + "&isbloque=Travesía&dificultad=verde");
       } else if (color == Colors.yellow) {
         colorDificultad = Color(color);
+        fetchVias(
+            "quepared=" + version + "&isbloque=Travesía&dificultad=amarillo");
       } else if (color == Colors.black) {
         colorDificultad = Color(color);
+        fetchVias(
+            "quepared=" + version + "&isbloque=Travesía&dificultad=negro");
       }
     }
 
@@ -333,17 +351,17 @@ class ViasListVM extends ChangeNotifier {
       colorDificultad = Colors.transparent;
       isBloque = false;
       isTrave = false;
-      fetchVias(version + "/");
+      fetchVias("quepared=" + version);
     } else {
       if (isblock == "Bloque") {
         isBloque = true;
         isTrave = false;
-        fetchVias(version + "/bloque/");
+        fetchVias("quepared=" + version + "&isbloque=Bloque");
       }
       if (isblock == "Travesía") {
         isTrave = true;
         isBloque = false;
-        fetchVias(version + "/travesia/");
+        fetchVias("quepared=" + version + "&isbloque=Travesía");
       }
 
       //list = raw!.values.where((item) => item.isbloque == isblock).toList();
