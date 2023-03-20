@@ -118,7 +118,7 @@ class ViasListVM extends ChangeNotifier {
       colorBbloque = t8_colorPrimary;
       colorBtrave = t8_colorPrimary;
       colorDificultad = Colors.transparent;
-      fetchVias("quepared=" + version + "&isbloque=Travesía&dificultad=verde");
+      fetchVias("/listar?quepared=" + version);
       notifyListeners();
     } else {
       /*list = raw.values
@@ -154,7 +154,7 @@ class ViasListVM extends ChangeNotifier {
 
     isBloque = false;
     isTrave = false;
-    fetchVias(version + "/${_searchController.text}");
+    fetchVias("/buscar?buscar=${_searchController.text}&quepared=" + version);
     print(version + "/${_searchController.text}");
     notifyListeners();
   }
