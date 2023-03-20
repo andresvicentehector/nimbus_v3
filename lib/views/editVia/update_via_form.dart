@@ -6,12 +6,13 @@ import 'package:Nimbus/models/ListadoVias/hive/via.dart';
 import 'package:Nimbus/template/T8Colors.dart';
 import 'package:select_form_field/select_form_field.dart';
 
+import '../../models/ListadoVias/AWS/ViaAWS.dart';
 import '../../viewModels/bluetoothSetings/backup_functions.dart';
 import '/template/ConstantesPropias.dart';
 
 class UpdateViaForm extends StatefulWidget {
-  final int xkey;
-  final Via via;
+  final String xkey;
+  final Vias via;
   final List<String> presas;
 
   const UpdateViaForm({
@@ -82,7 +83,7 @@ class _UpdateViaFormState extends State<UpdateViaForm> {
     _autorController = TextEditingController(text: widget.via.autor);
     _dificultadController = widget.via.dificultad;
     _comentarioController = TextEditingController(text: widget.via.comentario);
-    _isBloqueController = widget.via.isbloque;
+    _isBloqueController = widget.via.isbloque!;
   }
 
   @override
@@ -103,11 +104,11 @@ class _UpdateViaFormState extends State<UpdateViaForm> {
             initialValue: widget.via.isbloque,
             onChanged: (val) => setState(() => _isBloqueController = val),
             validator: (val) {
-              setState(() => _isBloqueController = val ?? widget.via.isbloque);
+              setState(() => _isBloqueController = val ?? widget.via.isbloque!);
               return null;
             },
             onSaved: (val) => setState(
-                () => _isBloqueController = val ?? widget.via.isbloque),
+                () => _isBloqueController = val ?? widget.via.isbloque!),
           ),
 
           SizedBox(height: 27.0),

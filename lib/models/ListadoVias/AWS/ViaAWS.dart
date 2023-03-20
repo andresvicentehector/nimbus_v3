@@ -33,9 +33,9 @@ class Vias {
   String? sId;
   String? name;
   String? autor;
-  int? dificultad;
-  String? comentario;
-  List<String>? presas;
+  dynamic dificultad;
+  late String comentario;
+  late List<String> presas;
   int? quepared;
   String? isbloque;
   int? iV;
@@ -45,8 +45,8 @@ class Vias {
       this.name,
       this.autor,
       this.dificultad,
-      this.comentario,
-      this.presas,
+      required this.comentario,
+      required this.presas,
       this.quepared,
       this.isbloque,
       this.iV});

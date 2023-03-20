@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:Nimbus/models/ListadoVias/hive/via.dart';
 
+import '../../models/ListadoVias/AWS/ViaAWS.dart';
 import '../z_widgets_comunes/utils/texto.dart';
 import 'update_via_form.dart';
 
 class UpdateScreen extends StatelessWidget {
-  final int xkey;
-  final Via via;
+  final String xkey;
+  final Vias via;
   final List<String> presas;
 
   const UpdateScreen({

@@ -19,7 +19,7 @@ Widget builderListadoVias(
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => EscalarScreen(
-          xKey: key,
+          xKey: viaData,
           via: viaData,
           server: selectedDevice,
         ),

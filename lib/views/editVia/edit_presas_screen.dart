@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:Nimbus/views/editVia/update_screen.dart';
 import 'package:Nimbus/template/ConstantesPropias.dart';
+import '../../models/ListadoVias/AWS/ViaAWS.dart';
 import '../z_widgets_comunes/utils/texto.dart';
 import '../z_widgets_comunes/wall/add_edit_wallBuilder/wall15.dart';
 import '../z_widgets_comunes/wall/add_edit_wallBuilder/wall25.dart';
@@ -15,8 +16,8 @@ import '../../models/ListadoVias/hive/via.dart';
 class EditPresas extends StatefulWidget {
   final BluetoothDevice? server;
   final List<String> presas;
-  final int xkey;
-  final Via via;
+  final String xkey;
+  final Vias via;
   const EditPresas(
       {required this.server,
       required this.presas,

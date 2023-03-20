@@ -40,14 +40,14 @@ class ViasListVM extends ChangeNotifier {
 
   late Color colorDificultad;
 
-  late Map<dynamic, dynamic>? raw = Map.fromEntries(itemBox
+  /*late Map<dynamic, dynamic>? raw = Map.fromEntries(itemBox
       .toMap()
       .entries
       .where((entry) => entry.value.quepared == int.parse(version)));
   late Map<dynamic, dynamic>? filteredraw = Map.fromEntries(itemBox
       .toMap()
       .entries
-      .where((entry) => entry.value.quepared == int.parse(version)));
+      .where((entry) => entry.value.quepared == int.parse(version)));*/
 
   late bool isBloque = false;
   late bool isTrave = false;
@@ -155,6 +155,7 @@ class ViasListVM extends ChangeNotifier {
     isBloque = false;
     isTrave = false;
     fetchVias(version + "/${_searchController.text}");
+    print(version + "/${_searchController.text}");
     notifyListeners();
   }
 
@@ -166,8 +167,7 @@ class ViasListVM extends ChangeNotifier {
               .where((element) =>
                   (element.dificultad == Colors.pinkAccent.value ||
                       element.dificultad == Colors.pink.value))
-              .toList();
-        
+              .toList(); 
         filteredraw = Map.fromEntries(raw!.entries.where((entry) =>
             (entry.value.dificultad == Colors.pinkAccent.value ||
                 entry.value.dificultad == Colors.pink.value) &&
@@ -178,26 +178,43 @@ class ViasListVM extends ChangeNotifier {
       } else if (color == Colors.orangeAccent.value ||
           color == Colors.orange.value) {
         /* list = raw!.values
-              .where((item) =>
-                  item.dificultad == Colors.orange.value ||
-                  item.dificultad == Colors.orangeAccent.value)
-              .toList();
-
-        filteredraw = Map.fromEntries(raw!.entries.where((entry) =>
-            (entry.value.dificultad == Colors.orange.value ||
-                entry.value.dificultad == Colors.orangeAccent.value) &&
-            entry.value.quepared == int.parse(version)));*/
+                        .where((item) =>
+                            item.dificultad == Colors.orange.value ||
+                            item.dificultad == Colors.orangeAccent.value)
+                        .toList();
+                  filteredraw = Map.fromEntries(raw!.entries.where((entry) =>
+                      (entry.value.dificultad == Colors.orange.value ||
+                          entry.value.dificultad == Colors.orangeAccent.value) &&
+                      entry.value.quepared == int.parse(version)));*/
 
         colorDificultad = Colors.orange;
         fetchVias(version + "/naranja");
-      } else {
+      } else if (color == Colors.green) {
         //list = raw!.values.where((item) => item.dificultad == color).toList();
-
-        filteredraw = Map.fromEntries(raw!.entries.where((entry) =>
+        /* filteredraw = Map.fromEntries(raw!.entries.where((entry) =>
             entry.value.dificultad == color &&
-            entry.value.quepared == int.parse(version)));
+            entry.value.quepared == int.parse(version)));*/
 
         colorDificultad = Color(color);
+        fetchVias(version + "/green");
+      } else if (color == Colors.yellow) {
+        //list = raw!.values.where((item) => item.dificultad == color).toList();
+
+        /* filteredraw = Map.fromEntries(raw!.entries.where((entry) =>
+                    entry.value.dificultad == color &&
+                    entry.value.quepared == int.parse(version)));*/
+
+        colorDificultad = Color(color);
+        fetchVias(version + "/yellow");
+      } else if (color == Colors.black) {
+        //list = raw!.values.where((item) => item.dificultad == color).toList();
+
+        /* filteredraw = Map.fromEntries(raw!.entries.where((entry) =>
+                      entry.value.dificultad == color &&
+                      entry.value.quepared == int.parse(version)));*/
+
+        colorDificultad = Color(color);
+        fetchVias(version + "/black");
       }
     }
 
@@ -208,13 +225,13 @@ class ViasListVM extends ChangeNotifier {
                   (element.dificultad == Colors.pinkAccent.value ||
                       element.dificultad == Colors.pink.value) &&
                   element.isbloque == "Bloque")
-              .toList();*/
+              .toList();
 
         filteredraw = Map.fromEntries(raw!.entries.where((entry) =>
             (entry.value.dificultad == Colors.pinkAccent.value ||
                 entry.value.dificultad == Colors.pink.value) &&
             entry.value.quepared == int.parse(version) &&
-            entry.value.isbloque == "Bloque"));
+            entry.value.isbloque == "Bloque"));*/
 
         colorDificultad = Colors.pink;
       } else if (color == Colors.orangeAccent.value ||
@@ -226,24 +243,28 @@ class ViasListVM extends ChangeNotifier {
                   item.isbloque == "Bloque")
               .toList();*/
 
-        filteredraw = Map.fromEntries(raw!.entries.where((entry) =>
+        /*filteredraw = Map.fromEntries(raw!.entries.where((entry) =>
             (entry.value.dificultad == Colors.orange.value ||
                 entry.value.dificultad == Colors.orangeAccent.value) &&
             entry.value.quepared == int.parse(version) &&
-            entry.value.isbloque == "Bloque"));
+            entry.value.isbloque == "Bloque"));*/
 
         colorDificultad = Colors.orange;
-      } else {
+      } else if (color == Colors.green) {
         /*list = raw!.values
               .where((item) =>
                   item.dificultad == color && item.isbloque == "Bloque")
-              .toList();*/
+              .toList();
 
         filteredraw = Map.fromEntries(raw!.entries.where((entry) =>
             entry.value.dificultad == color &&
             entry.value.quepared == int.parse(version) &&
-            entry.value.isbloque == "Bloque"));
+            entry.value.isbloque == "Bloque"));*/
 
+        colorDificultad = Color(color);
+      } else if (color == Colors.yellow) {
+        colorDificultad = Color(color);
+      } else if (color == Colors.black) {
         colorDificultad = Color(color);
       }
     }
@@ -255,13 +276,13 @@ class ViasListVM extends ChangeNotifier {
                   (element.dificultad == Colors.pinkAccent.value ||
                       element.dificultad == Colors.pink.value) &&
                   element.isbloque == "Travesía")
-              .toList();*/
+              .toList();
 
         filteredraw = Map.fromEntries(raw!.entries.where((entry) =>
             (entry.value.dificultad == Colors.pinkAccent.value ||
                 entry.value.dificultad == Colors.pink.value) &&
             entry.value.quepared == int.parse(version) &&
-            entry.value.isbloque == "Travesía"));
+            entry.value.isbloque == "Travesía"));*/
 
         colorDificultad = Colors.pink;
       } else if (color == Colors.orangeAccent.value ||
@@ -271,26 +292,30 @@ class ViasListVM extends ChangeNotifier {
                   (item.dificultad == Colors.orange.value ||
                       item.dificultad == Colors.orangeAccent.value) &&
                   item.isbloque == "Travesía")
-              .toList();*/
+              .toList();
 
         filteredraw = Map.fromEntries(raw!.entries.where((entry) =>
             (entry.value.dificultad == Colors.orange.value ||
                 entry.value.dificultad == Colors.orangeAccent.value) &&
             entry.value.quepared == int.parse(version) &&
-            entry.value.isbloque == "Travesía"));
+            entry.value.isbloque == "Travesía"));*/
 
         colorDificultad = Colors.orange;
-      } else {
+      } else if (color == Colors.green) {
         /*list = raw!.values
               .where((item) =>
                   item.dificultad == color && item.isbloque == "Travesía")
-              .toList();*/
+              .toList();
 
         filteredraw = Map.fromEntries(raw!.entries.where((entry) =>
             entry.value.dificultad == color &&
             entry.value.quepared == int.parse(version) &&
-            entry.value.isbloque == "Travesía"));
+            entry.value.isbloque == "Travesía"));*/
 
+        colorDificultad = Color(color);
+      } else if (color == Colors.yellow) {
+        colorDificultad = Color(color);
+      } else if (color == Colors.black) {
         colorDificultad = Color(color);
       }
     }
@@ -313,12 +338,12 @@ class ViasListVM extends ChangeNotifier {
       if (isblock == "Bloque") {
         isBloque = true;
         isTrave = false;
-        fetchVias(version + "/bloque");
+        fetchVias(version + "/bloque/");
       }
       if (isblock == "Travesía") {
         isTrave = true;
         isBloque = false;
-        fetchVias(version + "/travesia");
+        fetchVias(version + "/travesia/");
       }
 
       //list = raw!.values.where((item) => item.isbloque == isblock).toList();

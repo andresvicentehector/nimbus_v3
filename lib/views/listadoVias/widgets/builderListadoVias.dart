@@ -6,6 +6,8 @@ import 'package:hive_flutter/adapters.dart';
 import '../../../data/response/Status.dart';
 import '../../../viewModels/ListadoVias/listado_VM.dart';
 import '../../escalarVia/escalar_screen.dart';
+import '../../z_widgets_comunes/utils/LoadingWidget.dart';
+import '../../z_widgets_comunes/utils/MyErrorWidget.dart';
 import '../../z_widgets_comunes/utils/texto.dart';
 import '../utils/listado_screen_utils.dart';
 
@@ -13,20 +15,23 @@ class builderListadoVias extends StatelessWidget {
   final List<Vias>? via;
   final dynamic status;
   final BluetoothDevice? selectedDevice;
+  final String? message;
   const builderListadoVias(
-      {required this.via, required this.selectedDevice, required this.status});
+      {required this.via,
+      required this.selectedDevice,
+      required this.status,
+      required this.message});
 
   @override
   Widget build(BuildContext context) {
     switch (status) {
       case Status.LOADING:
         print("ESTADO::LOADING");
-        // return LoadingWidget();
-        return Container();
+        return LoadingWidget();
       case Status.ERROR:
         print("ESTADO :: ERROR LOADING");
-        return Container();
-      // return MyErrorWidget(viewModel.viasMain.message ?? "NA");
+
+        return MyErrorWidget(message ?? "NA");
       case Status.COMPLETED:
         //print("ESTADO :: COMPLETED");
         return Padding(
@@ -54,7 +59,7 @@ class builderListadoVias extends StatelessWidget {
                                       onTap: () {
                                         if (selectedDevice != null) {
                                           _escalarScreen(context, via![index],
-                                              key, selectedDevice);
+                                              selectedDevice);
                                         }
                                       },
                                       child: circulo(viaData)),
@@ -63,7 +68,7 @@ class builderListadoVias extends StatelessWidget {
                                       onTap: () {
                                         if (selectedDevice != null) {
                                           _escalarScreen(context, via![index],
-                                              key, selectedDevice);
+                                              selectedDevice);
                                         }
                                       },
                                       child: textoDescriptivo(via![index])),
@@ -74,8 +79,8 @@ class builderListadoVias extends StatelessWidget {
                               GestureDetector(
                                 onTap: () {
                                   if (selectedDevice != null) {
-                                    _escalarScreen(context, via![index], key,
-                                        selectedDevice);
+                                    _escalarScreen(
+                                        context, via![index], selectedDevice);
                                   }
                                 },
                                 child: botonCargarVia(selectedDevice),
@@ -93,12 +98,12 @@ class builderListadoVias extends StatelessWidget {
     return Container();
   }
 
-  void _escalarScreen(BuildContext context, var viaData, int key,
-      BluetoothDevice? selectedDevice) {
+  void _escalarScreen(
+      BuildContext context, Vias viaData, BluetoothDevice? selectedDevice) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => EscalarScreen(
-          xKey: key,
+          xKey: viaData.sId!,
           via: viaData,
           server: selectedDevice,
         ),

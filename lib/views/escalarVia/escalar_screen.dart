@@ -3,11 +3,12 @@ import 'package:Nimbus/models/ListadoVias/hive/via.dart';
 import 'package:Nimbus/views/escalarVia/widgets/escalar_via_form.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
+import '../../models/ListadoVias/AWS/ViaAWS.dart';
 import '../z_widgets_comunes/utils/texto.dart';
 
 class EscalarScreen extends StatelessWidget {
-  final int xKey;
-  final Via via;
+  final String xKey;
+  final Vias via;
   final BluetoothDevice? server;
 
   const EscalarScreen({
@@ -26,7 +27,7 @@ class EscalarScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         appBar: AppBar(
           title: texto(
-            via.name.toUpperCase(),
+            via.name!.toUpperCase(),
           ),
         ),
         body: SingleChildScrollView(

@@ -103,7 +103,7 @@ class _NavigationState extends State<Navigation> {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) => EscalarScreen(
-                  xKey: indexData ?? 0,
+                  xKey: indexData ?? "0",
                   server: widget.selectedDevice,
                   via: ViaData,
                 ),

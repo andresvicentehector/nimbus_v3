@@ -28,12 +28,12 @@ class _ListadoScreenState extends State<ListadoScreen> {
   void initState() {
     super.initState();
 
-    viewModel.fetchVias("25/bloque");
+    viewModel.fetchVias("");
 
-    viewModel.list = viewModel.raw!.values.toList();
-    viewModel.list2 = viewModel.raw!.keys.toList();
+    ///viewModel.list = viewModel.raw!.values.toList();
+    //viewModel.list2 = viewModel.raw!.keys.toList();
 
-    viewModel.filteredraw = viewModel.raw;
+    //viewModel.filteredraw = viewModel.raw;
     viewModel.selectedDevice = null;
     viewModel.colorDificultad = Colors.transparent;
   }
@@ -75,6 +75,7 @@ class _ListadoScreenState extends State<ListadoScreen> {
                   via: viewModel.ViasMain.data?.vias,
                   selectedDevice: viewModel.selectedDevice,
                   status: viewModel.ViasMain.status,
+                  message: viewModel.ViasMain.message,
                 ),
                 Navigation(selectedDevice: viewModel.selectedDevice),
               ]));
