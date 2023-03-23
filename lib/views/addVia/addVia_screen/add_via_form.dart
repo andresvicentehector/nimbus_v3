@@ -1,3 +1,4 @@
+import 'package:Nimbus/viewModels/addVia/add_viaVM.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_color_picker_wheel/models/button_behaviour.dart';
 import 'package:hive/hive.dart';
@@ -9,7 +10,7 @@ import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:select_form_field/select_form_field.dart';
 import 'package:Nimbus/viewModels/bluetoothSetings/backup_functions.dart';
 
-import '../../template/ConstantesPropias.dart';
+import '../../../template/ConstantesPropias.dart';
 
 class AddViaForm extends StatefulWidget {
   final BluetoothDevice? server;
@@ -22,19 +23,8 @@ class AddViaForm extends StatefulWidget {
 }
 
 class _AddViaFormState extends State<AddViaForm> {
-  final _nameController = TextEditingController();
-  final _autorController = TextEditingController();
-  int _dificultadController = Colors.green.value;
-  final _comentarioController = TextEditingController(
-      text:
-          "Todas nuestras vías siguen el método T.R.A.V.E (Tocas Rojas, Azules, Verdes y Encadenas) \n\n La salida y el top son de color blanco \n\n las amarillas se pueden usar para juntar \n\n Si con esos tres colores no es suficiente, el metodo T-R-A-V-E se puede alargar con el color morado ");
+  AddViaVM viewModel = AddViaVM();
   final _viaFormKey = GlobalKey<FormState>();
-  String _isBloqueControler = "";
-  late var width;
-  late var height;
-  late final Box box;
-  String bloque = "Bloque";
-  String travesia = "Travesía";
 
   final List<Map<String, dynamic>> _items = [
     {
@@ -49,28 +39,6 @@ class _AddViaFormState extends State<AddViaForm> {
       //'icon': Icon(Icons.grade),
     },
   ];
-
-  String? _fieldValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Este campo no puede quedar vacío';
-    }
-    return null;
-  }
-
-  // Add info to people box
-  _addInfo() async {
-    Via newVia = Via(
-        name: _nameController.text,
-        autor: _autorController.text,
-        dificultad: _dificultadController,
-        comentario: _comentarioController.text,
-        presas: widget.presas,
-        isbloque: _isBloqueControler,
-        quepared: version == '25' ? 25 : 15);
-
-    box.add(newVia);
-    //print(newVia);
-  }
 
   @override
   void initState() {
@@ -96,15 +64,19 @@ class _AddViaFormState extends State<AddViaForm> {
             SizedBox(height: 27.0),
 
             texto("Nombra tu " +
-                (_isBloqueControler == "Bloque" ? bloque : travesia)),
+                (viewModel.isBloqueControler == "Bloque"
+                    ? viewModel.bloque
+                    : viewModel.travesia)),
 
-            _entradaFormulario(context, _nameController, _fieldValidator),
+            _entradaFormulario(
+                context, viewModel.nameController, viewModel.fieldValidator),
 
             SizedBox(height: 25.0),
 
             texto('¿Quién eres?'),
 
-            _entradaFormulario(context, _autorController, _fieldValidator),
+            _entradaFormulario(
+                context, viewModel.autorController, viewModel.fieldValidator),
 
             SizedBox(height: 25.0),
 
@@ -122,12 +94,13 @@ class _AddViaFormState extends State<AddViaForm> {
             SizedBox(height: 25.0),
             texto2('Explica brevemente como se hace'),
 
-            _entradaFormulario(context, _comentarioController, _fieldValidator),
+            _entradaFormulario(context, viewModel.comentarioController,
+                viewModel.fieldValidator),
 
             SizedBox(height: 27.0),
 
             texto2("Acabas de diseñar" +
-                (_isBloqueControler == "Bloque"
+                (viewModel.isBloqueControler == "Bloque"
                     ? " un bloque de "
                     : " una travesía de ") +
                 widget.presas.length.toString() +
@@ -170,7 +143,7 @@ class _AddViaFormState extends State<AddViaForm> {
       onSelect: (Color newColor) {
         setState(() {
           Color c1 = newColor;
-          _dificultadController = c1.value;
+          viewModel.dificultadController = c1.value;
         });
       },
       behaviour: ButtonBehaviour.clickToOpen,
@@ -206,12 +179,12 @@ class _AddViaFormState extends State<AddViaForm> {
       dialogCancelBtn: 'CANCEL',
       items: _items,
       initialValue: "Travesía",
-      onChanged: (val) => setState(() => _isBloqueControler = val),
+      onChanged: (val) => viewModel.isBloqueControler = val,
       validator: (val) {
-        setState(() => _isBloqueControler = val ?? " ");
+        viewModel.isBloqueControler = val ?? " ";
         return null;
       },
-      onSaved: (val) => setState(() => _isBloqueControler = val ?? "Travesía"),
+      onSaved: (val) => (viewModel.isBloqueControler = val ?? "Travesía"),
     );
   }
 
@@ -224,9 +197,7 @@ class _AddViaFormState extends State<AddViaForm> {
         child: GestureDetector(
           onTap: () async {
             if (_viaFormKey.currentState!.validate()) {
-              setState(() {
-                _addInfo();
-              });
+              viewModel.addInfo(widget.presas);
 
               await createBackup(context);
               Navigator.pushReplacementNamed(context, '/');

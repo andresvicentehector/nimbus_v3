@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:Nimbus/views/addVia/add_via_form.dart';
+import 'package:Nimbus/views/addVia/addVia_screen/add_via_form.dart';
 
-import '../z_widgets_comunes/utils/texto.dart';
+import '../../z_widgets_comunes/utils/texto.dart';
 
 class AddScreen extends StatelessWidget {
   final List<String> presas;

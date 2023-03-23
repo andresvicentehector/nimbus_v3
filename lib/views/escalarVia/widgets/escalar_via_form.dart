@@ -3,22 +3,18 @@ import 'package:Nimbus/views/escalarVia/widgets/escalar_via_form_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
-import 'package:Nimbus/views/editVia/edit_presas_screen.dart';
+import 'package:Nimbus/views/editVia/editPresas_screen/edit_presas_screen.dart';
 
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:Nimbus/views/escalarVia/widgets/schema_howtoClimb_wallBuilder/wall15_show.dart';
-import 'package:Nimbus/views/escalarVia/widgets/schema_howtoClimb_wallBuilder/wall25_show.dart';
+
 import 'package:provider/provider.dart';
 import '../../../models/ListadoVias/AWS/ViaAWS.dart';
-import '/template/ConstantesPropias.dart';
 
 class EscalarVia extends StatefulWidget {
-  final String xKey;
   final Vias via;
   final BluetoothDevice? server;
 
   const EscalarVia({
-    required this.xKey,
     required this.via,
     required this.server,
   });
@@ -29,6 +25,7 @@ class EscalarVia extends StatefulWidget {
 
 class _EscalarViaState extends State<EscalarVia> {
   late final _nameController;
+  late final _idController;
   late final _autorController;
   late final _dificultadController;
   late final _comentarioController;
@@ -48,19 +45,11 @@ class _EscalarViaState extends State<EscalarVia> {
     //print(widget.xKey);
 
     _nameController = widget.via.name;
+    _idController = widget.via.sId;
     _autorController = widget.via.autor;
     _dificultadController = widget.via.dificultad;
     _comentarioController = Text(widget.via.comentario);
     _numPresasController = widget.via.presas.length;
-
-    if (version == "25") {
-      viewModel.pared = Wall25Show(
-        presas: widget.via.presas,
-      );
-    } else if (version == "15") {
-      viewModel.pared = Wall15Show(presas: widget.via.presas);
-    }
-
     viewModel.connect(widget.server);
   }
 
@@ -78,6 +67,7 @@ class _EscalarViaState extends State<EscalarVia> {
   @override
   Widget build(BuildContext context) {
     width = MediaQuery.of(context).size.width - 20;
+    viewModel.showPared(widget.via.presas);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -114,8 +104,8 @@ class _EscalarViaState extends State<EscalarVia> {
         Row(children: [
           botonEditar(widget.via.isbloque!, _navigatetoEditPresas),
           SizedBox(width: 5.0),
-          botonEliminar(context, _nameController, viewModel.cerrarConexion,
-              viewModel.eliminarVia)
+          botonEliminar(context, _nameController, _idController,
+              viewModel.cerrarConexion, viewModel.eliminarVia)
         ]),
       ],
     );
@@ -126,11 +116,8 @@ class _EscalarViaState extends State<EscalarVia> {
 
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => EditPresas(
-            server: widget.server,
-            presas: widget.via.presas,
-            xkey: widget.via.sId!,
-            via: widget.via),
+        builder: (context) =>
+            EditPresas(server: widget.server, via: widget.via),
       ),
     );
   }

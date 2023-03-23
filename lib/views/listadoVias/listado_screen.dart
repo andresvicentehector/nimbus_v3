@@ -21,19 +21,13 @@ class ListadoScreen extends StatefulWidget {
 
 class _ListadoScreenState extends State<ListadoScreen> {
   ViasListVM viewModel = ViasListVM();
-
   final _key = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
 
-    viewModel.fetchVias("");
-
-    ///viewModel.list = viewModel.raw!.values.toList();
-    //viewModel.list2 = viewModel.raw!.keys.toList();
-
-    //viewModel.filteredraw = viewModel.raw;
+    viewModel.fetchVias("listar?quepared=" + version);
     viewModel.selectedDevice = null;
     viewModel.colorDificultad = Colors.transparent;
   }

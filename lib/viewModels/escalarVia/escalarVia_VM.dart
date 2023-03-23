@@ -9,11 +9,14 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import '../../data/response/ApiResponse.dart';
 import '../../models/ListadoVias/AWS/ViaAWS.dart';
 import '../../repository/vias/ViaRepoImp.dart';
-import '../../views/editVia/edit_presas_screen.dart';
+import '../../template/ConstantesPropias.dart';
+import '../../views/editVia/editPresas_screen/edit_presas_screen.dart';
+import '../../views/escalarVia/widgets/schema_howtoClimb_wallBuilder/wall15_show.dart';
+import '../../views/escalarVia/widgets/schema_howtoClimb_wallBuilder/wall25_show.dart';
 
 class escalarViaVM extends ChangeNotifier {
   final _myRepo = ViaRepoImp();
-  ApiResponse<ViaAWS> ViasMain = ApiResponse.loading();
+  ApiResponse<ViaAWS> viasMain = ApiResponse.loading();
 
   static final clientID = 0;
   BluetoothConnection? connection;
@@ -33,9 +36,9 @@ class escalarViaVM extends ChangeNotifier {
   bool isDisconnecting = false;
   late Widget pared;
 
-  void _setViasMain(ApiResponse<ViaAWS> response) {
+  void _deleteViasMain(ApiResponse<ViaAWS> response) {
     //print("Response :: $response");
-    ViasMain = response;
+    viasMain = response;
     notifyListeners();
   }
 
@@ -43,19 +46,19 @@ class escalarViaVM extends ChangeNotifier {
   Future<void> erraseVia(String id) async {
     print("id " + id);
     if (await InternetConnectionChecker().hasConnection) {
-      _setViasMain(ApiResponse.loading());
+      _deleteViasMain(ApiResponse.loading());
 
       _myRepo
           .deleteVia(id)
-          .then((value) => _setViasMain(ApiResponse.completed(value)))
+          .then((value) => _deleteViasMain(ApiResponse.completed(value)))
           .onError((error, stackTrace) =>
-              _setViasMain(ApiResponse.error(error.toString())));
+              _deleteViasMain(ApiResponse.error(error.toString())));
     } else {
       // fetchViasFromHive();
     }
   }
 
-  void connect(BluetoothDevice? server) {
+  connect(BluetoothDevice? server) {
     BluetoothConnection.toAddress(server!.address).then((_connection) {
       //print('Connected to the device');
       connection = _connection;
@@ -65,9 +68,9 @@ class escalarViaVM extends ChangeNotifier {
 
       connection!.input!.listen(_onDataReceived).onDone(() {
         if (isDisconnecting) {
-          //print('Disconnecting locally!');
+          print('Disconnecting locally!');
         } else {
-          //print('Disconnected remotely!');
+          print('Disconnected remotely!');
         }
 
         notifyListeners();
@@ -157,13 +160,23 @@ class escalarViaVM extends ChangeNotifier {
     notifyListeners();
   }
 
-  void eliminarVia(BuildContext context) async {
+  Future eliminarVia(BuildContext context, String id) async {
     //  await box.delete(widget.xKey);
 
     cerrarConexion();
-
-    ///TODO ELIMINAR VIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    await erraseVia(id);
     await Navigator.pushReplacementNamed(context, '/');
+    notifyListeners();
+  }
+
+  void showPared(List<String> presas) {
+    if (version == "25") {
+      pared = Wall25Show(
+        presas: presas,
+      );
+    } else if (version == "15") {
+      pared = Wall15Show(presas: presas);
+    }
   }
 }
 

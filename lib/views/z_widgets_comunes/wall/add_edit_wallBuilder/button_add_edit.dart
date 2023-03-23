@@ -262,6 +262,13 @@ class _WallButtonState extends State<WallButton> with TickerProviderStateMixin {
                           ? SizedBox.shrink()
                           : Text("${widget.numero}",
                               style: TextStyle(
+                                shadows: [
+                                  Shadow(
+                                    blurRadius: 5,
+                                    color: Colors.black,
+                                    offset: Offset(0, 2),
+                                  ),
+                                ],
                                 color: c2,
                               )))
                 ],

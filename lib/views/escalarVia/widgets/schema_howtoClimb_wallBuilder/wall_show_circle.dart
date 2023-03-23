@@ -22,6 +22,13 @@ class WallShowCircle extends StatelessWidget {
                     ? SizedBox.shrink()
                     : Text("$numero",
                         style: TextStyle(
+                          shadows: [
+                            Shadow(
+                              blurRadius: 5,
+                              color: Colors.black,
+                              offset: Offset(0, 2),
+                            ),
+                          ],
                           color: c2,
                         ))),
           ],

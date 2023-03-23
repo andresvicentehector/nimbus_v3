@@ -19,12 +19,30 @@ Widget textoDescriptivo(var viaData) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
-      Text(viaData.name,
+      SizedBox(
+        width: 270,
+        child: Text(
+          viaData.name,
+          maxLines: 4,
+          overflow: TextOverflow.fade,
           style: TextStyle(
-              color: t8_textColorSecondary, fontSize: textSizeSMedium)),
-      Text(viaData.autor, style: TextStyle(fontFamily: fontMedium)),
-      Text(viaData.presas.length.toString() + " presas",
-          style: TextStyle(fontFamily: fontMedium)),
+            color: t8_textColorSecondary,
+            fontSize: textSizeSMedium,
+          ),
+        ),
+      ),
+      Text(
+        viaData.autor,
+        style: TextStyle(
+          fontFamily: fontMedium,
+        ),
+      ),
+      Text(
+        viaData.presas.length.toString() + " presas",
+        style: TextStyle(
+          fontFamily: fontMedium,
+        ),
+      ),
     ],
   );
 }

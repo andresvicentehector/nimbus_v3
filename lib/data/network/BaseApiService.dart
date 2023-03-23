@@ -3,6 +3,6 @@ abstract class BaseApiService {
 
   Future<dynamic> getResponse(String query);
   Future<dynamic> deleteResponse(String id);
-  Future<dynamic> postResponse(String body);
-  Future<dynamic> putResponse(String body);
+  Future<dynamic> postResponse(Map<String, dynamic> body, String endpoint);
+  Future<dynamic> putResponse(Map<String, dynamic> body, String endpoint);
 }

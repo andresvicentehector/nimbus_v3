@@ -7,12 +7,10 @@ import '../../models/ListadoVias/AWS/ViaAWS.dart';
 import '../z_widgets_comunes/utils/texto.dart';
 
 class EscalarScreen extends StatelessWidget {
-  final String xKey;
   final Vias via;
   final BluetoothDevice? server;
 
   const EscalarScreen({
-    required this.xKey,
     required this.via,
     required this.server,
   });
@@ -33,7 +31,7 @@ class EscalarScreen extends StatelessWidget {
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: EscalarVia(xKey: xKey, via: via, server: server),
+            child: EscalarVia(via: via, server: server),
           ),
         ));
   }

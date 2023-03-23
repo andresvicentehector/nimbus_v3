@@ -42,8 +42,7 @@ class builderListadoVias extends StatelessWidget {
                 //reverse: true,
                 itemBuilder: (context, index) {
                   if (via!.isNotEmpty) {
-                    int key = 2;
-                    var viaData = via![via!.length - 1 - index];
+                    var viaData = via![index];
 
                     return InkWell(
                         borderRadius: BorderRadius.all(Radius.zero),
@@ -103,7 +102,6 @@ class builderListadoVias extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => EscalarScreen(
-          xKey: viaData.sId!,
           via: viaData,
           server: selectedDevice,
         ),

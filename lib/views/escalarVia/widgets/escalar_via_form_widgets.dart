@@ -107,7 +107,7 @@ Widget botonEditar(String isBloque, Function _gotoEditScreen) {
 }
 
 Widget botonEliminar(BuildContext context, dynamic _nameController,
-    Function _cerrarConexion, Function _eliminarVia) {
+    dynamic _idController, Function _cerrarConexion, Function _eliminarVia) {
   return Expanded(
     flex: 3,
     child: ElevatedButton(
@@ -116,7 +116,7 @@ Widget botonEliminar(BuildContext context, dynamic _nameController,
           showDialog(
             context: context,
             builder: (BuildContext context) => _buildPopupDialogEliminar(
-                context, _nameController, _eliminarVia),
+                context, _nameController, _idController, _eliminarVia),
           );
         },
         child: Container(
@@ -134,8 +134,8 @@ Widget botonEliminar(BuildContext context, dynamic _nameController,
   ); //botón de eliminar
 }
 
-Widget _buildPopupDialogEliminar(
-    BuildContext context, dynamic _nameController, Function _eliminarVia) {
+Widget _buildPopupDialogEliminar(BuildContext context, dynamic _nameController,
+    dynamic _idController, Function _eliminarVia) {
   return new AlertDialog(
     title: Text(_nameController.toString()),
     content: new Column(
@@ -149,7 +149,10 @@ Widget _buildPopupDialogEliminar(
     actions: <Widget>[
       new ElevatedButton(
         onPressed: () async {
-          _eliminarVia();
+          _eliminarVia(
+            context,
+            _idController,
+          );
         },
         // buttonstyle:(textColor: Theme.of(context).primaryColor),
         child: const Text('Eliminar vía'),
