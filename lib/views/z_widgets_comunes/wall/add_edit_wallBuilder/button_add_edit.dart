@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_color_picker_wheel/flutter_color_picker_wheel.dart';
 import 'package:flutter_color_picker_wheel/models/layerlink_config.dart';
 import 'package:select_form_field/select_form_field.dart';
-import 'package:Nimbus/viewModels/functions/presas_add_delete.dart';
+import 'package:Nimbus/views/z_widgets_comunes/wall/funtions/presas_add_delete.dart';
 
 class WallButton extends StatefulWidget {
   final int index;

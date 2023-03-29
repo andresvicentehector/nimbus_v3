@@ -3,25 +3,20 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
-import 'package:hive/hive.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-
 import '../../data/response/ApiResponse.dart';
 import '../../models/ListadoVias/AWS/ViaAWS.dart';
 import '../../repository/vias/ViaRepoImp.dart';
-import '../../template/ConstantesPropias.dart';
-import '../../views/editVia/editPresas_screen/edit_presas_screen.dart';
+import '../../template/configuration/ConstantesPropias.dart';
 import '../../views/escalarVia/widgets/schema_howtoClimb_wallBuilder/wall15_show.dart';
 import '../../views/escalarVia/widgets/schema_howtoClimb_wallBuilder/wall25_show.dart';
 
-class escalarViaVM extends ChangeNotifier {
+class EscalarViaVM extends ChangeNotifier {
   final _myRepo = ViaRepoImp();
   ApiResponse<ViaAWS> viasMain = ApiResponse.loading();
 
   static final clientID = 0;
   BluetoothConnection? connection;
-
-  final box = Hive.box('Viabox');
 
   List<_Message> messages = List<_Message>.empty(growable: true);
   String _messageBuffer = '';
@@ -58,13 +53,14 @@ class escalarViaVM extends ChangeNotifier {
     }
   }
 
-  connect(BluetoothDevice? server) {
+  void connect(BluetoothDevice? server) {
     BluetoothConnection.toAddress(server!.address).then((_connection) {
       //print('Connected to the device');
       connection = _connection;
 
       isConnecting = false;
       isDisconnecting = false;
+      notifyListeners();
 
       connection!.input!.listen(_onDataReceived).onDone(() {
         if (isDisconnecting) {

@@ -18,17 +18,11 @@ Future<void> createBackup(context) async {
     const SnackBar(content: Text('Creating backup...')),
   );*/
   //print("Creating Backup");
-  Map<String, dynamic> map =
-      box.toMap().map((key, value) => MapEntry(key.toString(), value));
 
   var raw = box.toMap();
   List list = raw.values.toList();
-  List list2 = raw.keys.toList();
-  //print(list.toString());
-  //print(list2.toString());
+
   String json = jsonEncode(list);
-  String jsonq = jsonEncode(map);
-  //print(jsonq);
   await Permission.storage.request();
   Directory dir = await _getDirectory();
   String formattedDate = DateTime.now()

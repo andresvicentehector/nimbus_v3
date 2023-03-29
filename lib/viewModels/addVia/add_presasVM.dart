@@ -4,7 +4,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
-import '../../template/ConstantesPropias.dart';
+import '../../template/configuration/ConstantesPropias.dart';
 import '../../views/addVia/addVia_screen/add_via_screen.dart';
 import '../../views/z_widgets_comunes/wall/add_edit_wallBuilder/wall15.dart';
 import '../../views/z_widgets_comunes/wall/add_edit_wallBuilder/wall25.dart';

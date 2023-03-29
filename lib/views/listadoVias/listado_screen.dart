@@ -1,15 +1,11 @@
 import 'package:Nimbus/views/listadoVias/widgets/builderListadoVias.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
-import 'package:sidebarx/sidebarx.dart';
-import 'package:Nimbus/views/bluettothSetings/widgets/SelectBondedDevicePage.dart';
-
-import 'package:Nimbus/template/ConstantesPropias.dart';
 import 'package:Nimbus/views/z_widgets_comunes/navigation_bar/navigator.dart';
+import '../../template/configuration/ConstantesPropias.dart';
 import '../../viewModels/ListadoVias/listado_VM.dart';
 import '../z_widgets_comunes/utils/texto.dart';
 import 'utils/listado_screen_utils.dart';
-import '../z_widgets_comunes/navigation_bar/sidebarX.dart';
+import 'widgets/sidebarX.dart';
 import 'package:provider/provider.dart';
 
 class ListadoScreen extends StatefulWidget {
@@ -22,6 +18,7 @@ class ListadoScreen extends StatefulWidget {
 class _ListadoScreenState extends State<ListadoScreen> {
   ViasListVM viewModel = ViasListVM();
   final _key = GlobalKey<ScaffoldState>();
+  var pos = 1;
 
   @override
   void initState() {
@@ -58,30 +55,33 @@ class _ListadoScreenState extends State<ListadoScreen> {
                         viewModel.colorDificultad,
                         _key,
                         viewModel.filterbyblock,
+                        context,
                         viewModel.colorBbloque,
                         viewModel.colorBtrave,
                         viewModel.isTrave,
                         viewModel.isBloque),
-                    botoneraBloqueVia(viewModel),
+                    botoneraBloqueVia(viewModel, context),
                   ],
                 ),
-                builderListadoVias(
-                  via: viewModel.ViasMain.data?.vias,
+                BuilderListadoVias(
+                  via: viewModel.viasMain.data?.vias,
                   selectedDevice: viewModel.selectedDevice,
-                  status: viewModel.ViasMain.status,
-                  message: viewModel.ViasMain.message,
+                  status: viewModel.viasMain.status,
+                  message: viewModel.viasMain.message,
                 ),
-                Navigation(selectedDevice: viewModel.selectedDevice),
+                Navigation(selectedDevice: viewModel.selectedDevice, pos: pos),
               ]));
         }));
   }
 
   PreferredSizeWidget _appBarBuilder() {
     return AppBar(
+      backgroundColor: Theme.of(context).colorScheme.primary,
       automaticallyImplyLeading: false,
-      title: texto(quePared),
+      title: texto(quePared, context),
       actions: <Widget>[
         ElevatedButton(
+          style: ButtonStyle(),
           child: Icon(Icons.bluetooth,
               color: viewModel.selectedDevice != null
                   ? Colors.blue

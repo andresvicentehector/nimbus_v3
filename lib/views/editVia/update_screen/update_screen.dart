@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:Nimbus/models/ListadoVias/hive/via.dart';
-
 import '../../../models/ListadoVias/AWS/ViaAWS.dart';
 import '../../z_widgets_comunes/utils/texto.dart';
 import 'widgets/update_via_form.dart';
@@ -13,17 +11,15 @@ class UpdateScreen extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: _appBarBuilder(),
+      appBar: _appBarBuilder(context),
       body: _updateViaFormBuilder(),
     );
   }
 
-  PreferredSizeWidget _appBarBuilder() {
+  PreferredSizeWidget _appBarBuilder(BuildContext context) {
     return AppBar(
-      title: texto(
-        'Actualizar una via',
-      ),
+      backgroundColor: Theme.of(context).colorScheme.primary,
+      title: texto('Actualizar una via', context),
     );
   }
 

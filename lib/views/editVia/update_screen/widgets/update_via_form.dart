@@ -2,10 +2,7 @@ import 'package:Nimbus/viewModels/editVia/update_screen_VM.dart';
 import 'package:Nimbus/views/editVia/update_screen/utils/update_via_form_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_color_picker_wheel/models/button_behaviour.dart';
-import 'package:hive/hive.dart';
 import 'package:flutter_color_picker_wheel/flutter_color_picker_wheel.dart';
-import 'package:Nimbus/template/T8Colors.dart';
-import 'package:provider/provider.dart';
 import 'package:select_form_field/select_form_field.dart';
 
 import '../../../../models/ListadoVias/AWS/ViaAWS.dart';
@@ -27,27 +24,10 @@ class _UpdateViaFormState extends State<UpdateViaForm> {
 
   late var height;
 
-  final List<Map<String, dynamic>> _items = [
-    {
-      'value': "Bloque",
-      'label': 'Bloque',
-      //'icon': Icon(Icons.fiber_manual_record),
-      'textStyle': TextStyle(color: t8_colorPrimary),
-    },
-    {
-      'value': 'Travesía',
-      'label': 'Travesía',
-      //'icon': Icon(Icons.grade),
-    },
-  ];
-
   @override
   void initState() {
     super.initState();
-    //print(widget.xkey);
-    //print("eei");
-    // Get reference to an already opened box
-    box = Hive.box('Viabox');
+
     viewModel.nameController = TextEditingController(text: widget.via.name);
     viewModel.autorController = TextEditingController(text: widget.via.autor);
     viewModel.dificultadController = widget.via.dificultad;
@@ -58,6 +38,19 @@ class _UpdateViaFormState extends State<UpdateViaForm> {
 
   @override
   Widget build(BuildContext context) {
+    final List<Map<String, dynamic>> _items = [
+      {
+        'value': "Bloque",
+        'label': 'Bloque',
+        //'icon': Icon(Icons.fiber_manual_record),
+        'textStyle': TextStyle(color: Theme.of(context).colorScheme.primary),
+      },
+      {
+        'value': 'Travesía',
+        'label': 'Travesía',
+        //'icon': Icon(Icons.grade),
+      },
+    ];
     return Form(
       key: _viaFormKey,
       child: Column(
@@ -176,7 +169,7 @@ class _UpdateViaFormState extends State<UpdateViaForm> {
                     await Navigator.pushReplacementNamed(context, '/');
                   }
                 },
-                child: botonAnyadir(),
+                child: botonAnyadir(context),
               ),
             ),
           ),

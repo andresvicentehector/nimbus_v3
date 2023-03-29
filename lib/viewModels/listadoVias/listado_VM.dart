@@ -8,15 +8,15 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:sidebarx/sidebarx.dart';
 import '../../data/response/ApiResponse.dart';
 import '../../repository/vias/ViaRepoImp.dart';
-import '../../template/ConstantesPropias.dart';
-import '../../template/T8Colors.dart';
+import '../../template/colors/ColorsFixed.dart';
+import '../../template/configuration/ConstantesPropias.dart';
 import '../../views/bluettothSetings/widgets/SelectBondedDevicePage.dart';
 
 class ViasListVM extends ChangeNotifier {
   //Internal and private State of movie
   final _myRepo = ViaRepoImp();
 
-  ApiResponse<ViaAWS> ViasMain = ApiResponse.loading();
+  ApiResponse<ViaAWS> viasMain = ApiResponse.loading();
 
   // late List<Results>? movieMainHive;
   //utilizaremos estas tres más tarde para los idiomas
@@ -31,8 +31,8 @@ class ViasListVM extends ChangeNotifier {
 
   late BluetoothDevice? selectedDevice;
 
-  late Color colorBtrave = t8_colorPrimary;
-  late Color colorBbloque = t8_colorPrimary;
+  late Color colorBtrave = t_primary;
+  late Color colorBbloque = t_primary;
 
   late Box itemBox = Hive.box("Viabox");
 
@@ -44,7 +44,7 @@ class ViasListVM extends ChangeNotifier {
 //el parametro de entrada es la clase api response que coje la clase movie como parametro de entrada y devuelve una respuesta
   void _setViasMain(ApiResponse<ViaAWS> response) {
     //print("Response :: $response");
-    ViasMain = response;
+    viasMain = response;
     notifyListeners();
   }
 
@@ -100,7 +100,8 @@ class ViasListVM extends ChangeNotifier {
     // _myRepo.getMoviesListFromHive(page);
   }*/
 
-  void filterbyName(TextEditingController _searchController) {
+  void filterbyName(
+      TextEditingController _searchController, BuildContext context) {
     if (_searchController.text == "") {
       fetchVias("listar?quepared=" + version);
       notifyListeners();
@@ -112,8 +113,8 @@ class ViasListVM extends ChangeNotifier {
 
     isBloque = false;
     isTrave = false;
-    colorBbloque = t8_colorPrimary;
-    colorBtrave = t8_colorPrimary;
+    colorBbloque = Theme.of(context).colorScheme.primary;
+    colorBtrave = Theme.of(context).colorScheme.primary;
     colorDificultad = Colors.transparent;
   }
 
@@ -227,24 +228,25 @@ class ViasListVM extends ChangeNotifier {
     }
   }
 
-  void filtrarporBloque() {
+  void filtrarporBloque(BuildContext context) {
     filterbyblock("Bloque");
-    colorBbloque = t8_colorAccent;
-    colorBtrave = t8_colorPrimary;
+    colorBbloque = Theme.of(context).colorScheme.secondary;
+    colorBtrave = Theme.of(context).colorScheme.primary;
+    ;
     notifyListeners();
   }
 
-  void quitarFiltroBloqueTrave() {
+  void quitarFiltroBloqueTrave(BuildContext context) {
     filterbyblock("nofilter");
-    colorBbloque = t8_colorPrimary;
-    colorBtrave = t8_colorPrimary;
+    colorBbloque = Theme.of(context).colorScheme.primary;
+    colorBtrave = Theme.of(context).colorScheme.primary;
     notifyListeners();
   }
 
-  void filtrarporTravesia() {
+  void filtrarporTravesia(BuildContext context) {
     filterbyblock("Travesía");
-    colorBtrave = t8_colorAccent;
-    colorBbloque = t8_colorPrimary;
+    colorBtrave = Theme.of(context).colorScheme.secondary;
+    colorBbloque = Theme.of(context).colorScheme.primary;
     notifyListeners();
   }
 

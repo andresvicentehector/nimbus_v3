@@ -1,13 +1,9 @@
-import 'dart:convert';
-import 'dart:typed_data';
 import 'package:Nimbus/viewModels/addVia/add_presasVM.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
-import 'package:Nimbus/views/addVia/addVia_screen/add_via_screen.dart';
-
 import 'package:zoom_widget/zoom_widget.dart';
-import 'package:Nimbus/template/ConstantesPropias.dart';
 
+import '../../template/configuration/ConstantesPropias.dart';
 import '../z_widgets_comunes/utils/texto.dart';
 
 class AddPresas extends StatefulWidget {
@@ -79,11 +75,12 @@ class _AddPresas extends State<AddPresas> {
 
   PreferredSizeWidget _appBarBuilder(final serverName) {
     return AppBar(
+      backgroundColor: Theme.of(context).colorScheme.primary,
       title: (viewModel.isConnecting
-          ? texto('Conectando con ' + serverName + '...')
+          ? texto('Conectando con ' + serverName + '...', context)
           : viewModel.isConnected
-              ? texto('Elige las presas')
-              : texto('Envía presas a ' + serverName)),
+              ? texto('Elige las presas', context)
+              : texto('Envía presas a ' + serverName, context)),
       leading: Container(
           child: ElevatedButton(
         child: Icon(
@@ -97,9 +94,10 @@ class _AddPresas extends State<AddPresas> {
       )),
       actions: <Widget>[
         ElevatedButton(
+          style: ButtonStyle(),
           child: Icon(
             Icons.save_rounded,
-            color: Colors.greenAccent,
+            color: Theme.of(context).colorScheme.secondary,
             semanticLabel: "Guardar",
           ),
           onPressed: () async {

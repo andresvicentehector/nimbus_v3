@@ -1,9 +1,9 @@
+import 'package:Nimbus/template/AppContextExtension.dart';
+import 'package:Nimbus/template/colors/ColorsFixed.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
 import '../../../viewModels/ListadoVias/listado_VM.dart';
-import '/template/T8Colors.dart';
-import '/template/T8Constant.dart';
 
 Widget circulo(var viaData) {
   return Container(
@@ -15,7 +15,7 @@ Widget circulo(var viaData) {
   );
 }
 
-Widget textoDescriptivo(var viaData) {
+Widget textoDescriptivo(var viaData, BuildContext context) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
@@ -26,33 +26,34 @@ Widget textoDescriptivo(var viaData) {
           maxLines: 4,
           overflow: TextOverflow.fade,
           style: TextStyle(
-            color: t8_textColorSecondary,
-            fontSize: textSizeSMedium,
+            fontFamily: 'ClashDisplay',
+            color: Theme.of(context).colorScheme.tertiary,
+            fontSize: context.resources.dimensions.textSizeSMedium,
           ),
         ),
       ),
       Text(
         viaData.autor,
         style: TextStyle(
-          fontFamily: fontMedium,
+          fontFamily: context.resources.dimensions.fontBold,
         ),
       ),
       Text(
         viaData.presas.length.toString() + " presas",
         style: TextStyle(
-          fontFamily: fontMedium,
+          fontFamily: context.resources.dimensions.fontBold,
         ),
       ),
     ],
   );
 }
 
-Widget botonCargarVia(BluetoothDevice? selectedDevice) {
+Widget botonCargarVia(BluetoothDevice? selectedDevice, BuildContext context) {
   return Container(
       decoration: BoxDecoration(
           color: (selectedDevice != null
-              ? t8_colorPrimary
-              : t8_textColorSecondary),
+              ? Theme.of(context).colorScheme.primary
+              : t_unactive),
           borderRadius: BorderRadius.circular(5.0)),
       padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
       child: Stack(
@@ -64,8 +65,8 @@ Widget botonCargarVia(BluetoothDevice? selectedDevice) {
                     ? "Cargar vía"
                     : "Conéctate a la pared"),
                 style: TextStyle(
-                  color: t8_white,
-                  fontFamily: 'November',
+                  color: Theme.of(context).colorScheme.tertiary,
+                  fontFamily: 'ClashDisplay',
                 )),
           ),
           Align(
@@ -79,7 +80,7 @@ Widget botonCargarVia(BluetoothDevice? selectedDevice) {
                   selectedDevice != null
                       ? Icons.arrow_forward
                       : Icons.arrow_upward,
-                  color: t8_white,
+                  color: Theme.of(context).colorScheme.tertiary,
                   size: 20,
                 ),
               ),
@@ -96,6 +97,7 @@ Widget botonerafiltrosSearchColor(
     Color colorDificultad,
     _key,
     Function _filterbyblock,
+    BuildContext context,
     Color colorBbloque,
     Color colorBtrave,
     bool isTrave,
@@ -114,7 +116,7 @@ Widget botonerafiltrosSearchColor(
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(16.0)))),
               onTap: () {
-                _filterbyName(editingController);
+                _filterbyName(editingController, context);
               }),
         ),
       ),
@@ -133,7 +135,7 @@ Widget botonerafiltrosSearchColor(
             _key.currentState?.openDrawer();
           },
           onDoubleTap: () {
-            _quitarFiltroBloqueTrave();
+            _quitarFiltroBloqueTrave(context);
           },
         ),
       ),
@@ -141,7 +143,7 @@ Widget botonerafiltrosSearchColor(
   );
 }
 
-Widget botoneraBloqueVia(ViasListVM viewModel) {
+Widget botoneraBloqueVia(ViasListVM viewModel, BuildContext context) {
   return Center(
       child: Padding(
     padding: const EdgeInsets.fromLTRB(0, 1.0, 0, 5.0),
@@ -150,10 +152,10 @@ Widget botoneraBloqueVia(ViasListVM viewModel) {
         flex: 5,
         child: GestureDetector(
           onTap: () {
-            viewModel.filtrarporBloque();
+            viewModel.filtrarporBloque(context);
           },
           onDoubleTap: () {
-            viewModel.quitarFiltroBloqueTrave();
+            viewModel.quitarFiltroBloqueTrave(context);
           },
           child: Container(
               height: 50,
@@ -167,8 +169,8 @@ Widget botoneraBloqueVia(ViasListVM viewModel) {
                   Center(
                     child: Text("Bloques",
                         style: TextStyle(
-                          color: t8_white,
-                          fontFamily: 'November',
+                          color: Theme.of(context).colorScheme.tertiary,
+                          fontFamily: 'ClashDisplay',
                         )),
                   ),
                 ],
@@ -179,10 +181,10 @@ Widget botoneraBloqueVia(ViasListVM viewModel) {
         flex: 5,
         child: GestureDetector(
           onTap: () {
-            viewModel.filtrarporTravesia();
+            viewModel.filtrarporTravesia(context);
           },
           onDoubleTap: () {
-            viewModel.quitarFiltroBloqueTrave();
+            viewModel.quitarFiltroBloqueTrave(context);
           },
           child: Container(
               height: 50,
@@ -195,8 +197,8 @@ Widget botoneraBloqueVia(ViasListVM viewModel) {
                   Center(
                     child: Text("Travesías",
                         style: TextStyle(
-                          color: t8_white,
-                          fontFamily: 'November',
+                          color: Theme.of(context).colorScheme.tertiary,
+                          fontFamily: 'ClashDisplay',
                         )),
                   ),
                 ],

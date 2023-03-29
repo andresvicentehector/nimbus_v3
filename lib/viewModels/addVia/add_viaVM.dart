@@ -5,7 +5,7 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import '../../data/response/ApiResponse.dart';
 import '../../models/ListadoVias/AWS/ViaAWS.dart';
 import '../../repository/vias/ViaRepoImp.dart';
-import '../../template/ConstantesPropias.dart';
+import '../../template/configuration/ConstantesPropias.dart';
 
 class AddViaVM extends ChangeNotifier {
   final _myRepo = ViaRepoImp();
@@ -17,7 +17,7 @@ class AddViaVM extends ChangeNotifier {
   final comentarioController = TextEditingController(
       text:
           "Todas nuestras vías siguen el método T.R.A.V.E (Tocas Rojas, Azules, Verdes y Encadenas) \n\n La salida y el top son de color blanco \n\n las amarillas se pueden usar para juntar \n\n Si con esos tres colores no es suficiente, el metodo T-R-A-V-E se puede alargar con el color morado ");
-  String isBloqueControler = "";
+  late String isBloqueControler = "Travesía";
   late var width;
   late var height;
   late final Box box;
@@ -89,5 +89,14 @@ class AddViaVM extends ChangeNotifier {
     //print(newVia);
 
     addNewVia(body);
+  }
+
+  void changeColor(Color newColor) {
+    Color c1 = newColor;
+    dificultadController = c1.value;
+  }
+
+  setBloque(dynamic val) {
+    isBloqueControler = val;
   }
 }

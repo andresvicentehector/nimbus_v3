@@ -1,10 +1,9 @@
+import 'package:Nimbus/template/AppContextExtension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
-import '../../viewModels/functions/navigator_MaterialPage_functions.dart';
+import '../../viewModels/juegos/navigator_MaterialPage_functions.dart';
 import '../bluettothSetings/widgets/SelectBondedDevicePage.dart';
-import '/template/T8Colors.dart';
-import '/template/T8Constant.dart';
 
 Widget dictadoInfo(BuildContext context) {
   return InkWell(
@@ -22,8 +21,12 @@ Widget dictadoInfo(BuildContext context) {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text("Modo-Dictado",
-                      style: TextStyle(fontSize: textSizeSMedium)),
-                  Text("2+2", style: TextStyle(fontFamily: fontMedium)),
+                      style: TextStyle(
+                          fontSize:
+                              context.resources.dimensions.textSizeSMedium)),
+                  Text("2+2",
+                      style: TextStyle(
+                          fontFamily: context.resources.dimensions.fontMedium)),
                 ],
               ),
               SizedBox(width: 15),
@@ -52,7 +55,7 @@ Widget dictadoInfo(BuildContext context) {
           },
           child: Container(
               decoration: BoxDecoration(
-                  color: t8_colorPrimary,
+                  color: Theme.of(context).colorScheme.primary,
                   borderRadius: BorderRadius.circular(5.0)),
               padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
               child: Stack(
@@ -61,8 +64,8 @@ Widget dictadoInfo(BuildContext context) {
                   Center(
                     child: Text("Iniciar",
                         style: TextStyle(
-                          color: t8_white,
-                          fontFamily: "November",
+                          color: Theme.of(context).colorScheme.tertiary,
+                          fontFamily: "ClashDisplay",
                         )),
                   ),
                   Align(
@@ -74,7 +77,7 @@ Widget dictadoInfo(BuildContext context) {
                         padding: const EdgeInsets.all(8.0),
                         child: Icon(
                           Icons.arrow_forward,
-                          color: t8_white,
+                          color: Theme.of(context).colorScheme.tertiary,
                           size: 20,
                         ),
                       ),
@@ -104,8 +107,12 @@ Widget raulinInfo(BuildContext context) {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text("Raulin-stones",
-                      style: TextStyle(fontSize: textSizeSMedium)),
-                  Text(" 2 menos 2", style: TextStyle(fontFamily: fontMedium)),
+                      style: TextStyle(
+                          fontSize:
+                              context.resources.dimensions.textSizeSMedium)),
+                  Text(" 2 menos 2",
+                      style: TextStyle(
+                          fontFamily: context.resources.dimensions.fontMedium)),
                 ],
               ),
               SizedBox(width: 15),
@@ -134,7 +141,7 @@ Widget raulinInfo(BuildContext context) {
           },
           child: Container(
               decoration: BoxDecoration(
-                  color: t8_colorPrimary,
+                  color: Theme.of(context).colorScheme.primary,
                   borderRadius: BorderRadius.circular(5.0)),
               padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
               child: Stack(
@@ -143,8 +150,8 @@ Widget raulinInfo(BuildContext context) {
                   Center(
                     child: Text("Iniciar",
                         style: TextStyle(
-                          color: t8_white,
-                          fontFamily: "November",
+                          color: Theme.of(context).colorScheme.tertiary,
+                          fontFamily: "ClashDisplay",
                         )),
                   ),
                   Align(
@@ -156,7 +163,7 @@ Widget raulinInfo(BuildContext context) {
                         padding: const EdgeInsets.all(8.0),
                         child: Icon(
                           Icons.arrow_forward,
-                          color: t8_white,
+                          color: Theme.of(context).colorScheme.tertiary,
                           size: 20,
                         ),
                       ),
@@ -186,8 +193,12 @@ Widget kimoInfo(BuildContext context) {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text("Kimo-Game",
-                      style: TextStyle(fontSize: textSizeSMedium)),
-                  Text("Kimo", style: TextStyle(fontFamily: fontMedium)),
+                      style: TextStyle(
+                          fontSize:
+                              context.resources.dimensions.textSizeSMedium)),
+                  Text("Kimo",
+                      style: TextStyle(
+                          fontFamily: context.resources.dimensions.fontMedium)),
                 ],
               ),
               SizedBox(width: 15),
@@ -216,7 +227,7 @@ Widget kimoInfo(BuildContext context) {
           },
           child: Container(
               decoration: BoxDecoration(
-                  color: t8_colorPrimary,
+                  color: Theme.of(context).colorScheme.primary,
                   borderRadius: BorderRadius.circular(5.0)),
               padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
               child: Stack(
@@ -225,8 +236,8 @@ Widget kimoInfo(BuildContext context) {
                   Center(
                     child: Text("Jugar",
                         style: TextStyle(
-                          color: t8_white,
-                          fontFamily: "November",
+                          color: Theme.of(context).colorScheme.tertiary,
+                          fontFamily: "ClashDisplay",
                         )),
                   ),
                   Align(
@@ -238,7 +249,7 @@ Widget kimoInfo(BuildContext context) {
                         padding: const EdgeInsets.all(8.0),
                         child: Icon(
                           Icons.arrow_forward,
-                          color: t8_white,
+                          color: Theme.of(context).colorScheme.tertiary,
                           size: 20,
                         ),
                       ),

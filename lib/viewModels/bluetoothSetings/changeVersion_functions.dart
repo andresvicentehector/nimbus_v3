@@ -1,4 +1,4 @@
-import '../../template/ConstantesPropias.dart';
+import '../../template/configuration/ConstantesPropias.dart';
 
 void changeVersion(String variable) {
   switch (variable) {

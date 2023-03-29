@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-ViaAWS ViasMainFromJson(String str) => ViaAWS.fromJson(json.decode(str));
-String ViasMainToJson(ViaAWS data) => json.encode(data.toJson());
+ViaAWS viasMainFromJson(String str) => ViaAWS.fromJson(json.decode(str));
+String viasMainToJson(ViaAWS data) => json.encode(data.toJson());
 
 class ViaAWS {
   String? status;

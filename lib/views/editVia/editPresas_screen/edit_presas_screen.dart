@@ -1,14 +1,11 @@
 import 'package:Nimbus/viewModels/editVia/edit_presas_VM.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
-import 'package:Nimbus/views/editVia/update_screen/update_screen.dart';
-import 'package:Nimbus/template/ConstantesPropias.dart';
 import 'package:provider/provider.dart';
 import '../../../models/ListadoVias/AWS/ViaAWS.dart';
+import '../../../template/configuration/ConstantesPropias.dart';
 import '../../z_widgets_comunes/utils/texto.dart';
-
 import 'package:zoom_widget/zoom_widget.dart';
-import 'package:Nimbus/models/ListadoVias/hive/via.dart';
 
 class EditPresas extends StatefulWidget {
   final BluetoothDevice? server;
@@ -55,11 +52,12 @@ class _EditPresas extends State<EditPresas> {
 
   _appBarBuilder(final serverName) {
     return AppBar(
+      backgroundColor: Theme.of(context).colorScheme.primary,
       title: (viewModel.isConnecting
-          ? texto('Conectando con ' + serverName + '...')
+          ? texto('Conectando con ' + serverName + '...', context)
           : viewModel.isConnected
-              ? texto('Elige las presas')
-              : texto('Envía presas a ' + serverName)),
+              ? texto('Elige las presas', context)
+              : texto('Envía presas a ' + serverName, context)),
       leading: Container(
         child: ElevatedButton(
           child: Icon(

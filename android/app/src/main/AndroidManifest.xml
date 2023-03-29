@@ -2,8 +2,8 @@
     package="com.souvikbiswas.Nimbus">
    <application
         android:name="${applicationName}"
-        android:label="Nimbus"
-        android:icon="@mipmap/launcher_icon">
+        android:label="Nimbus Wall"
+        android:icon="@mipmap/ic_launcher">
         <activity
             android:exported="true"
             android:name=".MainActivity"

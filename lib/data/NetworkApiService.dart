@@ -35,15 +35,18 @@ class NetworkApiService extends BaseApiService {
 
   Future postResponse(Map<String, dynamic> body, String endpoint) async {
     dynamic responseJson;
+    print(body);
+    final bodyenco = jsonEncode(body);
+    final Map<String, String> headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
     try {
-      final bodyenco = jsonEncode(body);
-      final Map<String, String> headers = {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      };
-
-      final response = await http.post(Uri.parse(baseUrl + endpoint),
-          body: bodyenco, headers: headers); //+ url
+      final response = await http.post(
+        Uri.parse(baseUrl + endpoint),
+        headers: headers,
+        body: bodyenco,
+      ); //+ url
 
       responseJson = returnResponse(response);
     } on SocketException {

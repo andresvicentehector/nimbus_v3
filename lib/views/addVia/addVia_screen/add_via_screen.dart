@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:Nimbus/views/addVia/addVia_screen/add_via_form.dart';
-
+import 'package:Nimbus/views/addVia/addVia_screen/widgets/add_via_form.dart';
 import '../../z_widgets_comunes/utils/texto.dart';
 
 class AddScreen extends StatelessWidget {
@@ -12,10 +11,7 @@ class AddScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: texto('Añadir una nueva vía'),
-      ),
+      appBar: _appBarBuilder(context),
       body: _addViaBuilder(),
     );
   }
@@ -27,6 +23,13 @@ class AddScreen extends StatelessWidget {
           child: AddViaForm(
             presas: presas,
           )),
+    );
+  }
+
+  PreferredSizeWidget _appBarBuilder(BuildContext context) {
+    return AppBar(
+      backgroundColor: Theme.of(context).colorScheme.primary,
+      title: texto('Añadir una nueva vía', context),
     );
   }
 }

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
 import '../../models/ListadoVias/AWS/ViaAWS.dart';
-import '../../template/ConstantesPropias.dart';
+import '../../template/configuration/ConstantesPropias.dart';
 import '../../views/editVia/update_screen/update_screen.dart';
 import '../../views/z_widgets_comunes/wall/add_edit_wallBuilder/wall15.dart';
 import '../../views/z_widgets_comunes/wall/add_edit_wallBuilder/wall25.dart';

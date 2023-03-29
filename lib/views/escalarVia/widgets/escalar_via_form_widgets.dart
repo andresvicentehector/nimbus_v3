@@ -1,9 +1,9 @@
+import "package:Nimbus/template/AppContextExtension.dart";
+import 'package:Nimbus/template/colors/ColorsFixed.dart';
 import 'package:flutter/material.dart';
-
 import '../../../models/ListadoVias/AWS/ViaAWS.dart';
-import '../../../template/ConstantesPropias.dart';
-import '../../../template/T8Colors.dart';
-import '../../../template/T8Constant.dart';
+import '../../../template/configuration/ConstantesPropias.dart';
+
 import '../../z_widgets_comunes/utils/texto.dart';
 
 Widget circulo(dynamic _dificultadController) {
@@ -16,29 +16,34 @@ Widget circulo(dynamic _dificultadController) {
   );
 }
 
-Widget descriptivoVia(
-    dynamic _nameController, _autorController, _numPresasController) {
+Widget descriptivoVia(dynamic _nameController, _autorController,
+    _numPresasController, BuildContext context) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
       Text(
         _nameController,
-        style: TextStyle(fontSize: textSizeSMedium),
+        style: TextStyle(
+            color: Theme.of(context).colorScheme.tertiaryContainer,
+            fontSize: context.resources.dimensions.textSizeSMedium),
       ),
       Text(
         _autorController,
-        style: TextStyle(fontFamily: fontMedium),
+        style: TextStyle(fontFamily: context.resources.dimensions.fontMedium),
       ),
       Text(_numPresasController.toString() + " presas",
-          style: TextStyle(fontFamily: fontMedium)),
+          style:
+              TextStyle(fontFamily: context.resources.dimensions.fontMedium)),
     ],
   );
 }
 
-Widget botonCargar(bool _isConnected) {
+Widget botonCargar(bool _isConnected, BuildContext context) {
   return Container(
       decoration: BoxDecoration(
-          color: (_isConnected ? t8_colorPrimary : t8_textColorSecondary),
+          color: (_isConnected
+              ? Theme.of(context).colorScheme.primary
+              : t_unactive),
           borderRadius: BorderRadius.circular(5.0)),
       padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
       child: Stack(
@@ -47,8 +52,8 @@ Widget botonCargar(bool _isConnected) {
           Center(
             child: Text((_isConnected ? "Escalar" : "Conéctate a la pared"),
                 style: TextStyle(
-                  color: t8_white,
-                  fontFamily: "November",
+                  color: Theme.of(context).colorScheme.tertiary,
+                  fontFamily: "ClashDisplay",
                 )),
           ),
           Align(
@@ -60,7 +65,7 @@ Widget botonCargar(bool _isConnected) {
                 padding: const EdgeInsets.all(8.0),
                 child: Icon(
                   _isConnected ? Icons.arrow_forward : Icons.arrow_upward,
-                  color: t8_white,
+                  color: Theme.of(context).colorScheme.tertiary,
                   size: 20,
                 ),
               ),
@@ -70,7 +75,8 @@ Widget botonCargar(bool _isConnected) {
       ));
 }
 
-Widget botonEditar(String isBloque, Function _gotoEditScreen) {
+Widget botonEditar(
+    String isBloque, Function _gotoEditScreen, BuildContext context) {
   return Expanded(
     flex: 9,
     child: ElevatedButton(
@@ -79,14 +85,13 @@ Widget botonEditar(String isBloque, Function _gotoEditScreen) {
       },
       child: Container(
           decoration: BoxDecoration(
-              color: t8_colorPrimary, borderRadius: BorderRadius.circular(16)),
+              color: Theme.of(context).colorScheme.primary,
+              borderRadius: BorderRadius.circular(16)),
           padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
           child: Stack(
             alignment: Alignment.center,
             children: <Widget>[
-              Center(
-                child: texto('Edita tu ' + isBloque),
-              ),
+              Center(child: texto('Edita tu ' + isBloque, context)),
               Align(
                 alignment: Alignment.topRight,
                 child: Container(
@@ -94,7 +99,7 @@ Widget botonEditar(String isBloque, Function _gotoEditScreen) {
                     padding: const EdgeInsets.all(8.0),
                     child: Icon(
                       Icons.edit,
-                      color: t8_white,
+                      color: Theme.of(context).colorScheme.tertiary,
                       size: 20,
                     ),
                   ),
@@ -121,14 +126,16 @@ Widget botonEliminar(BuildContext context, dynamic _nameController,
         },
         child: Container(
           decoration: BoxDecoration(
-              color: t8_colorPrimary, borderRadius: BorderRadius.circular(16)),
+              color: Theme.of(context).colorScheme.primary,
+              borderRadius: BorderRadius.circular(16)),
           padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
           child: Stack(alignment: Alignment.center, children: [
             Container(
               width: 35,
               height: 35,
             ),
-            Icon(Icons.delete, size: 25),
+            Icon(Icons.delete,
+                color: Theme.of(context).colorScheme.tertiary, size: 25),
           ]),
         )),
   ); //botón de eliminar
@@ -155,23 +162,28 @@ Widget _buildPopupDialogEliminar(BuildContext context, dynamic _nameController,
           );
         },
         // buttonstyle:(textColor: Theme.of(context).primaryColor),
-        child: const Text('Eliminar vía'),
+        child: Text(
+          'Eliminar vía',
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.tertiary,
+          ),
+        ),
       ),
     ],
   );
 }
 
-Widget botoneraCargar(bool isConnected, Function _cargarViaTroncho, Vias via) {
+Widget botoneraCargar(bool isConnected, Function _cargarViaTroncho, Vias via,
+    BuildContext context) {
   return GestureDetector(
-    onTap: () async {
-      if (isConnected == true) {
-        await _cargarViaTroncho(via.presas);
-        ViaData = via;
-        indexData = via.sId;
-      }
-    },
-    child: botonCargar(isConnected),
-  );
+      onTap: () async {
+        if (isConnected == true) {
+          await _cargarViaTroncho(via.presas);
+          ViaData = via;
+          indexData = via.sId;
+        }
+      },
+      child: botonCargar(isConnected, context));
 }
 
 Widget esquematicoPared(double width, Widget pared) {

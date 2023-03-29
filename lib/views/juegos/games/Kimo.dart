@@ -114,6 +114,7 @@ class _ChatPageKimo extends State<ChatPageKimo> {
     final serverName = widget.server.name ?? "Unknown";
     return Scaffold(
       appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.primary,
           title: (isConnecting
               ? Text('Connecting chat to ' + serverName + '...')
               : isConnected

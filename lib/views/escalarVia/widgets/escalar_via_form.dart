@@ -1,11 +1,8 @@
 import 'package:Nimbus/viewModels/escalarVia/escalarVia_VM.dart';
 import 'package:Nimbus/views/escalarVia/widgets/escalar_via_form_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:Nimbus/views/editVia/editPresas_screen/edit_presas_screen.dart';
-
-import 'package:hive_flutter/hive_flutter.dart';
 
 import 'package:provider/provider.dart';
 import '../../../models/ListadoVias/AWS/ViaAWS.dart';
@@ -30,27 +27,21 @@ class _EscalarViaState extends State<EscalarVia> {
   late final _dificultadController;
   late final _comentarioController;
   late final _numPresasController;
-  late final Box box;
   late var height;
   double width = 934;
 
-  escalarViaVM viewModel = escalarViaVM();
+  EscalarViaVM viewModel = EscalarViaVM();
 
   @override
   void initState() {
     super.initState();
-    // Get reference to an already opened box
-    box = viewModel.box;
-    //print(box.keys.toString());
-    //print(widget.xKey);
-
+    viewModel.connect(widget.server);
     _nameController = widget.via.name;
     _idController = widget.via.sId;
     _autorController = widget.via.autor;
     _dificultadController = widget.via.dificultad;
     _comentarioController = Text(widget.via.comentario);
     _numPresasController = widget.via.presas.length;
-    viewModel.connect(widget.server);
   }
 
   void dispose() {
@@ -75,8 +66,8 @@ class _EscalarViaState extends State<EscalarVia> {
           children: <Widget>[
             circulo(_dificultadController),
             SizedBox(width: 14),
-            descriptivoVia(
-                _nameController, _autorController, _numPresasController),
+            descriptivoVia(_nameController, _autorController,
+                _numPresasController, context),
             SizedBox(width: 15),
           ],
         ),
@@ -85,11 +76,11 @@ class _EscalarViaState extends State<EscalarVia> {
         _comentarioController,
         SizedBox(height: 20.0),
 
-        ChangeNotifierProvider<escalarViaVM>(
+        ChangeNotifierProvider<EscalarViaVM>(
           create: (BuildContext context) => viewModel,
-          child: Consumer<escalarViaVM>(builder: (context, viewModel, _) {
-            return botoneraCargar(
-                viewModel.isConnected, viewModel.cargarViaTroncho, widget.via);
+          child: Consumer<EscalarViaVM>(builder: (context, viewModel, _) {
+            return botoneraCargar(viewModel.isConnected,
+                viewModel.cargarViaTroncho, widget.via, context);
           }),
         ),
 
@@ -102,7 +93,7 @@ class _EscalarViaState extends State<EscalarVia> {
           height: 24,
         ),
         Row(children: [
-          botonEditar(widget.via.isbloque!, _navigatetoEditPresas),
+          botonEditar(widget.via.isbloque!, _navigatetoEditPresas, context),
           SizedBox(width: 5.0),
           botonEliminar(context, _nameController, _idController,
               viewModel.cerrarConexion, viewModel.eliminarVia)

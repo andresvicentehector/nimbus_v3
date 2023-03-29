@@ -4,15 +4,20 @@ import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:hive/hive.dart';
 import 'package:Nimbus/views/bluettothSetings/widgets/DiscoveryPage.dart';
 import 'package:Nimbus/views/bluettothSetings/widgets/SelectBondedDevicePage.dart';
-import 'package:Nimbus/template/ConstantesPropias.dart';
+import 'package:Nimbus/template/configuration/ConstantesPropias.dart';
 import 'package:Nimbus/viewModels/bluetoothSetings/backup_functions.dart';
 
 import '../../viewModels/bluetoothSetings/changeVersion_functions.dart';
-import '../../viewModels/functions/navigator_MaterialPage_functions.dart';
+import '../../viewModels/juegos/navigator_MaterialPage_functions.dart';
+import '../z_widgets_comunes/navigation_bar/navigator.dart';
 import '../z_widgets_comunes/utils/texto.dart';
 
 // ignore: camel_case_types
 class bluetooth_Screen extends StatefulWidget {
+  final BluetoothDevice? selectedDevice;
+
+  const bluetooth_Screen({this.selectedDevice});
+
   @override
   _Bluetooth_screen createState() => _Bluetooth_screen();
 }
@@ -86,6 +91,7 @@ class _Bluetooth_screen extends State<bluetooth_Screen> {
 
   @override
   Widget build(BuildContext context) {
+    var pos = 4;
     return Scaffold(
         appBar: _appBarBuilder(),
         body: Stack(
@@ -93,15 +99,18 @@ class _Bluetooth_screen extends State<bluetooth_Screen> {
             Container(
               child: _bluetoothScreenBuilder(),
             ),
+            SizedBox(
+              height: 70,
+            ),
+            Navigation(selectedDevice: widget.selectedDevice, pos: pos)
           ],
         ));
   }
 
   PreferredSizeWidget _appBarBuilder() {
     return AppBar(
-      title: texto(
-        'Configuración General',
-      ),
+      backgroundColor: Theme.of(context).colorScheme.primary,
+      title: texto('Configuración General', context),
     );
   }
 
@@ -132,7 +141,10 @@ class _Bluetooth_screen extends State<bluetooth_Screen> {
           title: const Text('Bluetooth status'),
           subtitle: Text(_bluetoothState.toString()),
           trailing: ElevatedButton(
-            child: const Text('Settings'),
+            child: Text(
+              'Settings',
+              style: TextStyle(color: Theme.of(context).colorScheme.tertiary),
+            ),
             onPressed: () {
               FlutterBluetoothSerial.instance.openSettings();
             },
@@ -171,7 +183,10 @@ class _Bluetooth_screen extends State<bluetooth_Screen> {
         ),
         ListTile(
           title: ElevatedButton(
-              child: const Text('Buscar dispositivos para emparejar'),
+              child: Text(
+                'Buscar dispositivos para emparejar',
+                style: TextStyle(color: Theme.of(context).colorScheme.tertiary),
+              ),
               onPressed: () async {
                 final BluetoothDevice? selectedDevice =
                     await Navigator.of(context).push(
@@ -191,7 +206,10 @@ class _Bluetooth_screen extends State<bluetooth_Screen> {
         ),
         ListTile(
           title: ElevatedButton(
-            child: const Text(' Chat con un dispositivo emparejado'),
+            child: Text(
+              ' Chat con un dispositivo emparejado',
+              style: TextStyle(color: Theme.of(context).colorScheme.tertiary),
+            ),
             onPressed: () async {
               final BluetoothDevice? selectedDevice =
                   await Navigator.of(context).push(
@@ -214,8 +232,11 @@ class _Bluetooth_screen extends State<bluetooth_Screen> {
         Divider(),
         ListTile(
           title: ElevatedButton(
-            child: Text(' Cambiar la configuración a la pared de ' +
-                (version == "15" ? "25 grados" : "15 grados")),
+            child: Text(
+              ' Cambiar la configuración a la pared de ' +
+                  (version == "15" ? "25 grados" : "15 grados"),
+              style: TextStyle(color: Theme.of(context).colorScheme.tertiary),
+            ),
             onPressed: () {
               setState(() {
                 changeVersion(version);
@@ -226,7 +247,10 @@ class _Bluetooth_screen extends State<bluetooth_Screen> {
         Divider(),
         ListTile(
           title: ElevatedButton(
-            child: Text(' Hacer una copia de respaldo'),
+            child: Text(
+              ' Hacer una copia de respaldo',
+              style: TextStyle(color: Theme.of(context).colorScheme.tertiary),
+            ),
             onPressed: () {
               setState(() {
                 createBackup(context);
@@ -236,7 +260,10 @@ class _Bluetooth_screen extends State<bluetooth_Screen> {
         ),
         ListTile(
           title: ElevatedButton(
-            child: Text('Cargar una copia de respaldo'),
+            child: Text(
+              'Cargar una copia de respaldo',
+              style: TextStyle(color: Theme.of(context).colorScheme.tertiary),
+            ),
             onPressed: () {
               setState(() {
                 restoreBackup(context);

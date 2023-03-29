@@ -1,14 +1,11 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import '../../data/response/ApiResponse.dart';
 import '../../models/ListadoVias/AWS/ViaAWS.dart';
-import '../../models/ListadoVias/hive/via.dart';
 import '../../repository/vias/ViaRepoImp.dart';
-import '../../template/ConstantesPropias.dart';
+import '../../template/configuration/ConstantesPropias.dart';
 
 class UpdateScreenVM extends ChangeNotifier {
   final _myRepo = ViaRepoImp();

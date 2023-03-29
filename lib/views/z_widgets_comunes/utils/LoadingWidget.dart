@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 
 class LoadingWidget extends StatelessWidget {
@@ -9,16 +10,11 @@ class LoadingWidget extends StatelessWidget {
       child: Center(
           child: Stack(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: CircularProgressIndicator(
-                strokeWidth:
-                    4.0 // increase this value to make the indicator bigger
-                ),
-          ),
-          SizedBox(
-            height: 80,
-            child: Image.asset("images/icon/logo.png"),
+          Roulette(
+            child: SizedBox(
+              height: 80,
+              child: Image.asset("images/icon/logo.png"),
+            ),
           ),
         ],
       )),

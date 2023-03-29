@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:typed_data';
+import 'package:Nimbus/template/configuration/ConstantesPropias.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:zoom_widget/zoom_widget.dart';
-import 'package:Nimbus/template/ConstantesPropias.dart';
 
 import '../../z_widgets_comunes/wall/raulin_stones_wallBuilder/wall15_raulin.dart';
 import '../../z_widgets_comunes/wall/raulin_stones_wallBuilder/wall25_raulin.dart';
@@ -101,6 +101,7 @@ class _Raulin extends State<Raulin> {
     final serverName = widget.server.name ?? "Unknown";
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.primary,
         title: (isConnecting
             ? Text('Conectando con ' + serverName + '...')
             : isConnected

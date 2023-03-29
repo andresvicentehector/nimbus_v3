@@ -1,3 +1,4 @@
+import 'package:Nimbus/views/listadoVias/listado_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:Nimbus/views/bluettothSetings/setings_screen.dart';
 import 'package:Nimbus/views/addVia/add_presas_screen.dart';
@@ -6,30 +7,32 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:Nimbus/views/escalarVia/escalar_screen.dart';
 import 'package:Nimbus/views/juegos/jugar_screen.dart';
-import 'package:Nimbus/template/T8Colors.dart';
-import 'package:Nimbus/template/T1Colors.dart';
-import 'package:Nimbus/template/T1Images.dart';
+
+import 'package:Nimbus/template/images/T1Images.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
-import '/template/ConstantesPropias.dart';
+import '../../../template/colors/ColorsFixed.dart';
+import '../../../template/configuration/ConstantesPropias.dart';
 
 class Navigation extends StatefulWidget {
   final BluetoothDevice? selectedDevice;
+  final pos;
 
-  const Navigation({required this.selectedDevice});
+  const Navigation({required this.selectedDevice, required this.pos});
 
   @override
   State<Navigation> createState() => _NavigationState();
 }
 
 class _NavigationState extends State<Navigation> {
-  var isSelected = 1;
+  late var isSelected;
   Widget animation = Icon(
     Icons.add,
-    color: t1_white,
+    color: t_white,
   );
   @override
   Widget build(BuildContext context) {
+    isSelected = widget.pos;
     return Align(
       alignment: Alignment.bottomCenter,
       child: Stack(
@@ -70,8 +73,8 @@ class _NavigationState extends State<Navigation> {
             width: 75,
             child: FloatingActionButton(
                 backgroundColor: (widget.selectedDevice != null
-                    ? t8_colorPrimary
-                    : t8_textColorSecondary),
+                    ? Theme.of(context).colorScheme.primary
+                    : t_unactive),
                 onPressed: () {
                   if (widget.selectedDevice != null) {
                     Navigator.of(context).push(
@@ -94,10 +97,15 @@ class _NavigationState extends State<Navigation> {
     return GestureDetector(
       onTap: () {
         setState(() {
-          isSelected = 1;
+          isSelected = pos;
         });
 
         if (pos == 1) {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => ListadoScreen(),
+            ),
+          );
         } else if (pos == 2) {
           if (indexData != null && widget.selectedDevice != null) {
             Navigator.of(context).push(
@@ -112,13 +120,15 @@ class _NavigationState extends State<Navigation> {
         } else if (pos == 3) {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => JugarScreen(),
+              builder: (context) =>
+                  JugarScreen(selectedDevice: widget.selectedDevice),
             ),
           );
         } else if (pos == 4) {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => bluetooth_Screen(),
+              builder: (context) =>
+                  bluetooth_Screen(selectedDevice: widget.selectedDevice),
             ),
           );
         }
@@ -129,24 +139,18 @@ class _NavigationState extends State<Navigation> {
         alignment: Alignment.center,
         decoration: isSelected == pos
             ? BoxDecoration(
-                shape: BoxShape.circle, color: t1_colorPrimary_light)
+                shape: BoxShape.circle,
+                color: Theme.of(context).colorScheme.primary)
             : BoxDecoration(),
         child: SvgPicture.asset(
           icon,
           width: 20,
           height: 20,
-          color: isSelected == pos ? t1_colorPrimary : Colors.black,
+          color: isSelected == pos
+              ? Theme.of(context).colorScheme.secondary
+              : t_white,
         ),
       ),
     );
   }
 }
-
-
-/*setState(() {
-Animation= LoadingAnimationWidget.discreteCircle(
-color:  const Color(0xFF32EE02),
-secondRingColor: const Color(0xFFF5FC00),
-thirdRingColor: const Color(0xFFEA3799),
-size: 45,);
-});*/
