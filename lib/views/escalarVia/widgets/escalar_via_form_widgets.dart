@@ -29,11 +29,10 @@ Widget descriptivoVia(dynamic _nameController, _autorController,
       ),
       Text(
         _autorController,
-        style: TextStyle(fontFamily: context.resources.dimensions.fontMedium),
+        style: TextStyle(fontFamily: context.resources.fonts.fontMedium),
       ),
       Text(_numPresasController.toString() + " presas",
-          style:
-              TextStyle(fontFamily: context.resources.dimensions.fontMedium)),
+          style: TextStyle(fontFamily: context.resources.fonts.fontMedium)),
     ],
   );
 }
@@ -53,7 +52,7 @@ Widget botonCargar(bool _isConnected, BuildContext context) {
             child: Text((_isConnected ? "Escalar" : "Conéctate a la pared"),
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.tertiary,
-                  fontFamily: "ClashDisplay",
+                  fontFamily: context.resources.fonts.tittle,
                 )),
           ),
           Align(
@@ -99,7 +98,6 @@ Widget botonEditar(
                     padding: const EdgeInsets.all(8.0),
                     child: Icon(
                       Icons.edit,
-                      color: Theme.of(context).colorScheme.tertiary,
                       size: 20,
                     ),
                   ),

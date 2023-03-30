@@ -95,17 +95,14 @@ flutter:
 
 
   fonts:
-      - family: November
-        fonts:
-          - asset: fonts/November_Regular.ttf
-
+    
       - family: ClashDisplay
         fonts:
           - asset: fonts/ClashDisplay-Bold.ttf
       
       - family: Regular
         fonts:
-          - asset: fonts/googlesansregular.ttf
+          - asset: fonts/PlusJakartaSans-Regular.ttf
 
       - family: Medium
         fonts:
@@ -113,11 +110,11 @@ flutter:
 
       - family: Semibold
         fonts:
-          - asset: fonts/googlesansmedium.ttf
+          - asset: fonts/PlusJakartaSans-SemiBold.ttf
 
       - family: Bold
         fonts:
-          - asset: fonts/googlesansebold.ttf
+          - asset: fonts/PlusJakartaSans-Bold.ttf
 
 
 

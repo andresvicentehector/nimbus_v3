@@ -40,7 +40,7 @@ class _MyAppState extends State<MyApp> {
                 secondary: context.resources.color.colorAccent)
             .copyWith(
                 tertiary: context.resources.color.colorPrimaryText,
-                tertiaryContainer: context.resources.color.colorPrimaryText),
+                tertiaryContainer: context.resources.color.colorSecondaryText),
       ),
       darkTheme: ThemeData(
         colorScheme: ColorScheme.dark(

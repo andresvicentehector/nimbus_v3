@@ -1,3 +1,4 @@
+import 'package:Nimbus/template/AppContextExtension.dart';
 import 'package:flutter/material.dart';
 import 'package:select_form_field/select_form_field.dart';
 import 'package:flutter_color_picker_wheel/models/button_behaviour.dart';
@@ -11,18 +12,16 @@ Widget texto(
   return Center(
     child: Text(text,
         textAlign: TextAlign.center,
-        style: DefaultTextStyle.of(context)
-            .style
-            .apply(fontFamily: 'ClashDisplay', fontSizeFactor: 1.0)),
+        style: DefaultTextStyle.of(context).style.apply(
+            fontFamily: context.resources.fonts.tittle, fontSizeFactor: 1.0)),
   );
 }
 
 Widget texto2(BuildContext context, String text) {
   return Text(text,
       textAlign: TextAlign.center,
-      style: DefaultTextStyle.of(context)
-          .style
-          .apply(fontFamily: 'ClashDisplay', fontSizeFactor: 1.0));
+      style: DefaultTextStyle.of(context).style.apply(
+          fontFamily: context.resources.fonts.tittle, fontSizeFactor: 1.0));
 }
 
 Widget colorPicker(Function _changeColor) {
@@ -124,7 +123,7 @@ Widget _estiloBotoneraAdd(BuildContext context) {
             child: Text("Añadir vía",
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.tertiary,
-                  fontFamily: 'ClashDisplay',
+                  fontFamily: context.resources.fonts.tittle,
                 )),
           ),
           Align(

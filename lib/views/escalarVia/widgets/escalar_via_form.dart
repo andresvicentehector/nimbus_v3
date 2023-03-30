@@ -59,46 +59,49 @@ class _EscalarViaState extends State<EscalarVia> {
   Widget build(BuildContext context) {
     width = MediaQuery.of(context).size.width - 20;
     viewModel.showPared(widget.via.presas);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: <Widget>[
-            circulo(_dificultadController),
-            SizedBox(width: 14),
-            descriptivoVia(_nameController, _autorController,
-                _numPresasController, context),
-            SizedBox(width: 15),
-          ],
-        ),
-        SizedBox(height: 20.0),
-        //Text('Comentarios'),
-        _comentarioController,
-        SizedBox(height: 20.0),
+    return SizedBox(
+      width: MediaQuery.of(context).size.width,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: <Widget>[
+              circulo(_dificultadController),
+              SizedBox(width: 14),
+              descriptivoVia(_nameController, _autorController,
+                  _numPresasController, context),
+              SizedBox(width: 15),
+            ],
+          ),
+          SizedBox(height: 20.0),
+          //Text('Comentarios'),
+          _comentarioController,
+          SizedBox(height: 20.0),
 
-        ChangeNotifierProvider<EscalarViaVM>(
-          create: (BuildContext context) => viewModel,
-          child: Consumer<EscalarViaVM>(builder: (context, viewModel, _) {
-            return botoneraCargar(viewModel.isConnected,
-                viewModel.cargarViaTroncho, widget.via, context);
-          }),
-        ),
+          ChangeNotifierProvider<EscalarViaVM>(
+            create: (BuildContext context) => viewModel,
+            child: Consumer<EscalarViaVM>(builder: (context, viewModel, _) {
+              return botoneraCargar(viewModel.isConnected,
+                  viewModel.cargarViaTroncho, widget.via, context);
+            }),
+          ),
 
-        Divider(
-          height: 24,
-        ),
+          Divider(
+            height: 24,
+          ),
 
-        esquematicoPared(width, viewModel.pared),
-        Divider(
-          height: 24,
-        ),
-        Row(children: [
-          botonEditar(widget.via.isbloque!, _navigatetoEditPresas, context),
-          SizedBox(width: 5.0),
-          botonEliminar(context, _nameController, _idController,
-              viewModel.cerrarConexion, viewModel.eliminarVia)
-        ]),
-      ],
+          esquematicoPared(width, viewModel.pared),
+          Divider(
+            height: 24,
+          ),
+          Row(children: [
+            botonEditar(widget.via.isbloque!, _navigatetoEditPresas, context),
+            SizedBox(width: 5.0),
+            botonEliminar(context, _nameController, _idController,
+                viewModel.cerrarConexion, viewModel.eliminarVia)
+          ]),
+        ],
+      ),
     );
   }
 

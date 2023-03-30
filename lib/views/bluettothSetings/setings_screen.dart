@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:Nimbus/template/AppContextExtension.dart';
+import 'package:Nimbus/views/listadoVias/listado_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:hive/hive.dart';
@@ -99,9 +101,6 @@ class _Bluetooth_screen extends State<bluetooth_Screen> {
             Container(
               child: _bluetoothScreenBuilder(),
             ),
-            SizedBox(
-              height: 70,
-            ),
             Navigation(selectedDevice: widget.selectedDevice, pos: pos)
           ],
         ));
@@ -143,7 +142,10 @@ class _Bluetooth_screen extends State<bluetooth_Screen> {
           trailing: ElevatedButton(
             child: Text(
               'Settings',
-              style: TextStyle(color: Theme.of(context).colorScheme.tertiary),
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.tertiary,
+                fontFamily: context.resources.fonts.tittle,
+              ),
             ),
             onPressed: () {
               FlutterBluetoothSerial.instance.openSettings();
@@ -240,6 +242,12 @@ class _Bluetooth_screen extends State<bluetooth_Screen> {
             onPressed: () {
               setState(() {
                 changeVersion(version);
+
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) {
+                    return ListadoScreen();
+                  },
+                ));
               });
             },
           ),
@@ -271,6 +279,7 @@ class _Bluetooth_screen extends State<bluetooth_Screen> {
             },
           ),
         ),
+        SizedBox(height: 80)
       ],
     );
   }

@@ -26,7 +26,7 @@ Widget dictadoInfo(BuildContext context) {
                               context.resources.dimensions.textSizeSMedium)),
                   Text("2+2",
                       style: TextStyle(
-                          fontFamily: context.resources.dimensions.fontMedium)),
+                          fontFamily: context.resources.fonts.fontMedium)),
                 ],
               ),
               SizedBox(width: 15),
@@ -62,10 +62,10 @@ Widget dictadoInfo(BuildContext context) {
                 alignment: Alignment.center,
                 children: <Widget>[
                   Center(
-                    child: Text("Iniciar",
+                    child: Text("Jugar",
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.tertiary,
-                          fontFamily: "ClashDisplay",
+                          fontFamily: context.resources.fonts.tittle,
                         )),
                   ),
                   Align(
@@ -112,7 +112,7 @@ Widget raulinInfo(BuildContext context) {
                               context.resources.dimensions.textSizeSMedium)),
                   Text(" 2 menos 2",
                       style: TextStyle(
-                          fontFamily: context.resources.dimensions.fontMedium)),
+                          fontFamily: context.resources.fonts.fontMedium)),
                 ],
               ),
               SizedBox(width: 15),
@@ -148,10 +148,10 @@ Widget raulinInfo(BuildContext context) {
                 alignment: Alignment.center,
                 children: <Widget>[
                   Center(
-                    child: Text("Iniciar",
+                    child: Text("Jugar",
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.tertiary,
-                          fontFamily: "ClashDisplay",
+                          fontFamily: context.resources.fonts.tittle,
                         )),
                   ),
                   Align(
@@ -198,7 +198,7 @@ Widget kimoInfo(BuildContext context) {
                               context.resources.dimensions.textSizeSMedium)),
                   Text("Kimo",
                       style: TextStyle(
-                          fontFamily: context.resources.dimensions.fontMedium)),
+                          fontFamily: context.resources.fonts.fontMedium)),
                 ],
               ),
               SizedBox(width: 15),
@@ -237,7 +237,7 @@ Widget kimoInfo(BuildContext context) {
                     child: Text("Jugar",
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.tertiary,
-                          fontFamily: "ClashDisplay",
+                          fontFamily: context.resources.fonts.tittle,
                         )),
                   ),
                   Align(

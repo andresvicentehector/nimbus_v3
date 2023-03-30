@@ -37,5 +37,12 @@
             "flutterMode": "debug"
         }
 
+        {
+            "name": " REl (SM G998B)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+
     ]
 }

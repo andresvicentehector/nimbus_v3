@@ -1,9 +1,4 @@
 abstract class Dimensions {
-/*fonts*/
-  String get fontRegular;
-  String get fontMedium;
-  String get fontSemibold;
-  String get fontBold;
 /* font sizes*/
   double get textSizeSmall;
   double get textSizeSMedium;

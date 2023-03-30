@@ -22,7 +22,7 @@ class AppColors implements BaseColors {
   MaterialColor get colorPrimary => MaterialColor(0xFF2F00E9, _primary);
 
   @override
-  Color get colorPrimaryText => Color.fromARGB(255, 255, 255, 255);
+  Color get colorPrimaryText => Color.fromARGB(255, 5, 0, 0);
 
   @override
   Color get colorSecondaryText => Color.fromARGB(255, 0, 0, 0);

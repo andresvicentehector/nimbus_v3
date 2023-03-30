@@ -11,6 +11,7 @@ class LoadingWidget extends StatelessWidget {
           child: Stack(
         children: [
           Roulette(
+            spins: 1,
             child: SizedBox(
               height: 80,
               child: Image.asset("images/icon/logo.png"),

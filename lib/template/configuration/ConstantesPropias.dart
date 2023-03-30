@@ -1,6 +1,6 @@
 import '../../models/ListadoVias/AWS/ViaAWS.dart';
 
-String quePared = "Pared de 25 Grados";
+String quePared = "Pared de  25 Grados";
 String fondo = "images/fondo_trans25.png";
 String paredTrans = "images/presas_trans25.png";
 String version = "25";

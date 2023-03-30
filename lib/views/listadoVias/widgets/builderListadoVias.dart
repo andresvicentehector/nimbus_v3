@@ -1,6 +1,8 @@
 import 'package:Nimbus/models/ListadoVias/AWS/ViaAWS.dart';
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+import 'package:nb_utils/nb_utils.dart';
 import '../../../data/response/Status.dart';
 import '../../escalarVia/escalar_screen.dart';
 import '../../z_widgets_comunes/utils/LoadingWidget.dart';
@@ -41,52 +43,55 @@ class BuilderListadoVias extends StatelessWidget {
                   if (via!.isNotEmpty) {
                     var viaData = via![index];
 
-                    return InkWell(
-                        borderRadius: BorderRadius.all(Radius.zero),
-                        radius: 20,
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Row(
-                                children: <Widget>[
-                                  GestureDetector(
-                                      onTap: () {
-                                        if (selectedDevice != null) {
-                                          _escalarScreen(context, via![index],
-                                              selectedDevice);
-                                        }
-                                      },
-                                      child: circulo(viaData)),
-                                  SizedBox(width: 14),
-                                  GestureDetector(
-                                      onTap: () {
-                                        if (selectedDevice != null) {
-                                          _escalarScreen(context, via![index],
-                                              selectedDevice);
-                                        }
-                                      },
-                                      child: textoDescriptivo(
-                                          via![index], context)),
-                                  SizedBox(width: 14),
-                                ],
-                              ),
-                              SizedBox(height: 14),
-                              GestureDetector(
-                                  onTap: () {
-                                    if (selectedDevice != null) {
-                                      _escalarScreen(
-                                          context, via![index], selectedDevice);
-                                    }
-                                  },
-                                  child: botonCargarVia(
-                                    selectedDevice,
-                                    context,
-                                  ))
-                            ],
-                          ),
-                        ));
+                    return FadeInUp(
+                      delay: Duration(milliseconds: 1),
+                      child: InkWell(
+                          borderRadius: BorderRadius.all(Radius.zero),
+                          radius: 20,
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Row(
+                                  children: <Widget>[
+                                    GestureDetector(
+                                        onTap: () {
+                                          if (selectedDevice != null) {
+                                            _escalarScreen(context, via![index],
+                                                selectedDevice);
+                                          }
+                                        },
+                                        child: circulo(viaData)),
+                                    SizedBox(width: 14),
+                                    GestureDetector(
+                                        onTap: () {
+                                          if (selectedDevice != null) {
+                                            _escalarScreen(context, via![index],
+                                                selectedDevice);
+                                          }
+                                        },
+                                        child: textoDescriptivo(
+                                            via![index], context)),
+                                    SizedBox(width: 14),
+                                  ],
+                                ),
+                                SizedBox(height: 14),
+                                GestureDetector(
+                                    onTap: () {
+                                      if (selectedDevice != null) {
+                                        _escalarScreen(context, via![index],
+                                            selectedDevice);
+                                      }
+                                    },
+                                    child: botonCargarVia(
+                                      selectedDevice,
+                                      context,
+                                    ))
+                              ],
+                            ),
+                          )),
+                    );
                   } else {
                     return Center(
                       child: texto("No hemos encontrado nada", context),

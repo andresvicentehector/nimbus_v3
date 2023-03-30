@@ -5,6 +5,7 @@ import 'package:Nimbus/template/strings/SpanishStrings.dart';
 import 'package:Nimbus/template/strings/Strings.dart';
 import 'package:flutter/cupertino.dart';
 
+import 'fonts/AppFonts.dart';
 import 'strings/EnglishStrings.dart';
 
 class Resources {
@@ -33,6 +34,10 @@ class Resources {
 
   AppDimensions get dimensions {
     return AppDimensions();
+  }
+
+  AppFonts get fonts {
+    return AppFonts();
   }
 
   static Resources of(BuildContext context) {

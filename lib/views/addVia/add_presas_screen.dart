@@ -94,7 +94,11 @@ class _AddPresas extends State<AddPresas> {
       )),
       actions: <Widget>[
         ElevatedButton(
-          style: ButtonStyle(),
+          style: ButtonStyle(
+            backgroundColor:
+                MaterialStateProperty.all<Color>(Colors.transparent),
+            shadowColor: MaterialStateProperty.all<Color>(Colors.transparent),
+          ),
           child: Icon(
             Icons.save_rounded,
             color: Theme.of(context).colorScheme.secondary,

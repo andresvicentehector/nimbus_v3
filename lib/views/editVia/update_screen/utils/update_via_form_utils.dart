@@ -1,12 +1,12 @@
+import 'package:Nimbus/template/AppContextExtension.dart';
 import 'package:flutter/material.dart';
 
 Widget textoCabecera(String text, BuildContext context) {
   return Center(
     child: Text(text,
         textAlign: TextAlign.center,
-        style: DefaultTextStyle.of(context)
-            .style
-            .apply(fontFamily: 'ClashDisplay', fontSizeFactor: 1.0)),
+        style: DefaultTextStyle.of(context).style.apply(
+            fontFamily: context.resources.fonts.tittle, fontSizeFactor: 1.0)),
   );
 }
 
@@ -23,7 +23,7 @@ Widget botonAnyadir(BuildContext context) {
             child: Text("Actualizar vía",
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.tertiary,
-                  fontFamily: 'ClashDisplay',
+                  fontFamily: context.resources.fonts.tittle,
                 )),
           ),
           Align(

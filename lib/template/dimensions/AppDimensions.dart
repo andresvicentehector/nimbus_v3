@@ -2,15 +2,6 @@ import 'Dimensions.dart';
 
 class AppDimensions implements Dimensions {
   @override
-  String get fontRegular => 'Regular';
-  @override
-  String get fontBold => 'Medium';
-  @override
-  String get fontMedium => 'SemiBold';
-  @override
-  String get fontSemibold => 'Bold';
-
-  @override
   double get textSizeLarge => 12.0;
 
   @override

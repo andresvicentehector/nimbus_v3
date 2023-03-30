@@ -26,22 +26,20 @@ Widget textoDescriptivo(var viaData, BuildContext context) {
           maxLines: 4,
           overflow: TextOverflow.fade,
           style: TextStyle(
-            fontFamily: 'ClashDisplay',
-            color: Theme.of(context).colorScheme.tertiary,
-            fontSize: context.resources.dimensions.textSizeSMedium,
-          ),
+              fontFamily: context.resources.fonts.tittle,
+              fontSize: context.resources.dimensions.textSizeMedium),
         ),
       ),
       Text(
         viaData.autor,
         style: TextStyle(
-          fontFamily: context.resources.dimensions.fontBold,
+          fontFamily: context.resources.fonts.fontBold,
         ),
       ),
       Text(
         viaData.presas.length.toString() + " presas",
         style: TextStyle(
-          fontFamily: context.resources.dimensions.fontBold,
+          fontFamily: context.resources.fonts.fontBold,
         ),
       ),
     ],
@@ -66,7 +64,7 @@ Widget botonCargarVia(BluetoothDevice? selectedDevice, BuildContext context) {
                     : "Conéctate a la pared"),
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.tertiary,
-                  fontFamily: 'ClashDisplay',
+                  fontFamily: context.resources.fonts.tittle,
                 )),
           ),
           Align(
@@ -167,11 +165,12 @@ Widget botoneraBloqueVia(ViasListVM viewModel, BuildContext context) {
                 alignment: Alignment.center,
                 children: <Widget>[
                   Center(
-                    child: Text("Bloques",
+                    child: Text("BLOQUES",
                         style: TextStyle(
-                          color: Theme.of(context).colorScheme.tertiary,
-                          fontFamily: 'ClashDisplay',
-                        )),
+                            color: Theme.of(context).colorScheme.tertiary,
+                            fontFamily: context.resources.fonts.tittle,
+                            fontSize:
+                                context.resources.dimensions.textSizeMedium)),
                   ),
                 ],
               )),
@@ -195,11 +194,12 @@ Widget botoneraBloqueVia(ViasListVM viewModel, BuildContext context) {
                 alignment: Alignment.center,
                 children: <Widget>[
                   Center(
-                    child: Text("Travesías",
+                    child: Text("TRAVESÍAS",
                         style: TextStyle(
-                          color: Theme.of(context).colorScheme.tertiary,
-                          fontFamily: 'ClashDisplay',
-                        )),
+                            color: Theme.of(context).colorScheme.tertiary,
+                            fontFamily: context.resources.fonts.tittle,
+                            fontSize:
+                                context.resources.dimensions.textSizeMedium)),
                   ),
                 ],
               )),

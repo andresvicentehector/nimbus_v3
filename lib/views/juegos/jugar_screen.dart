@@ -1,3 +1,4 @@
+import 'package:Nimbus/template/AppContextExtension.dart';
 import 'package:flutter/material.dart';
 import 'package:Nimbus/template/configuration/ConstantesPropias.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
@@ -29,7 +30,7 @@ class JugarScreen extends StatelessWidget {
     return AppBar(
       backgroundColor: Theme.of(context).colorScheme.primary,
       title: Text('Juegos Disponibles',
-          style: TextStyle(fontFamily: 'ClashDisplay')),
+          style: TextStyle(fontFamily: context.resources.fonts.tittle)),
     );
   }
 

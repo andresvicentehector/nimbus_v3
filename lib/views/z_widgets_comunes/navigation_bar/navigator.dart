@@ -148,7 +148,7 @@ class _NavigationState extends State<Navigation> {
           height: 20,
           color: isSelected == pos
               ? Theme.of(context).colorScheme.secondary
-              : t_white,
+              : Theme.of(context).colorScheme.tertiary,
         ),
       ),
     );

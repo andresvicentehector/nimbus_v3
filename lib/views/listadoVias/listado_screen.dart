@@ -1,6 +1,8 @@
 import 'package:Nimbus/views/listadoVias/widgets/builderListadoVias.dart';
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:Nimbus/views/z_widgets_comunes/navigation_bar/navigator.dart';
+import 'package:nb_utils/nb_utils.dart';
 import '../../template/configuration/ConstantesPropias.dart';
 import '../../viewModels/ListadoVias/listado_VM.dart';
 import '../z_widgets_comunes/utils/texto.dart';
@@ -78,17 +80,24 @@ class _ListadoScreenState extends State<ListadoScreen> {
     return AppBar(
       backgroundColor: Theme.of(context).colorScheme.primary,
       automaticallyImplyLeading: false,
-      title: texto(quePared, context),
+      title: texto(quePared.toUpperCase(), context),
       actions: <Widget>[
-        ElevatedButton(
-          style: ButtonStyle(),
-          child: Icon(Icons.bluetooth,
-              color: viewModel.selectedDevice != null
-                  ? Colors.blue
-                  : Colors.white),
-          onPressed: () async {
-            viewModel.selectDevice(context);
-          },
+        Pulse(
+          delay: const Duration(seconds: 3),
+          child: ElevatedButton(
+            style: ButtonStyle(
+              backgroundColor:
+                  MaterialStateProperty.all<Color>(Colors.transparent),
+              shadowColor: MaterialStateProperty.all<Color>(Colors.transparent),
+            ),
+            child: Icon(Icons.bluetooth,
+                color: viewModel.selectedDevice != null
+                    ? Colors.blue
+                    : Colors.white),
+            onPressed: () async {
+              viewModel.selectDevice(context);
+            },
+          ),
         ),
       ],
     );
