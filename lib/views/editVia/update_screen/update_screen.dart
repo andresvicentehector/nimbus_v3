@@ -1,3 +1,4 @@
+import 'package:Nimbus/template/AppContextExtension.dart';
 import 'package:flutter/material.dart';
 import '../../../models/ListadoVias/AWS/ViaAWS.dart';
 import '../../z_widgets_comunes/utils/texto.dart';
@@ -19,7 +20,8 @@ class UpdateScreen extends StatelessWidget {
   PreferredSizeWidget _appBarBuilder(BuildContext context) {
     return AppBar(
       backgroundColor: Theme.of(context).colorScheme.primary,
-      title: texto('Actualizar una via', context),
+      title: texto(
+          context.resources.strings.editViaScreenAppbar.toUpperCase(), context),
     );
   }
 

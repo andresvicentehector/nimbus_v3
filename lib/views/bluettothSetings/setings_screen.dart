@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:Nimbus/template/AppContextExtension.dart';
+import 'package:Nimbus/viewModels/bluetoothSetings/changeLang_function.dart';
 import 'package:Nimbus/views/listadoVias/listado_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
@@ -109,7 +110,9 @@ class _Bluetooth_screen extends State<bluetooth_Screen> {
   PreferredSizeWidget _appBarBuilder() {
     return AppBar(
       backgroundColor: Theme.of(context).colorScheme.primary,
-      title: texto('Configuración General', context),
+      title: texto(
+          context.resources.strings.bluetoothScreenAppbar.toUpperCase(),
+          context),
     );
   }
 
@@ -117,9 +120,10 @@ class _Bluetooth_screen extends State<bluetooth_Screen> {
     return ListView(
       children: <Widget>[
         Divider(),
-        ListTile(title: const Text('General')),
+        ListTile(title: Text(context.resources.strings.bluetoothScreenGeneral)),
         SwitchListTile(
-          title: const Text('Activar Bluetooth'),
+          title:
+              Text(context.resources.strings.bluetoothScreenActivateBluetooth),
           value: _bluetoothState.isEnabled,
           onChanged: (bool value) {
             // Do the request and update with the true value then
@@ -137,11 +141,11 @@ class _Bluetooth_screen extends State<bluetooth_Screen> {
           },
         ),
         ListTile(
-          title: const Text('Bluetooth status'),
+          title: Text(context.resources.strings.bluetoothScreenBluetoothStatus),
           subtitle: Text(_bluetoothState.toString()),
           trailing: ElevatedButton(
             child: Text(
-              'Settings',
+              context.resources.strings.bluetoothScreenBluetoothSettings,
               style: TextStyle(
                 color: Theme.of(context).colorScheme.tertiary,
                 fontFamily: context.resources.fonts.tittle,
@@ -153,16 +157,18 @@ class _Bluetooth_screen extends State<bluetooth_Screen> {
           ),
         ),
         ListTile(
-          title: const Text('Local adapter address'),
+          title: Text(
+              context.resources.strings.bluetoothScreenLocalAdapterAddress),
           subtitle: Text(_address),
         ),
         ListTile(
-          title: const Text('Local adapter name'),
+          title:
+              Text(context.resources.strings.bluetoothScreenLocalAdapterName),
           subtitle: Text(_name),
           onLongPress: null,
         ),
         SwitchListTile(
-          title: const Text('Insertar PIN de manera automática al emparejar'),
+          title: Text(context.resources.strings.bluetoothScreenInsertPin),
           subtitle: const Text('Pin 1234'),
           value: _autoAcceptPairingRequests,
           onChanged: (bool value) {
@@ -186,7 +192,7 @@ class _Bluetooth_screen extends State<bluetooth_Screen> {
         ListTile(
           title: ElevatedButton(
               child: Text(
-                'Buscar dispositivos para emparejar',
+                context.resources.strings.bluetoothScreenSearchPairingDevices,
                 style: TextStyle(color: Theme.of(context).colorScheme.tertiary),
               ),
               onPressed: () async {
@@ -206,10 +212,20 @@ class _Bluetooth_screen extends State<bluetooth_Screen> {
                 }
               }),
         ),
+        /*  ListTile(
+          title: ElevatedButton(
+              child: Text(
+                'Cambiar idioma a inglés',
+                style: TextStyle(color: Theme.of(context).colorScheme.tertiary),
+              ),
+              onPressed: () async {
+                cambiarIdioma('en', context);
+              }),
+        ),*/
         ListTile(
           title: ElevatedButton(
             child: Text(
-              ' Chat con un dispositivo emparejado',
+              context.resources.strings.bluetoothScreenChatwithPaired,
               style: TextStyle(color: Theme.of(context).colorScheme.tertiary),
             ),
             onPressed: () async {
@@ -235,8 +251,8 @@ class _Bluetooth_screen extends State<bluetooth_Screen> {
         ListTile(
           title: ElevatedButton(
             child: Text(
-              ' Cambiar la configuración a la pared de ' +
-                  (version == "15" ? "25 grados" : "15 grados"),
+              context.resources.strings.bluetoothScreenChangeWall +
+                  (version == "15" ? "25 " : "15 "),
               style: TextStyle(color: Theme.of(context).colorScheme.tertiary),
             ),
             onPressed: () {
@@ -256,7 +272,7 @@ class _Bluetooth_screen extends State<bluetooth_Screen> {
         ListTile(
           title: ElevatedButton(
             child: Text(
-              ' Hacer una copia de respaldo',
+              context.resources.strings.bluetoothScreenMakeBackup,
               style: TextStyle(color: Theme.of(context).colorScheme.tertiary),
             ),
             onPressed: () {
@@ -269,7 +285,7 @@ class _Bluetooth_screen extends State<bluetooth_Screen> {
         ListTile(
           title: ElevatedButton(
             child: Text(
-              'Cargar una copia de respaldo',
+              context.resources.strings.bluetoothScreenLoadBackup,
               style: TextStyle(color: Theme.of(context).colorScheme.tertiary),
             ),
             onPressed: () {

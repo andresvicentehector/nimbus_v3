@@ -31,7 +31,9 @@ Widget descriptivoVia(dynamic _nameController, _autorController,
         _autorController,
         style: TextStyle(fontFamily: context.resources.fonts.fontMedium),
       ),
-      Text(_numPresasController.toString() + " presas",
+      Text(
+          _numPresasController.toString() +
+              context.resources.strings.homeScreenPresas,
           style: TextStyle(fontFamily: context.resources.fonts.fontMedium)),
     ],
   );
@@ -49,7 +51,10 @@ Widget botonCargar(bool _isConnected, BuildContext context) {
         alignment: Alignment.center,
         children: <Widget>[
           Center(
-            child: Text((_isConnected ? "Escalar" : "Conéctate a la pared"),
+            child: Text(
+                (_isConnected
+                    ? context.resources.strings.escalarViaScreenButtonClimb
+                    : context.resources.strings.escalarViaScreenButtonConnect),
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.tertiary,
                   fontFamily: context.resources.fonts.tittle,
@@ -90,7 +95,15 @@ Widget botonEditar(
           child: Stack(
             alignment: Alignment.center,
             children: <Widget>[
-              Center(child: texto('Edita tu ' + isBloque, context)),
+              Center(
+                  child: texto(
+                      context.resources.strings.escalarViaScreenButtonEdit +
+                          (isBloque == "Bloque"
+                              ? context.resources.strings
+                                  .editViaScreenBloqueSelection
+                              : context.resources.strings
+                                  .editViaScreenTraveSelection),
+                      context)),
               Align(
                 alignment: Alignment.topRight,
                 child: Container(
@@ -142,13 +155,15 @@ Widget botonEliminar(BuildContext context, dynamic _nameController,
 Widget _buildPopupDialogEliminar(BuildContext context, dynamic _nameController,
     dynamic _idController, Function _eliminarVia) {
   return new AlertDialog(
-    title: Text(_nameController.toString()),
+    title: Text(
+      _nameController.toString(),
+      style: TextStyle(fontFamily: context.resources.fonts.tittle),
+    ),
     content: new Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
-            "Esto hará que esta via se borre para siempre y no podrás volver atrás. Estás de acuerdo?")
+        Text(context.resources.strings.escalarViaScreeDeleteDescription)
       ],
     ),
     actions: <Widget>[
@@ -161,7 +176,7 @@ Widget _buildPopupDialogEliminar(BuildContext context, dynamic _nameController,
         },
         // buttonstyle:(textColor: Theme.of(context).primaryColor),
         child: Text(
-          'Eliminar vía',
+          context.resources.strings.escalarViaScreeDeleteDescriptionButton,
           style: TextStyle(
             color: Theme.of(context).colorScheme.tertiary,
           ),

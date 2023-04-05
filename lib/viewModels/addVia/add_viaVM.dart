@@ -14,9 +14,7 @@ class AddViaVM extends ChangeNotifier {
   final nameController = TextEditingController();
   final autorController = TextEditingController();
   int dificultadController = Colors.green.value;
-  final comentarioController = TextEditingController(
-      text:
-          "Todas nuestras vías siguen el método T.R.A.V.E (Tocas Rojas, Azules, Verdes y Encadenas) \n\n La salida y el top son de color blanco \n\n las amarillas se pueden usar para juntar \n\n Si con esos tres colores no es suficiente, el metodo T-R-A-V-E se puede alargar con el color morado ");
+  final comentarioController = TextEditingController();
   late String isBloqueControler = "Travesía";
   late var width;
   late var height;

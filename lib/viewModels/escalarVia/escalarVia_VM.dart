@@ -54,27 +54,31 @@ class EscalarViaVM extends ChangeNotifier {
   }
 
   void connect(BluetoothDevice? server) {
-    BluetoothConnection.toAddress(server!.address).then((_connection) {
-      //print('Connected to the device');
-      connection = _connection;
-
+    if (server == null) {
       isConnecting = false;
-      isDisconnecting = false;
-      notifyListeners();
+    } else {
+      BluetoothConnection.toAddress(server!.address).then((_connection) {
+        //print('Connected to the device');
+        connection = _connection;
 
-      connection!.input!.listen(_onDataReceived).onDone(() {
-        if (isDisconnecting) {
-          print('Disconnecting locally!');
-        } else {
-          print('Disconnected remotely!');
-        }
-
+        isConnecting = false;
+        isDisconnecting = false;
         notifyListeners();
+
+        connection!.input!.listen(_onDataReceived).onDone(() {
+          if (isDisconnecting) {
+            print('Disconnecting locally!');
+          } else {
+            print('Disconnected remotely!');
+          }
+
+          notifyListeners();
+        });
+      }).catchError((error) {
+        //print('Cannot connect, exception occured');
+        //print(error);
       });
-    }).catchError((error) {
-      //print('Cannot connect, exception occured');
-      //print(error);
-    });
+    }
   }
 
   void _onDataReceived(Uint8List data) {
@@ -159,7 +163,6 @@ class EscalarViaVM extends ChangeNotifier {
   Future eliminarVia(BuildContext context, String id) async {
     //  await box.delete(widget.xKey);
 
-    cerrarConexion();
     await erraseVia(id);
     await Navigator.pushReplacementNamed(context, '/');
     notifyListeners();

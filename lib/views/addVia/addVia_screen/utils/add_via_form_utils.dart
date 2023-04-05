@@ -59,7 +59,7 @@ Widget selectorBloqueORTravesia(
   final List<Map<String, dynamic>> _items = [
     {
       'value': 'Bloque',
-      'label': 'Bloque',
+      'label': context.resources.strings.addViaScreenBloqueSelection,
       //'icon': Icon(Icons.fiber_manual_record),
       'textStyle': TextStyle(
         color: Theme.of(context).colorScheme.primary,
@@ -67,7 +67,7 @@ Widget selectorBloqueORTravesia(
     },
     {
       'value': 'Travesía',
-      'label': 'Travesía',
+      'label': context.resources.strings.addViaScreenTraveSelection,
       //'icon': Icon(Icons.grade),
     },
   ];
@@ -78,13 +78,14 @@ Widget selectorBloqueORTravesia(
     dialogTitle: 'Selecciona',
     dialogCancelBtn: 'CANCEL',
     items: _items,
-    initialValue: "Travesía",
+    initialValue: context.resources.strings.addViaScreenTraveSelection,
     onChanged: (val) => setBloque(val),
     validator: (val) {
       isBloqueControler = val ?? " ";
       return null;
     },
-    onSaved: (val) => (isBloqueControler = val ?? "Travesía"),
+    onSaved: (val) => (isBloqueControler =
+        val ?? context.resources.strings.addViaScreenTraveSelection),
   );
 }
 
@@ -120,7 +121,7 @@ Widget _estiloBotoneraAdd(BuildContext context) {
         alignment: Alignment.center,
         children: <Widget>[
           Center(
-            child: Text("Añadir vía",
+            child: Text(context.resources.strings.addViaScreenButton,
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.tertiary,
                   fontFamily: context.resources.fonts.tittle,

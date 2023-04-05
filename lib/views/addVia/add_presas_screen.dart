@@ -1,6 +1,8 @@
+import 'package:Nimbus/template/AppContextExtension.dart';
 import 'package:Nimbus/viewModels/addVia/add_presasVM.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+import 'package:provider/provider.dart';
 import 'package:zoom_widget/zoom_widget.dart';
 
 import '../../template/configuration/ConstantesPropias.dart';
@@ -38,13 +40,15 @@ class _AddPresas extends State<AddPresas> {
 
   @override
   Widget build(BuildContext context) {
-    final serverName = widget.server!.name ?? "Unknown";
-
-    return Scaffold(
-        appBar: _appBarBuilder(serverName),
-        body: Stack(children: [
-          _esquemaPared(),
-        ]));
+    return ChangeNotifierProvider<AddPresasVM>(
+        create: (BuildContext context) => viewModel,
+        child: Consumer<AddPresasVM>(builder: (context, viewModel, _) {
+          return Scaffold(
+              appBar: _appBarBuilder(),
+              body: Stack(children: [
+                _esquemaPared(),
+              ]));
+        }));
   }
 
   Widget _esquemaPared() {
@@ -73,14 +77,23 @@ class _AddPresas extends State<AddPresas> {
     );
   }
 
-  PreferredSizeWidget _appBarBuilder(final serverName) {
+  PreferredSizeWidget _appBarBuilder() {
     return AppBar(
       backgroundColor: Theme.of(context).colorScheme.primary,
       title: (viewModel.isConnecting
-          ? texto('Conectando con ' + serverName + '...', context)
+          ? texto(
+              context.resources.strings.addEditPresasScreenConnecting + '...',
+              context)
           : viewModel.isConnected
-              ? texto('Elige las presas', context)
-              : texto('Envía presas a ' + serverName, context)),
+              ? texto(context.resources.strings.addEditPresasScreenConnected,
+                  context)
+              : viewModel.falloConexion
+                  ? texto(
+                      context.resources.strings.addEditPresasScreenOfflineMode,
+                      context)
+                  : texto(
+                      context.resources.strings.addEditPresasScreenOfflineMode,
+                      context)),
       leading: Container(
           child: ElevatedButton(
         child: Icon(
@@ -88,7 +101,6 @@ class _AddPresas extends State<AddPresas> {
           color: Colors.white,
         ),
         onPressed: () async {
-          viewModel.connection?.dispose();
           await Navigator.pushReplacementNamed(context, '/');
         },
       )),

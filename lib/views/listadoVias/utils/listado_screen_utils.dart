@@ -2,6 +2,7 @@ import 'package:Nimbus/template/AppContextExtension.dart';
 import 'package:Nimbus/template/colors/ColorsFixed.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 import '../../../viewModels/ListadoVias/listado_VM.dart';
 
@@ -37,7 +38,9 @@ Widget textoDescriptivo(var viaData, BuildContext context) {
         ),
       ),
       Text(
-        viaData.presas.length.toString() + " presas",
+        viaData.presas.length.toString() +
+            " " +
+            context.resources.strings.homeScreenPresas,
         style: TextStyle(
           fontFamily: context.resources.fonts.fontBold,
         ),
@@ -46,12 +49,11 @@ Widget textoDescriptivo(var viaData, BuildContext context) {
   );
 }
 
-Widget botonCargarVia(BluetoothDevice? selectedDevice, BuildContext context) {
+Widget botonCargarVia(
+    BluetoothDevice? selectedDevice, BuildContext context, var viaData) {
   return Container(
       decoration: BoxDecoration(
-          color: (selectedDevice != null
-              ? Theme.of(context).colorScheme.primary
-              : t_unactive),
+          color: (Theme.of(context).colorScheme.primary),
           borderRadius: BorderRadius.circular(5.0)),
       padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
       child: Stack(
@@ -59,9 +61,20 @@ Widget botonCargarVia(BluetoothDevice? selectedDevice, BuildContext context) {
         children: <Widget>[
           Center(
             child: Text(
-                (selectedDevice != null
-                    ? "Cargar vía"
-                    : "Conéctate a la pared"),
+                context.resources.strings.homeScreenLoadRoute +
+                    " " +
+                    (viaData.isbloque == 'Travesía'
+                        ? (context.resources.strings
+                                .addViaScreenDELATraveSelection +
+                            " " +
+                            context.resources.strings.addViaScreenTraveSelection
+                                .toLowerCase())
+                        : (context.resources.strings
+                                .addViaScreenDELBloqueSelection +
+                            " " +
+                            context
+                                .resources.strings.addViaScreenBloqueSelection
+                                .toLowerCase())),
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.tertiary,
                   fontFamily: context.resources.fonts.tittle,
@@ -75,9 +88,7 @@ Widget botonCargarVia(BluetoothDevice? selectedDevice, BuildContext context) {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Icon(
-                  selectedDevice != null
-                      ? Icons.arrow_forward
-                      : Icons.arrow_upward,
+                  Icons.arrow_forward,
                   color: Theme.of(context).colorScheme.tertiary,
                   size: 20,
                 ),
@@ -109,11 +120,14 @@ Widget botonerafiltrosSearchColor(
           child: TextField(
               controller: editingController,
               decoration: InputDecoration(
-                  hintText: "Busca por nombre o autor",
+                  hintText: context.resources.strings.homeScreenSearchNameAutor,
                   prefixIcon: Icon(Icons.search),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(16.0)))),
               onTap: () {
+                _filterbyName(editingController, context);
+              },
+              onEditingComplete: () {
                 _filterbyName(editingController, context);
               }),
         ),
@@ -165,7 +179,9 @@ Widget botoneraBloqueVia(ViasListVM viewModel, BuildContext context) {
                 alignment: Alignment.center,
                 children: <Widget>[
                   Center(
-                    child: Text("BLOQUES",
+                    child: Text(
+                        context.resources.strings.homeScreenBloque
+                            .toUpperCase(),
                         style: TextStyle(
                             color: Theme.of(context).colorScheme.tertiary,
                             fontFamily: context.resources.fonts.tittle,
@@ -194,7 +210,9 @@ Widget botoneraBloqueVia(ViasListVM viewModel, BuildContext context) {
                 alignment: Alignment.center,
                 children: <Widget>[
                   Center(
-                    child: Text("TRAVESÍAS",
+                    child: Text(
+                        context.resources.strings.homeScreenTravesia
+                            .toUpperCase(),
                         style: TextStyle(
                             color: Theme.of(context).colorScheme.tertiary,
                             fontFamily: context.resources.fonts.tittle,

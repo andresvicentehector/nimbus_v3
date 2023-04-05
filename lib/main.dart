@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:Nimbus/models/ListadoVias/hive/via.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'views/listadoVias/listado_screen.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 main() async {
   // Initialize hive
@@ -56,6 +57,13 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       home: ListadoScreen(),
       initialRoute: ListadoScreen.id,
+      localizationsDelegates: GlobalMaterialLocalizations.delegates,
+      // Add the newly created delegate
+
+      supportedLocales: [
+        const Locale('en'), // English
+        const Locale('es'), // Spanish
+      ],
       routes: {
         ListadoScreen.id: (context) => ListadoScreen(),
       },

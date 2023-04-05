@@ -29,7 +29,7 @@ class JugarScreen extends StatelessWidget {
   _appBarBuilder(BuildContext context) {
     return AppBar(
       backgroundColor: Theme.of(context).colorScheme.primary,
-      title: Text('Juegos Disponibles',
+      title: Text(context.resources.strings.juegosScreenappbar.toUpperCase(),
           style: TextStyle(fontFamily: context.resources.fonts.tittle)),
     );
   }

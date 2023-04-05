@@ -22,34 +22,46 @@ class AddPresasVM extends ChangeNotifier {
   bool isConnecting = true;
   bool get isConnected => (connection?.isConnected ?? false);
   bool isDisconnecting = false;
+  bool falloConexion = false;
 
   void connect(BluetoothDevice? server) {
-    BluetoothConnection.toAddress(server!.address).then((_connection) {
-      //print('Connected to the device');
-      connection = _connection;
-      _sendMessage("clear");
-      notifyListeners();
+    if (server == null) {
       isConnecting = false;
-      isDisconnecting = false;
+    } else {
+      BluetoothConnection.toAddress(server!.address).then((_connection) {
+        //print('Connected to the device');
+        connection = _connection;
+        _sendMessage("clear");
+        notifyListeners();
+        isConnecting = false;
+        isDisconnecting = false;
 
-      connection!.input!.listen(_onDataReceived).onDone(() {
-        // Example: Detect which side closed the connection
-        // There should be `isDisconnecting` flag to show are we are (locally)
-        // in middle of disconnecting process, should be set before calling
-        // `dispose`, `finish` or `close`, which all causes to disconnect.
-        // If we except the disconnection, `onDone` should be fired as result.
-        // If we didn't except this (no flag set), it means closing by remote.
-        if (isDisconnecting) {
-          //print('Disconnecting locally!');
-        } else {
-          //print('Disconnected remotely!');
-        }
+        connection!.input!.listen(_onDataReceived).onDone(() {
+          // Example: Detect which side closed the connection
+          // There should be `isDisconnecting` flag to show are we are (locally)
+          // in middle of disconnecting process, should be set before calling
+          // `dispose`, `finish` or `close`, which all causes to disconnect.
+          // If we except the disconnection, `onDone` should be fired as result.
+          // If we didn't except this (no flag set), it means closing by remote.
+          if (isDisconnecting) {
+            //print('Disconnecting locally!');
+            isConnecting = false;
+            falloConexion = true;
+          } else {
+            print('Disconnected remotely!');
+            isConnecting = false;
+            falloConexion = true;
+          }
+          notifyListeners();
+        });
+      }).catchError((e) {
+        print('Cannot connect, exception occured');
+        //print(e);
+        isConnecting = false;
+        falloConexion = true;
         notifyListeners();
       });
-    }).catchError((e) {
-      //print('Cannot connect, exception occured');
-      //print(e);
-    });
+    }
   }
 
   void setPared() {

@@ -20,40 +20,16 @@ class EditPresasVM extends ChangeNotifier {
       new TextEditingController();
   final ScrollController listScrollController = new ScrollController();
   Widget pared = SizedBox.shrink();
-  bool isConnecting = true;
   bool get isConnected => (connection?.isConnected ?? false);
 
   bool isDisconnecting = false;
 
-  void connect(BluetoothDevice? server, List<String> presas) {
-    BluetoothConnection.toAddress(server!.address).then((_connection) {
-      //print('Connected to the device');
-
-      connection = _connection;
+  void mandarPresasAPared(
+      BluetoothConnection? connection, List<String> presas) {
+    if (connection != null) {
+      print('hector hemos enviao');
       sendMessage(presas.join(","));
-
-      isConnecting = false;
-      isDisconnecting = false;
-      notifyListeners();
-
-      connection!.input!.listen(_onDataReceived).onDone(() {
-        // Example: Detect which side closed the connection
-        // There should be `isDisconnecting` flag to show are we are (locally)
-        // in middle of disconnecting process, should be set before calling
-        // `dispose`, `finish` or `close`, which all causes to disconnect.
-        // If we except the disconnection, `onDone` should be fired as result.
-        // If we didn't except this (no flag set), it means closing by remote.
-        if (isDisconnecting) {
-          print('Disconnecting locally!');
-        } else {
-          print('Disconnected remotely!');
-        }
-        notifyListeners();
-      });
-    }).catchError((error) {
-      print('Cannot connect, exception occured');
-      print(error);
-    });
+    }
   }
 
   void sendMessage(String text) async {
@@ -131,7 +107,11 @@ class EditPresasVM extends ChangeNotifier {
   }
 
   void connectionDispose() {
-    connection?.dispose();
+    if (isConnected) {
+      isDisconnecting = true;
+      connection?.dispose();
+      connection = null;
+    }
   }
 
   void navigateHome(BuildContext context) async {

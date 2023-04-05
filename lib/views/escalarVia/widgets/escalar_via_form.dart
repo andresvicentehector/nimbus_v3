@@ -106,12 +106,10 @@ class _EscalarViaState extends State<EscalarVia> {
   }
 
   _navigatetoEditPresas() {
-    viewModel.cerrarConexion();
-
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) =>
-            EditPresas(server: widget.server, via: widget.via),
+            EditPresas(connection: viewModel.connection, via: widget.via),
       ),
     );
   }

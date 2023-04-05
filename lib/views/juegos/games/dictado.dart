@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'dart:typed_data';
+import 'package:Nimbus/template/AppContextExtension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 import 'package:zoom_widget/zoom_widget.dart';
 
@@ -106,7 +108,11 @@ class _Dictado extends State<Dictado> {
         title: (isConnecting
             ? Text('Conectando con ' + serverName + '...')
             : isConnected
-                ? Text('Modo dictado')
+                ? Text(
+                    'Modo dictado',
+                    style:
+                        TextStyle(fontFamily: context.resources.fonts.tittle),
+                  )
                 : Text('Envía presas a ' + serverName)),
         leading: Container(
           child: ElevatedButton(

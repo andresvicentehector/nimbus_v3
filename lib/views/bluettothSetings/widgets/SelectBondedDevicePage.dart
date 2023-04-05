@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:Nimbus/template/AppContextExtension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
@@ -120,7 +121,7 @@ class _SelectBondedDevicePage extends State<SelectBondedDevicePage> {
         .toList();
     return Scaffold(
       appBar: AppBar(
-        title: Text('Dispositivos para conectar'),
+        title: Text(context.resources.strings.discoverScreenappbar),
         actions: <Widget>[
           _isDiscovering
               ? FittedBox(

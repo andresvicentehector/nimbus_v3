@@ -20,7 +20,7 @@ Widget botonAnyadir(BuildContext context) {
         alignment: Alignment.center,
         children: <Widget>[
           Center(
-            child: Text("Actualizar vía",
+            child: Text(context.resources.strings.editViaScreenButton,
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.tertiary,
                   fontFamily: context.resources.fonts.tittle,

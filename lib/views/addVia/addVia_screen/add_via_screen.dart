@@ -1,3 +1,4 @@
+import 'package:Nimbus/template/AppContextExtension.dart';
 import 'package:flutter/material.dart';
 import 'package:Nimbus/views/addVia/addVia_screen/widgets/add_via_form.dart';
 import '../../z_widgets_comunes/utils/texto.dart';
@@ -29,7 +30,8 @@ class AddScreen extends StatelessWidget {
   PreferredSizeWidget _appBarBuilder(BuildContext context) {
     return AppBar(
       backgroundColor: Theme.of(context).colorScheme.primary,
-      title: texto('Añadir una nueva vía', context),
+      title: texto(
+          context.resources.strings.addViaScreenAppbar.toUpperCase(), context),
     );
   }
 }

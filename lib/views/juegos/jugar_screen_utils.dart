@@ -20,11 +20,14 @@ Widget dictadoInfo(BuildContext context) {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text("Modo-Dictado",
+                  Text(context.resources.strings.juegosScreenDictado,
                       style: TextStyle(
                           fontSize:
-                              context.resources.dimensions.textSizeSMedium)),
-                  Text("2+2",
+                              context.resources.dimensions.textSizeSMedium,
+                          fontFamily: context.resources.fonts.tittle)),
+                  Text(
+                      context.resources.strings
+                          .juegosScreenDictadoDescriptionShort,
                       style: TextStyle(
                           fontFamily: context.resources.fonts.fontMedium)),
                 ],
@@ -32,7 +35,7 @@ Widget dictadoInfo(BuildContext context) {
               SizedBox(width: 15),
               Flexible(
                 child: Text(
-                    "Selecciona la presa que quieres que se ilumine en la tablet para que la persona que esté escalando pueda alcanzarla",
+                    context.resources.strings.juegosScreenDictadoDescription,
                     maxLines: 4),
               ),
             ],
@@ -62,7 +65,7 @@ Widget dictadoInfo(BuildContext context) {
                 alignment: Alignment.center,
                 children: <Widget>[
                   Center(
-                    child: Text("Jugar",
+                    child: Text(context.resources.strings.juegosScreenBegin,
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.tertiary,
                           fontFamily: context.resources.fonts.tittle,
@@ -106,11 +109,14 @@ Widget raulinInfo(BuildContext context) {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text("Raulin-stones",
+                  Text(context.resources.strings.juegosScreenRaulin,
                       style: TextStyle(
                           fontSize:
-                              context.resources.dimensions.textSizeSMedium)),
-                  Text(" 2 menos 2",
+                              context.resources.dimensions.textSizeSMedium,
+                          fontFamily: context.resources.fonts.tittle)),
+                  Text(
+                      context
+                          .resources.strings.juegosScreenRaulinDescriptionShort,
                       style: TextStyle(
                           fontFamily: context.resources.fonts.fontMedium)),
                 ],
@@ -118,8 +124,7 @@ Widget raulinInfo(BuildContext context) {
               SizedBox(width: 15),
               Flexible(
                 child: Text(
-                  "Juega con un compañero o compañera.\nEmpezad eligiendo en la tablet las presas de inicio y las del top. Escala desde el start hasta el top mientras tu compañero marca las presas que estas utilizando.\nEn la siguiente ronda tu compañero o compañera tendrá que llegar al top sin utilizar las presas que están marcadas. El que primero cae PIERDE! \nManten pulsado para seleccionar las presas de inicio/top (Se mostrarán en blanco). Pulsa una vez sobre las presas que quieras marcar (Se mostrarán en rojo). Pulsa dos veces sobre la presa para apagarla.",
-                ),
+                    context.resources.strings.juegosScreenRaulinDescription),
               ),
             ],
           ),
@@ -148,7 +153,7 @@ Widget raulinInfo(BuildContext context) {
                 alignment: Alignment.center,
                 children: <Widget>[
                   Center(
-                    child: Text("Jugar",
+                    child: Text(context.resources.strings.juegosScreenBegin,
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.tertiary,
                           fontFamily: context.resources.fonts.tittle,
@@ -192,11 +197,14 @@ Widget kimoInfo(BuildContext context) {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text("Kimo-Game",
+                  Text(context.resources.strings.juegosScreenKimo,
                       style: TextStyle(
                           fontSize:
-                              context.resources.dimensions.textSizeSMedium)),
-                  Text("Kimo",
+                              context.resources.dimensions.textSizeSMedium,
+                          fontFamily: context.resources.fonts.tittle)),
+                  Text(
+                      context
+                          .resources.strings.juegosScreenKimoDescriptionShort,
                       style: TextStyle(
                           fontFamily: context.resources.fonts.fontMedium)),
                 ],
@@ -204,7 +212,7 @@ Widget kimoInfo(BuildContext context) {
               SizedBox(width: 15),
               Flexible(
                 child: Text(
-                    "Llega a la siguiente presa antes de que se acabe el tiempo. Este juego fue diseñado para la pared de 25 grados, así que debes conectarte a ella para poder jugar",
+                    context.resources.strings.juegosScreenKimoDescription,
                     maxLines: 4),
               ),
             ],
@@ -234,7 +242,7 @@ Widget kimoInfo(BuildContext context) {
                 alignment: Alignment.center,
                 children: <Widget>[
                   Center(
-                    child: Text("Jugar",
+                    child: Text(context.resources.strings.juegosScreenBegin,
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.tertiary,
                           fontFamily: context.resources.fonts.tittle,

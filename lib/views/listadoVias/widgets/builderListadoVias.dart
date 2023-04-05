@@ -1,8 +1,8 @@
 import 'package:Nimbus/models/ListadoVias/AWS/ViaAWS.dart';
+import 'package:Nimbus/template/AppContextExtension.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
-import 'package:nb_utils/nb_utils.dart';
 import '../../../data/response/Status.dart';
 import '../../escalarVia/escalar_screen.dart';
 import '../../z_widgets_comunes/utils/LoadingWidget.dart';
@@ -30,7 +30,11 @@ class BuilderListadoVias extends StatelessWidget {
       case Status.ERROR:
         print("ESTADO :: ERROR LOADING");
 
-        return MyErrorWidget(message ?? "NA");
+        return Column(
+          children: [
+            MyErrorWidget(message ?? "NA"),
+          ],
+        );
       case Status.COMPLETED:
         //print("ESTADO :: COMPLETED");
         return Padding(
@@ -79,22 +83,22 @@ class BuilderListadoVias extends StatelessWidget {
                                 SizedBox(height: 14),
                                 GestureDetector(
                                     onTap: () {
-                                      if (selectedDevice != null) {
+                                      if (true) {
                                         _escalarScreen(context, via![index],
                                             selectedDevice);
                                       }
                                     },
                                     child: botonCargarVia(
-                                      selectedDevice,
-                                      context,
-                                    ))
+                                        selectedDevice, context, via![index]))
                               ],
                             ),
                           )),
                     );
                   } else {
                     return Center(
-                      child: texto("No hemos encontrado nada", context),
+                      child: texto(
+                          context.resources.strings.homeScreenNothingFound,
+                          context),
                     );
                   }
                 }));

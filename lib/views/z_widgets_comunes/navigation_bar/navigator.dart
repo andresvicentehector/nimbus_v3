@@ -72,11 +72,9 @@ class _NavigationState extends State<Navigation> {
             height: 75,
             width: 75,
             child: FloatingActionButton(
-                backgroundColor: (widget.selectedDevice != null
-                    ? Theme.of(context).colorScheme.primary
-                    : t_unactive),
+                backgroundColor: Theme.of(context).colorScheme.primary,
                 onPressed: () {
-                  if (widget.selectedDevice != null) {
+                  if (true) {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => AddPresas(

@@ -1,3 +1,4 @@
+import 'package:Nimbus/template/AppContextExtension.dart';
 import 'package:Nimbus/viewModels/addVia/add_viaVM.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
@@ -25,13 +26,16 @@ class _AddViaFormState extends State<AddViaForm> {
 
   @override
   Widget build(BuildContext context) {
+    viewModel.comentarioController.text =
+        context.resources.strings.addViaScreenCommentTraveDescription;
     return Form(
         key: _viaFormKey,
         child: Column(
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            texto(context, "Travesía o Bloque?"),
+            texto(context,
+                context.resources.strings.addViaScreenTraveBloqueTittle),
 
             SizedBox(height: 27.0),
 
@@ -41,25 +45,25 @@ class _AddViaFormState extends State<AddViaForm> {
             SizedBox(height: 27.0),
 
             texto(
-                context,
-                "Nombra tu " +
-                    (viewModel.isBloqueControler == "Bloque"
-                        ? viewModel.bloque
-                        : viewModel.travesia)),
+                context, context.resources.strings.addViaScreenNameTraveTittle),
 
             entradaFormulario(
                 context, viewModel.nameController, viewModel.fieldValidator),
 
             SizedBox(height: 25.0),
 
-            texto(context, '¿Quién eres?'),
+            texto(
+              context,
+              context.resources.strings.addViaScreenAutorTraveTittle,
+            ),
 
             entradaFormulario(
                 context, viewModel.autorController, viewModel.fieldValidator),
 
             SizedBox(height: 25.0),
 
-            texto(context, 'Escoge la dificultad'),
+            texto(context,
+                context.resources.strings.addViaScreenDificultyTraveTittle),
 
             SizedBox(height: 25.0),
 
@@ -71,7 +75,8 @@ class _AddViaFormState extends State<AddViaForm> {
               thickness: 2.0,
             ),
             SizedBox(height: 25.0),
-            texto2(context, 'Explica brevemente como se hace'),
+            texto2(context,
+                context.resources.strings.addViaScreenCommentTraveTittle),
 
             entradaFormulario(context, viewModel.comentarioController,
                 viewModel.fieldValidator),
@@ -80,19 +85,18 @@ class _AddViaFormState extends State<AddViaForm> {
 
             texto2(
                 context,
-                "Acabas de diseñar" +
-                    (viewModel.isBloqueControler == "Bloque"
-                        ? " un bloque de "
-                        : " una travesía de ") +
+                context.resources.strings.addViaScreenNumberHolds +
+                    " " +
                     widget.presas.length.toString() +
-                    ' presas'),
+                    " " +
+                    context.resources.strings.homeScreenPresas),
 
-            SizedBox(height: 27.0),
+            /*    SizedBox(height: 27.0),
             Text(
               widget.presas.join(" "),
               style:
                   DefaultTextStyle.of(context).style.apply(fontSizeFactor: 0.9),
-            ),
+            ),*/
 
             SizedBox(height: 25.0),
 

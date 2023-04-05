@@ -1,3 +1,4 @@
+import 'package:Nimbus/template/AppContextExtension.dart';
 import 'package:flutter/material.dart';
 import 'package:sidebarx/sidebarx.dart';
 
@@ -87,35 +88,35 @@ class SideBarX extends StatelessWidget {
       items: [
         SidebarXItem(
             iconWidget: icono(Colors.black),
-            label: 'Insanos',
+            label: context.resources.strings.homeScreenColorSuperHard,
             onTap: () {
               color = Colors.black;
               filtrofunction(Colors.black.value);
             }),
         SidebarXItem(
             iconWidget: icono(Colors.pink),
-            label: 'Difíciles',
+            label: context.resources.strings.homeScreenColorHard,
             onTap: () {
               color = Colors.pink;
               filtrofunction(Colors.pink.value);
             }),
         SidebarXItem(
             iconWidget: icono(Colors.orange),
-            label: 'Avanzados',
+            label: context.resources.strings.homeScreenColorAdvanced,
             onTap: () {
               color = Colors.orange;
               filtrofunction(Colors.orange.value);
             }),
         SidebarXItem(
             iconWidget: icono(Colors.yellow),
-            label: 'Intermedios',
+            label: context.resources.strings.homeScreenColorIntermediate,
             onTap: () {
               color = Colors.yellow;
               filtrofunction(Colors.yellow.value);
             }),
         SidebarXItem(
             iconWidget: icono(Colors.green),
-            label: 'Iniciados',
+            label: context.resources.strings.homeScreenColorBeginers,
             onTap: () {
               color = Colors.green;
               filtrofunction(Colors.green.value);

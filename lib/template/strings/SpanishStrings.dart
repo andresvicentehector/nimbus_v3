@@ -13,19 +13,24 @@ class SpanishStrings implements Strings {
       "Cambia el Orden de La presa";
 
   @override
-  String get addEditPresasScreenConnected => "Conectado con";
+  String get addEditPresasScreenConnected => "Elige las presas";
 
+  @override
+  String get addEditPresasScreenOfflineMode => "Modo sin Conexión";
   @override
   String get addEditPresasScreenConnecting => "Conectando con";
 
   @override
-  String get addViaScreenAppbar => "Añade una nueva";
+  String get addViaScreenAppbar => "Nueva ruta";
 
   @override
   String get addViaScreenAutorTraveTittle => "¿Quién Eres?";
 
   @override
   String get addViaScreenBloqueSelection => "Bloque";
+
+  @override
+  String get addViaScreenDELBloqueSelection => "del ";
 
   @override
   String get addViaScreenButton => "Añadir";
@@ -42,17 +47,19 @@ class SpanishStrings implements Strings {
   String get addViaScreenDificultyTraveTittle => "Elige la dificultad";
 
   @override
-  String get addViaScreenNameTraveTittle => "Nombrala";
+  String get addViaScreenNameTraveTittle => "Ponle un Nombre Chulo ";
 
   @override
-  String get addViaScreenNumberHolds =>
-      "Acabas de diseñar una ruta con estos movimientos: ";
+  String get addViaScreenNumberHolds => "Acabas de diseñar una ruta con ";
 
   @override
-  String get addViaScreenTraveBloqueTittle => "¿Es un bloque o una travesía?";
+  String get addViaScreenTraveBloqueTittle => "¿Es un Bloque o una Travesía?";
 
   @override
   String get addViaScreenTraveSelection => "Travesía";
+
+  @override
+  String get addViaScreenDELATraveSelection => "de la ";
 
   @override
   String get bluetoothScreenActivateBluetooth => "Activar Bluetooth";
@@ -153,13 +160,13 @@ class SpanishStrings implements Strings {
   String get escalarViaScreenAppBar => throw UnimplementedError();
 
   @override
-  String get escalarViaScreenButtonClimb => "Cargar Ruta";
+  String get escalarViaScreenButtonClimb => "Cárgala en la pared";
 
   @override
   String get escalarViaScreenButtonConnect => "Conéctate a la pared";
 
   @override
-  String get escalarViaScreenButtonEdit => "Edita tu ruta";
+  String get escalarViaScreenButtonEdit => "Edita tu ";
 
   @override
   String get homeScreenBloque => "Bloques";
@@ -183,10 +190,13 @@ class SpanishStrings implements Strings {
   String get homeScreenConectTowall => "Conéctate a la pared";
 
   @override
-  String get homeScreenLoadRoute => "Detalles de la vía";
+  String get homeScreenLoadRoute => "Detalles";
 
   @override
-  String get homeScreenPared => "Pared de";
+  String get homeScreenPared => "Vuit:  Pared de ";
+
+  @override
+  String get homeScreenParedGrados => " Grados";
 
   @override
   String get homeScreenPresas => "presas";
@@ -232,4 +242,10 @@ class SpanishStrings implements Strings {
 
   @override
   String get juegosScreenappbar => "Juegos Disponibles";
+
+  @override
+  String get homeScreenNothingFound => "No hemos encontrado nada";
+
+  @override
+  String get bluetoothScreenBluetoothSettings => "Settings";
 }

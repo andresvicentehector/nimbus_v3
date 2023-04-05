@@ -1,3 +1,4 @@
+import 'package:Nimbus/template/AppContextExtension.dart';
 import 'package:Nimbus/viewModels/editVia/edit_presas_VM.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
@@ -8,9 +9,9 @@ import '../../z_widgets_comunes/utils/texto.dart';
 import 'package:zoom_widget/zoom_widget.dart';
 
 class EditPresas extends StatefulWidget {
-  final BluetoothDevice? server;
+  final BluetoothConnection? connection;
   final Vias via;
-  const EditPresas({required this.server, required this.via});
+  const EditPresas({required this.connection, required this.via});
 
   @override
   _EditPresas createState() => new _EditPresas();
@@ -21,8 +22,9 @@ class _EditPresas extends State<EditPresas> {
 
   @override
   void initState() {
+    viewModel.connection = widget.connection;
     super.initState();
-    viewModel.connect(widget.server, widget.via.presas);
+    viewModel.mandarPresasAPared(widget.connection, widget.via.presas);
   }
 
   @override
@@ -39,25 +41,25 @@ class _EditPresas extends State<EditPresas> {
   @override
   Widget build(BuildContext context) {
     viewModel.showPresasenPared(widget.via.presas);
-    final serverName = widget.server!.name ?? "Unknown";
+
     return ChangeNotifierProvider<EditPresasVM>(
         create: (BuildContext context) => viewModel,
         child: Consumer<EditPresasVM>(builder: (context, viewModel, _) {
           return Scaffold(
-            appBar: _appBarBuilder(serverName),
+            appBar: _appBarBuilder(),
             body: _wallBuilder(),
           );
         }));
   }
 
-  _appBarBuilder(final serverName) {
+  _appBarBuilder() {
     return AppBar(
       backgroundColor: Theme.of(context).colorScheme.primary,
-      title: (viewModel.isConnecting
-          ? texto('Conectando con ' + serverName + '...', context)
-          : viewModel.isConnected
-              ? texto('Elige las presas', context)
-              : texto('Envía presas a ' + serverName, context)),
+      title: (viewModel.isConnected
+          ? texto(
+              context.resources.strings.addEditPresasScreenConnected, context)
+          : texto(context.resources.strings.addEditPresasScreenOfflineMode,
+              context)),
       leading: Container(
         child: ElevatedButton(
           child: Icon(

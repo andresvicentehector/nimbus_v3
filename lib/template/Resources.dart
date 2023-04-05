@@ -16,11 +16,14 @@ class Resources {
   Strings get strings {
     // It could be from the user preferences or even from the current locale
     Locale locale = Localizations.localeOf(_context);
+    print('HECTOR:' + locale.languageCode);
     switch (locale.languageCode) {
       case 'en':
         return EnglishStrings();
-      default:
+      case 'es':
         return SpanishStrings();
+      default:
+        return EnglishStrings();
     }
   }
 

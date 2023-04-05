@@ -1,3 +1,4 @@
+import 'package:Nimbus/template/AppContextExtension.dart';
 import 'package:Nimbus/viewModels/editVia/update_screen_VM.dart';
 import 'package:Nimbus/views/editVia/update_screen/utils/update_via_form_utils.dart';
 import 'package:flutter/material.dart';
@@ -41,13 +42,13 @@ class _UpdateViaFormState extends State<UpdateViaForm> {
     final List<Map<String, dynamic>> _items = [
       {
         'value': "Bloque",
-        'label': 'Bloque',
+        'label': context.resources.strings.addViaScreenBloqueSelection,
         //'icon': Icon(Icons.fiber_manual_record),
         'textStyle': TextStyle(color: Theme.of(context).colorScheme.primary),
       },
       {
         'value': 'Travesía',
-        'label': 'Travesía',
+        'label': context.resources.strings.addViaScreenTraveSelection,
         //'icon': Icon(Icons.grade),
       },
     ];
@@ -56,7 +57,9 @@ class _UpdateViaFormState extends State<UpdateViaForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          textoCabecera("Travesía o Bloque?", context),
+          textoCabecera(
+              context.resources.strings.editViaScreenTraveBloqueTittle,
+              context),
           SizedBox(height: 27.0),
 
           SelectFormField(
@@ -77,7 +80,7 @@ class _UpdateViaFormState extends State<UpdateViaForm> {
           SizedBox(height: 27.0),
 
           textoCabecera(
-              'Nombre ' +
+              context.resources.strings.editViaScreenNameTraveTittle +
                   (viewModel.isBloqueController == "Bloque"
                       ? "del Bloque"
                       : "de la travesía"),
@@ -87,13 +90,17 @@ class _UpdateViaFormState extends State<UpdateViaForm> {
             validator: viewModel.fieldValidator,
           ),
           SizedBox(height: 20.0),
-          textoCabecera("Autor:", context),
+          textoCabecera(
+              context.resources.strings.editViaScreenBAutorTraveTittle,
+              context),
           TextFormField(
             controller: viewModel.autorController,
             validator: viewModel.fieldValidator,
           ),
           SizedBox(height: 20.0),
-          textoCabecera("Dificultad:", context),
+          textoCabecera(
+              context.resources.strings.editViaScreenDificultyTraveTittle,
+              context),
           SizedBox(height: 20.0),
 
           WheelColorPicker(
@@ -130,7 +137,9 @@ class _UpdateViaFormState extends State<UpdateViaForm> {
           ),
           SizedBox(height: 25.0),
 
-          textoCabecera('Comentarios:', context),
+          textoCabecera(
+              context.resources.strings.editViaScreenCommentTraveTittle,
+              context),
           TextFormField(
             style:
                 DefaultTextStyle.of(context).style.apply(fontSizeFactor: 0.9),
@@ -143,7 +152,7 @@ class _UpdateViaFormState extends State<UpdateViaForm> {
           SizedBox(height: 25.0),
           textoCabecera(
               widget.via.presas.length.toString() +
-                  ' Presas con su código de color:',
+                  context.resources.strings.editViaScreenNumberHolds,
               context),
           //Text('Presas: \n verde:16711680 \n rojo:65280 \n azul: 255 \n Blanco:16777215 \n amarillo:16776960 \n morado:65535'),
           SizedBox(height: 25.0),

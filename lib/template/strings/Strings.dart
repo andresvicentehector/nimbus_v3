@@ -1,9 +1,12 @@
 abstract class Strings {
   //home Screen
   String get homeScreenPared;
+  String get homeScreenParedGrados;
   String get homeScreenSearchNameAutor;
   String get homeScreenBloque;
   String get homeScreenTravesia;
+  String get homeScreenNothingFound;
+
   String get homeScreenConectTowall;
   String get homeScreenLoadRoute;
 
@@ -49,6 +52,7 @@ abstract class Strings {
 
   String get bluetoothScreenActivateBluetooth;
   String get bluetoothScreenBluetoothStatus;
+  String get bluetoothScreenBluetoothSettings;
   String get bluetoothScreenLocalAdapterAddress;
   String get bluetoothScreenLocalAdapterName;
   String get bluetoothScreenInsertPin;
@@ -63,6 +67,7 @@ abstract class Strings {
 
   String get addEditPresasScreenConnecting;
   String get addEditPresasScreenConnected;
+  String get addEditPresasScreenOfflineMode;
 
   String get addEditPresasScreenChangePositionTittle;
   String get addEditPresasScreenChangePositionSubTittle;
@@ -75,6 +80,8 @@ abstract class Strings {
 
   String get addViaScreenTraveSelection;
   String get addViaScreenBloqueSelection;
+  String get addViaScreenDELATraveSelection;
+  String get addViaScreenDELBloqueSelection;
 
   String get addViaScreenNameTraveTittle;
   String get addViaScreenAutorTraveTittle;

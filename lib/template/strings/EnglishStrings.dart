@@ -2,307 +2,249 @@ import 'package:Nimbus/template/strings/Strings.dart';
 
 class EnglishStrings implements Strings {
   @override
-  // TODO: implement addEditPresasScreenChangePositionButton
-  String get addEditPresasScreenChangePositionButton => 'Cambiar';
+  String get addEditPresasScreenChangePositionButton => 'Change';
 
   @override
-  // TODO: implement addEditPresasScreenChangePositionSubTittle
   String get addEditPresasScreenChangePositionSubTittle =>
-      'Elige la posición que quieras';
+      'Choose the position';
 
   @override
-  // TODO: implement addEditPresasScreenChangePositionTittle
   String get addEditPresasScreenChangePositionTittle =>
-      "Cambia el Orden de La presa";
+      "Change the order of the hold";
 
   @override
-  // TODO: implement addEditPresasScreenConnected
-  String get addEditPresasScreenConnected => "Conectado con";
+  String get addEditPresasScreenConnected => "Choose the holds";
 
   @override
-  // TODO: implement addEditPresasScreenConnecting
-  String get addEditPresasScreenConnecting => "Conectando con";
+  String get addEditPresasScreenOfflineMode => "Offline Mode";
 
   @override
-  // TODO: implement addViaScreenAppbar
-  String get addViaScreenAppbar => "Añade una nueva";
+  String get addEditPresasScreenConnecting => "Connecting to";
 
   @override
-  // TODO: implement addViaScreenBAutorTraveTittle
-  String get addViaScreenAutorTraveTittle => "¿Quién Eres?";
+  String get addViaScreenAppbar => "New Route";
 
   @override
-  // TODO: implement addViaScreenBloqueSelection
-  String get addViaScreenBloqueSelection => "Bloque";
+  String get addViaScreenAutorTraveTittle => "Who are you?";
 
   @override
-  // TODO: implement addViaScreenButton
-  String get addViaScreenButton => "Añadir";
+  String get addViaScreenBloqueSelection => "Boulder";
 
   @override
-  // TODO: implement addViaScreenCommentTraveDescription
+  String get addViaScreenDELBloqueSelection => "of ";
+
+  @override
+  String get addViaScreenButton => "Add";
+
+  @override
   String get addViaScreenCommentTraveDescription =>
-      "Todas nuestras rutas siguen el método T.R.A.V.E (Tocas Rojas, Azules, Verdes y Encadenas) \n\n La salida y el top son de color blanco \n\n las amarillas se pueden usar para juntar \n\n Si con esos tres colores no es suficiente, el metodo T-R-A-V-E se puede alargar con el color morado ";
+      "All of our routes follow the next method: first touch Red then Blue and finally Green)\n\nThe start and the top are white\n\nYellow holds can be used to joining hands\n\nIf these three colors are not enough, the method can be extended with the purple color.";
 
   @override
-  // TODO: implement addViaScreenCommentTraveTittle
   String get addViaScreenCommentTraveTittle =>
-      "Explica Brevemente como se hace:";
+      "Briefly explain how to climb it:";
 
   @override
-  // TODO: implement addViaScreenDificultyTraveTittle
-  String get addViaScreenDificultyTraveTittle => "Elige la dificultad";
+  String get addViaScreenDificultyTraveTittle => "Choose the difficulty";
 
   @override
-  // TODO: implement addViaScreenNameTraveTittle
-  String get addViaScreenNameTraveTittle => "Nombrala";
+  String get addViaScreenNameTraveTittle => "Give it a cool name";
 
   @override
-  // TODO: implement addViaScreenNumberHolds
-  String get addViaScreenNumberHolds =>
-      "Acabas de diseñar una ruta con estos movimientos: ";
+  String get addViaScreenNumberHolds => "You just designed a route with ";
 
   @override
-  // TODO: implement addViaScreenTraveBloqueTittle
-  String get addViaScreenTraveBloqueTittle => "¿Es un bloque o una travesía?";
+  String get addViaScreenTraveBloqueTittle => "Is it a boulder or a route?";
 
   @override
-  // TODO: implement addViaScreenTraveSelection
-  String get addViaScreenTraveSelection => "Travesía";
+  String get addViaScreenTraveSelection => "Route";
 
   @override
-  // TODO: implement bluetoothScreenActivateBluetooth
-  String get bluetoothScreenActivateBluetooth => "Activar Bluetooth";
+  String get addViaScreenDELATraveSelection => "of the ";
 
   @override
-  // TODO: implement bluetoothScreenAppbar
-  String get bluetoothScreenAppbar => "Configuración General";
+  String get bluetoothScreenActivateBluetooth => "Activate Bluetooth";
 
   @override
-  // TODO: implement bluetoothScreenBluetoothStatus
+  String get bluetoothScreenAppbar => "General Settings";
+
+  @override
   String get bluetoothScreenBluetoothStatus => "Bluetooth Status";
 
   @override
-  // TODO: implement bluetoothScreenChangeWall
-  String get bluetoothScreenChangeWall =>
-      "Cambiar configuración a la pared de ";
+  String get bluetoothScreenChangeWall => "Change settings to the wall of ";
 
   @override
-  // TODO: implement bluetoothScreenChatwithPaired
-  String get bluetoothScreenChatwithPaired => "Abre un chat con un Dispositivo";
+  String get bluetoothScreenChatwithPaired => "Chat with a Paired Device";
 
   @override
-  // TODO: implement bluetoothScreenGeneral
   String get bluetoothScreenGeneral => "General";
 
   @override
-  // TODO: implement bluetoothScreenInsertPin
   String get bluetoothScreenInsertPin =>
-      "Insertar Pin de manera automática al Emparejar";
+      "Automatically insert Pin when Pairing";
 
   @override
-  // TODO: implement bluetoothScreenLoadBackup
-  String get bluetoothScreenLoadBackup => "Cargar copia de Respaldo";
+  String get bluetoothScreenLoadBackup => "Load Backup";
 
   @override
-  // TODO: implement bluetoothScreenLocalAdapterAddress
-  String get bluetoothScreenLocalAdapterAddress =>
-      "Dirección del adaptador local";
+  String get bluetoothScreenLocalAdapterAddress => "Local Adapter Address";
 
   @override
-  // TODO: implement bluetoothScreenLocalAdapterName
-  String get bluetoothScreenLocalAdapterName => "Nombre del dispositivo";
+  String get bluetoothScreenLocalAdapterName => "Device Name";
 
   @override
-  // TODO: implement bluetoothScreenMakeBackup
-  String get bluetoothScreenMakeBackup => "Cargar una copia de respaldo";
+  String get bluetoothScreenMakeBackup => "Make a Backup";
 
   @override
-  // TODO: implement bluetoothScreenSearchPairingDevices
   String get bluetoothScreenSearchPairingDevices =>
-      "Buscar dispositivos para emparejar";
+      "Search for devices to pair with";
 
   @override
-  // TODO: implement chatScreenappbarConnected
-  String get chatScreenappbarConnected => "Conectado con";
+  String get chatScreenappbarConnected => "Connected with";
 
   @override
-  // TODO: implement chatScreenappbarConnecting
-  String get chatScreenappbarConnecting => "Conectando con";
+  String get chatScreenappbarConnecting => "Connecting to";
 
   @override
-  // TODO: implement chatScreenappbarType
-  String get chatScreenappbarType => "Escribe";
+  String get chatScreenappbarType => "Type";
 
   @override
-  // TODO: implement chatScreenappbarWaitUntilConnected
-  String get chatScreenappbarWaitUntilConnected => "Esperando a que se conecte";
+  String get chatScreenappbarWaitUntilConnected => "Waiting to connect";
 
   @override
-  // TODO: implement discoverScreenappbar
-  String get discoverScreenappbar => "Dispositivos Disponibles";
+  String get discoverScreenappbar => "Available Devices";
 
   @override
-  // TODO: implement discoverScreenappbar
-  String get discoverPairedScreenappbar => "Dispositivos Disponibles";
+  String get discoverPairedScreenappbar => "Paired Devices";
 
   @override
-  // TODO: implement editViaScreenAppbar
-  String get editViaScreenAppbar => "Edita";
+  String get editViaScreenAppbar => "Edit";
 
   @override
-  // TODO: implement editViaScreenBAutorTraveTittle
-  String get editViaScreenBAutorTraveTittle => "Autor:";
+  String get editViaScreenBAutorTraveTittle => "Author:";
 
   @override
-  // TODO: implement editViaScreenBloqueSelection
-  String get editViaScreenBloqueSelection => "Bloque";
+  String get editViaScreenBloqueSelection => "Boulder";
 
   @override
-  // TODO: implement editViaScreenButton
-  String get editViaScreenButton => "Actualizar";
+  String get editViaScreenButton => "Update";
 
   @override
-  // TODO: implement editViaScreenCommentTraveTittle
-  String get editViaScreenCommentTraveTittle => "Comentarios:";
+  String get editViaScreenCommentTraveTittle => "Comments:";
 
   @override
-  // TODO: implement editViaScreenDificultyTraveTittle
-  String get editViaScreenDificultyTraveTittle => "Dificultad";
+  String get editViaScreenDificultyTraveTittle => "Difficulty";
 
   @override
-  // TODO: implement editViaScreenNameTraveTittle
-  String get editViaScreenNameTraveTittle => "Nombre";
+  String get editViaScreenNameTraveTittle => "Name";
 
   @override
-  // TODO: implement editViaScreenNumberHolds
-  String get editViaScreenNumberHolds => "Presas con su código de color";
+  String get editViaScreenNumberHolds => "Holds with their color code";
 
   @override
-  // TODO: implement editViaScreenTraveBloqueTittle
-  String get editViaScreenTraveBloqueTittle => "¿Era un bloque o una travesía?";
+  String get editViaScreenTraveBloqueTittle => "Was it a boulder or a route?";
 
   @override
-  // TODO: implement editViaScreenTraveSelection
-  String get editViaScreenTraveSelection => "Travesía";
+  String get editViaScreenTraveSelection => "Route";
 
   @override
-  // TODO: implement escalarViaScreeDeleteDescription
   String get escalarViaScreeDeleteDescription =>
-      "Esto hará que tu ruta se borre para siempre y no podrás volver atrás ¿Estás de acuerdo?";
+      "This will delete your creation permanently and you won't be able to go back. Are you sure?";
 
   @override
-  // TODO: implement escalarViaScreeDeleteDescriptionButton
-  String get escalarViaScreeDeleteDescriptionButton => "Eliminar";
+  String get escalarViaScreeDeleteDescriptionButton => "Delete";
 
   @override
-  // TODO: implement escalarViaScreenAppBar
   String get escalarViaScreenAppBar => throw UnimplementedError();
 
   @override
-  // TODO: implement escalarViaScreenButtonClimb
-  String get escalarViaScreenButtonClimb => "Cargar Ruta";
+  String get escalarViaScreenButtonClimb => "Climb it";
 
   @override
-  // TODO: implement escalarViaScreenButtonConnect
-  String get escalarViaScreenButtonConnect => "Conéctate a la pared";
+  String get escalarViaScreenButtonConnect => "Connect to the wall";
 
   @override
-  // TODO: implement escalarViaScreenButtonEdit
-  String get escalarViaScreenButtonEdit => "Edita tu ruta";
+  String get escalarViaScreenButtonEdit => "Edit your ";
 
   @override
-  // TODO: implement homeScreenBloque
-  String get homeScreenBloque => "Bloques";
+  String get homeScreenBloque => "Boulders";
 
   @override
-  // TODO: implement homeScreenColorAdvanced
-  String get homeScreenColorAdvanced => "Avanzados";
+  String get homeScreenColorAdvanced => "Advanced";
 
   @override
-  // TODO: implement homeScreenColorBeginers
-  String get homeScreenColorBeginers => "Iniciados";
+  String get homeScreenColorBeginers => "Beginners";
 
   @override
-  // TODO: implement homeScreenColorHard
-  String get homeScreenColorHard => "Difíciles";
+  String get homeScreenColorHard => "Hard";
 
   @override
-  // TODO: implement homeScreenColorIntermediate
-  String get homeScreenColorIntermediate => "Intermedios";
+  String get homeScreenColorIntermediate => "Intermediate";
 
   @override
-  // TODO: implement homeScreenColorSuperHard
-  String get homeScreenColorSuperHard => "Insanos";
+  String get homeScreenColorSuperHard => "Insane";
 
   @override
-  // TODO: implement homeScreenConectTowall
-  String get homeScreenConectTowall => "Conéctate a la pared";
+  String get homeScreenConectTowall => "Connect to the wall";
 
   @override
-  // TODO: implement homeScreenLoadRoute
-  String get homeScreenLoadRoute => "Detalles de la vía";
+  String get homeScreenLoadRoute => "Details";
 
   @override
-  // TODO: implement homeScreenPared
-  String get homeScreenPared => "Pared de";
+  String get homeScreenPared => "Wall: ";
 
   @override
-  // TODO: implement homeScreenPresas
-  String get homeScreenPresas => "presas";
+  String get homeScreenParedGrados => " Degrees";
 
   @override
-  // TODO: implement homeScreenSearchNameAutor
-  String get homeScreenSearchNameAutor => "Busca por Nombre o Autor";
+  String get homeScreenPresas => "holds";
 
   @override
-  // TODO: implement homeScreenTravesia
-  String get homeScreenTravesia => "Travesías";
+  String get homeScreenSearchNameAutor => "Search by Name or Author";
 
   @override
-  // TODO: implement juegosScreenBegin
-  String get juegosScreenBegin => "Jugar";
+  String get homeScreenTravesia => "Routes";
 
   @override
-  // TODO: implement juegosScreenDictado
-  String get juegosScreenDictado => "Modo-Dictado";
+  String get juegosScreenBegin => "Play";
 
   @override
-  // TODO: implement juegosScreenDictadoDescription
+  String get juegosScreenDictado => "Dictation Mode";
+
+  @override
   String get juegosScreenDictadoDescription =>
-      "Juega con un compañero o compañera.\nEmpezad eligiendo en la tablet las presas de inicio y las del top. Escala desde el start hasta el top mientras tu compañero marca las presas que estas utilizando.\nEn la siguiente ronda tu compañero o compañera tendrá que llegar al top sin utilizar las presas que están marcadas. El que primero cae PIERDE! \nManten pulsado para seleccionar las presas de inicio/top (Se mostrarán en blanco). Pulsa una vez sobre las presas que quieras marcar (Se mostrarán en rojo). Pulsa dos veces sobre la presa para apagarla.";
+      "Play with a partner. Begin by selecting the start and top holds on the tablet. Climb from the start to the top while your partner marks the holds that you use. In the next round, your partner will have to reach the top without using the holds that are marked. The first one to fall LOSES! Press and hold to select the start/top holds (they will be displayed in white). Tap once on the holds you want to mark (they will be displayed in red). Double-tap on the hold to turn it off.";
 
   @override
-  // TODO: implement juegosScreenDictadoDescriptionShort
   String get juegosScreenDictadoDescriptionShort => "2+2";
 
   @override
-  // TODO: implement juegosScreenKimo
   String get juegosScreenKimo => "Kimo-Game";
 
   @override
-  // TODO: implement juegosScreenKimoDescription
   String get juegosScreenKimoDescription =>
-      "Llega a la siguiente presa antes de que se acabe el tiempo. Este juego fue diseñado para la pared de 25 grados, así que debes conectarte a ella para poder jugar";
+      "Get to the next hold before time runs out. This game was designed for a 25-degree wall, so you must connect to it to play.";
 
   @override
-  // TODO: implement juegosScreenKimoDescriptionShort
   String get juegosScreenKimoDescriptionShort => "Kimo";
 
   @override
-  // TODO: implement juegosScreenRaulin
   String get juegosScreenRaulin => "RaulinStones";
 
   @override
-  // TODO: implement juegosScreenRaulinDescription
   String get juegosScreenRaulinDescription =>
-      "Juega con un compañero o compañera.\nEmpezad eligiendo en la tablet las presas de inicio y las del top. Escala desde el start hasta el top mientras tu compañero marca las presas que estas utilizando.\nEn la siguiente ronda tu compañero o compañera tendrá que llegar al top sin utilizar las presas que están marcadas. El que primero cae PIERDE! \nManten pulsado para seleccionar las presas de inicio/top (Se mostrarán en blanco). Pulsa una vez sobre las presas que quieras marcar (Se mostrarán en rojo). Pulsa dos veces sobre la presa para apagarla.";
+      "Play with a partner. Begin by selecting the start and top holds on the tablet. Climb from the start to the top while your partner marks the holds that you use. In the next round, your partner will have to reach the top without using the holds that are marked. The first one to fall LOSES! Press and hold to select the start/top holds (they will be displayed in white). Tap once on the holds you want to mark (they will be displayed in red). Double-tap on the hold to turn it off.";
 
   @override
-  // TODO: implement juegosScreenRaulinDescriptionShort
   String get juegosScreenRaulinDescriptionShort => "2-2";
 
   @override
-  // TODO: implement juegosScreenappbar
-  String get juegosScreenappbar => "Juegos Disponibles";
+  String get juegosScreenappbar => "Available Games";
+
+  @override
+  String get homeScreenNothingFound => "We couldn't find anything";
+
+  @override
+  String get bluetoothScreenBluetoothSettings => "Settings";
 }

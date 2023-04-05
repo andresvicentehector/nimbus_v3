@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:typed_data';
+import 'package:Nimbus/template/AppContextExtension.dart';
 import 'package:Nimbus/template/configuration/ConstantesPropias.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
@@ -105,7 +106,11 @@ class _Raulin extends State<Raulin> {
         title: (isConnecting
             ? Text('Conectando con ' + serverName + '...')
             : isConnected
-                ? Text('Modo dictado')
+                ? Text(
+                    'Raulin Stones',
+                    style:
+                        TextStyle(fontFamily: context.resources.fonts.tittle),
+                  )
                 : Text('Envía presas a ' + serverName)),
         leading: Container(
           child: ElevatedButton(
