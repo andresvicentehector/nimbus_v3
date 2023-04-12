@@ -35,6 +35,7 @@ class _EscalarViaState extends State<EscalarVia> {
   @override
   void initState() {
     super.initState();
+    viewModel.checkDataConnection(context);
     viewModel.connect(widget.server);
     _nameController = widget.via.name;
     _idController = widget.via.sId;
@@ -59,50 +60,56 @@ class _EscalarViaState extends State<EscalarVia> {
   Widget build(BuildContext context) {
     width = MediaQuery.of(context).size.width - 20;
     viewModel.showPared(widget.via.presas);
-    return SizedBox(
-      width: MediaQuery.of(context).size.width,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: <Widget>[
-              circulo(_dificultadController),
-              SizedBox(width: 14),
-              descriptivoVia(_nameController, _autorController,
-                  _numPresasController, context),
-              SizedBox(width: 15),
-            ],
-          ),
-          SizedBox(height: 20.0),
-          //Text('Comentarios'),
-          _comentarioController,
-          SizedBox(height: 20.0),
 
-          ChangeNotifierProvider<EscalarViaVM>(
-            create: (BuildContext context) => viewModel,
-            child: Consumer<EscalarViaVM>(builder: (context, viewModel, _) {
-              return botoneraCargar(viewModel.isConnected,
-                  viewModel.cargarViaTroncho, widget.via, context);
-            }),
-          ),
+    return ChangeNotifierProvider<EscalarViaVM>(
+        create: (BuildContext context) => viewModel,
+        child: Consumer<EscalarViaVM>(builder: (context, viewModel, _) {
+          return SizedBox(
+            width: MediaQuery.of(context).size.width,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: <Widget>[
+                    circulo(_dificultadController),
+                    SizedBox(width: 14),
+                    descriptivoVia(_nameController, _autorController,
+                        _numPresasController, context),
+                    SizedBox(width: 15),
+                  ],
+                ),
+                SizedBox(height: 20.0),
+                //Text('Comentarios'),
+                _comentarioController,
+                SizedBox(height: 20.0),
 
-          Divider(
-            height: 24,
-          ),
+                botoneraCargar(viewModel.isConnected,
+                    viewModel.cargarViaTroncho, widget.via, context),
 
-          esquematicoPared(width, viewModel.pared),
-          Divider(
-            height: 24,
-          ),
-          Row(children: [
-            botonEditar(widget.via.isbloque!, _navigatetoEditPresas, context),
-            SizedBox(width: 5.0),
-            botonEliminar(context, _nameController, _idController,
-                viewModel.cerrarConexion, viewModel.eliminarVia)
-          ]),
-        ],
-      ),
-    );
+                Divider(
+                  height: 24,
+                ),
+
+                esquematicoPared(width, viewModel.pared),
+                Divider(
+                  height: 24,
+                ),
+                Row(children: [
+                  botonEditar(widget.via.isbloque!, _navigatetoEditPresas,
+                      context, viewModel.botonEditarColor),
+                  SizedBox(width: 5.0),
+                  botonEliminar(
+                      context,
+                      _nameController,
+                      _idController,
+                      viewModel.cerrarConexion,
+                      viewModel.eliminarVia,
+                      viewModel.botonEliminarColor)
+                ]),
+              ],
+            ),
+          );
+        }));
   }
 
   _navigatetoEditPresas() {

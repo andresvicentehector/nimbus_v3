@@ -115,7 +115,7 @@ Widget _estiloBotoneraAdd(BuildContext context) {
   return Container(
       decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.primary,
-          borderRadius: BorderRadius.circular(16)),
+          borderRadius: BorderRadius.circular(17)),
       padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
       child: Stack(
         alignment: Alignment.center,

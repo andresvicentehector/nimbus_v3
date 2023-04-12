@@ -1,17 +1,14 @@
 import 'package:Nimbus/template/AppContextExtension.dart';
-import 'package:Nimbus/template/colors/ColorsFixed.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
-import 'package:nb_utils/nb_utils.dart';
-
 import '../../../viewModels/ListadoVias/listado_VM.dart';
 
 Widget circulo(var viaData) {
   return Container(
     decoration:
         BoxDecoration(shape: BoxShape.circle, color: Color(viaData.dificultad)),
-    width: 80,
-    height: 80,
+    width: 50,
+    height: 50,
     padding: EdgeInsets.all(10),
   );
 }
@@ -27,6 +24,7 @@ Widget textoDescriptivo(var viaData, BuildContext context) {
           maxLines: 4,
           overflow: TextOverflow.fade,
           style: TextStyle(
+              color: Theme.of(context).colorScheme.tertiary,
               fontFamily: context.resources.fonts.tittle,
               fontSize: context.resources.dimensions.textSizeMedium),
         ),
@@ -34,6 +32,7 @@ Widget textoDescriptivo(var viaData, BuildContext context) {
       Text(
         viaData.autor,
         style: TextStyle(
+          color: Theme.of(context).colorScheme.tertiary,
           fontFamily: context.resources.fonts.fontBold,
         ),
       ),
@@ -42,6 +41,7 @@ Widget textoDescriptivo(var viaData, BuildContext context) {
             " " +
             context.resources.strings.homeScreenPresas,
         style: TextStyle(
+          color: Theme.of(context).colorScheme.tertiary,
           fontFamily: context.resources.fonts.fontBold,
         ),
       ),
@@ -54,8 +54,8 @@ Widget botonCargarVia(
   return Container(
       decoration: BoxDecoration(
           color: (Theme.of(context).colorScheme.primary),
-          borderRadius: BorderRadius.circular(5.0)),
-      padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
+          borderRadius: BorderRadius.circular(17.0)),
+      padding: EdgeInsets.fromLTRB(16, 5, 16, 5),
       child: Stack(
         alignment: Alignment.center,
         children: <Widget>[
@@ -116,14 +116,14 @@ Widget botonerafiltrosSearchColor(
       Expanded(
         flex: 9,
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(10.0, 6.0, 2.0, 6.0),
+          padding: const EdgeInsets.fromLTRB(10.0, 6.0, 5.0, 6.0),
           child: TextField(
               controller: editingController,
               decoration: InputDecoration(
                   hintText: context.resources.strings.homeScreenSearchNameAutor,
                   prefixIcon: Icon(Icons.search),
                   border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(16.0)))),
+                      borderRadius: BorderRadius.all(Radius.circular(17.0)))),
               onTap: () {
                 _filterbyName(editingController, context);
               },
@@ -151,6 +151,7 @@ Widget botonerafiltrosSearchColor(
           },
         ),
       ),
+      SizedBox(width: 6),
     ],
   );
 }
@@ -160,6 +161,7 @@ Widget botoneraBloqueVia(ViasListVM viewModel, BuildContext context) {
       child: Padding(
     padding: const EdgeInsets.fromLTRB(0, 1.0, 0, 5.0),
     child: Row(children: [
+      SizedBox(width: 10),
       Expanded(
         flex: 5,
         child: GestureDetector(
@@ -172,6 +174,7 @@ Widget botoneraBloqueVia(ViasListVM viewModel, BuildContext context) {
           child: Container(
               height: 50,
               decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(17.0),
                 color: viewModel.colorBbloque,
                 border: Border.all(color: Color(0xFFFFF)),
               ),
@@ -185,6 +188,16 @@ Widget botoneraBloqueVia(ViasListVM viewModel, BuildContext context) {
                         style: TextStyle(
                             color: Theme.of(context).colorScheme.tertiary,
                             fontFamily: context.resources.fonts.tittle,
+                            shadows: viewModel.colorBbloque ==
+                                    Theme.of(context).colorScheme.secondary
+                                ? [
+                                    Shadow(
+                                      blurRadius: 2,
+                                      color: Colors.black,
+                                      offset: Offset(0, 0),
+                                    )
+                                  ]
+                                : [],
                             fontSize:
                                 context.resources.dimensions.textSizeMedium)),
                   ),
@@ -192,6 +205,7 @@ Widget botoneraBloqueVia(ViasListVM viewModel, BuildContext context) {
               )),
         ),
       ),
+      SizedBox(width: 10),
       Expanded(
         flex: 5,
         child: GestureDetector(
@@ -204,6 +218,7 @@ Widget botoneraBloqueVia(ViasListVM viewModel, BuildContext context) {
           child: Container(
               height: 50,
               decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(17.0),
                 color: viewModel.colorBtrave,
               ),
               child: Stack(
@@ -216,13 +231,24 @@ Widget botoneraBloqueVia(ViasListVM viewModel, BuildContext context) {
                         style: TextStyle(
                             color: Theme.of(context).colorScheme.tertiary,
                             fontFamily: context.resources.fonts.tittle,
+                            shadows: viewModel.colorBtrave ==
+                                    Theme.of(context).colorScheme.secondary
+                                ? [
+                                    Shadow(
+                                      blurRadius: 2,
+                                      color: Colors.black,
+                                      offset: Offset(0, 0),
+                                    )
+                                  ]
+                                : [],
                             fontSize:
                                 context.resources.dimensions.textSizeMedium)),
                   ),
                 ],
               )),
         ),
-      )
+      ),
+      SizedBox(width: 10),
     ]),
   ));
 }

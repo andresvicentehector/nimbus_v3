@@ -7,6 +7,7 @@ import 'package:hive/hive.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:sidebarx/sidebarx.dart';
 import '../../data/response/ApiResponse.dart';
+import '../../models/ListadoVias/hive/via.dart';
 import '../../repository/vias/ViaRepoImp.dart';
 import '../../template/colors/ColorsFixed.dart';
 import '../../template/configuration/ConstantesPropias.dart';
@@ -17,6 +18,8 @@ class ViasListVM extends ChangeNotifier {
   final _myRepo = ViaRepoImp();
 
   ApiResponse<ViaAWS> viasMain = ApiResponse.loading();
+
+  late List<dynamic> viasMainHive = [];
 
   // late List<Results>? movieMainHive;
   //utilizaremos estas tres más tarde para los idiomas
@@ -38,8 +41,24 @@ class ViasListVM extends ChangeNotifier {
 
   late Color colorDificultad;
 
+  late Color colorBAdd = t_primary;
+
   late bool isBloque = false;
   late bool isTrave = false;
+
+  void checkIfDataConnection() async {
+    if (await InternetConnectionChecker().hasConnection) {
+      fetchVias("listar?quepared=" + version);
+      compareAWSwithHive();
+    } else {
+      print('No hay conexión de datos');
+      colorBbloque = t_unactive;
+      colorBtrave = t_unactive;
+      colorDificultad = t_unactive;
+      fetchViasFromHive(version);
+      notifyListeners();
+    }
+  }
 
 //el parametro de entrada es la clase api response que coje la clase movie como parametro de entrada y devuelve una respuesta
   void _setViasMain(ApiResponse<ViaAWS> response) {
@@ -48,11 +67,21 @@ class ViasListVM extends ChangeNotifier {
     notifyListeners();
   }
 
-  /*void _setMovieMainHive(HiveResponse<MovieHive> response) {
+  void _setViasMainHive(String version) {
     //print(" :: $response");
-    movieMainhive = response;
-    notifyListeners();
-  } */
+    viasMainHive =
+        itemBox.values.where((item) => item.quepared == version).toList();
+  }
+
+  void compareAWSwithHive() async {
+    if (await InternetConnectionChecker().hasConnection) {
+      if (viasMain.data?.vias?.length != viasMainHive.length) {
+        makeaCopy();
+      }
+    } else {
+      print('Comparación FAILED');
+    }
+  }
 
 //the only way to access to movie list from the ui
   Future<void> fetchVias(String query) async {
@@ -66,7 +95,12 @@ class ViasListVM extends ChangeNotifier {
           .onError((error, stackTrace) =>
               _setViasMain(ApiResponse.error(error.toString())));
     } else {
-      // fetchViasFromHive();
+      print('No hay conexión de datos');
+      colorBbloque = t_unactive;
+      colorBtrave = t_unactive;
+      colorDificultad = t_unactive;
+      fetchViasFromHive(version);
+      notifyListeners();
     }
   }
 
@@ -101,108 +135,134 @@ class ViasListVM extends ChangeNotifier {
   }*/
 
   void filterbyName(
-      TextEditingController _searchController, BuildContext context) {
-    if (_searchController.text == "") {
-      fetchVias("listar?quepared=" + version);
-      notifyListeners();
-    } else {
-      fetchVias("buscar?buscar=${_searchController.text}&quepared=" + version);
-      print(version + "/${_searchController.text}");
-      notifyListeners();
-    }
+      TextEditingController _searchController, BuildContext context) async {
+    //check if there is connection
+    if (await InternetConnectionChecker().hasConnection) {
+      if (_searchController.text == "") {
+        fetchVias("listar?quepared=" + version);
+        notifyListeners();
+      } else {
+        fetchVias(
+            "buscar?buscar=${_searchController.text}&quepared=" + version);
+        print(version + "/${_searchController.text}");
+        notifyListeners();
+      }
 
-    isBloque = false;
-    isTrave = false;
-    colorBbloque = Theme.of(context).colorScheme.primary;
-    colorBtrave = Theme.of(context).colorScheme.primary;
-    colorDificultad = Colors.transparent;
+      isBloque = false;
+      isTrave = false;
+      colorBbloque = Theme.of(context).colorScheme.primary;
+      colorBtrave = Theme.of(context).colorScheme.primary;
+      colorDificultad = Colors.transparent;
+    } else {
+      //TODO: Poder filtrar por nombre en hive(ya estaba hecho tilín)
+      isBloque = false;
+      isTrave = false;
+      colorBbloque = t_unactive;
+      colorBtrave = t_unactive;
+      colorDificultad = t_unactive;
+      colorBAdd = t_unactive;
+    }
   }
 
-  void filterbylevel(int color) {
+  void filterbylevel(int color) async {
     //si no esta seleccionado el filtro de bloque o trave
-    if (isBloque == false && isTrave == false) {
-      if (color == Colors.pinkAccent.value || color == Colors.pink.value) {
-        fetchVias("listar?quepared=" + version + "&dificultad=morado");
-        colorDificultad = Colors.pink;
-        notifyListeners();
-      } else if (color == Colors.orangeAccent.value ||
-          color == Colors.orange.value) {
-        colorDificultad = Colors.orange;
-        fetchVias("listar?quepared=" + version + "&dificultad=naranja");
-      } else if (color == Colors.green.value) {
-        fetchVias("listar?quepared=" + version + "&dificultad=verde");
-        colorDificultad = Colors.green;
-      } else if (color == Colors.yellow.value) {
-        colorDificultad = Colors.yellow;
-        fetchVias("listar?quepared=" + version + "&dificultad=amarillo");
-      } else if (color == Colors.black.value) {
-        colorDificultad = Colors.black;
-        fetchVias("listar?quepared=" + version + "&dificultad=negro");
-      }
-    }
 
-    //si está seleccionado el bloque
-    if (isBloque == true) {
-      if (color == Colors.pinkAccent.value || color == Colors.pink.value) {
-        colorDificultad = Colors.pink;
-        fetchVias("listar?quepared=" +
-            version +
-            "&isbloque=Bloque&dificultad=morado");
-      } else if (color == Colors.orangeAccent.value ||
-          color == Colors.orange.value) {
-        colorDificultad = Colors.orange;
-        fetchVias("listar?quepared=" +
-            version +
-            "&isbloque=Bloque&dificultad=naranja");
-      } else if (color == Colors.green.value) {
-        colorDificultad = Colors.green;
-        fetchVias(
-            "listar?quepared=" + version + "&isbloque=Bloque&dificultad=verde");
-      } else if (color == Colors.yellow.value) {
-        colorDificultad = Colors.yellow;
-        fetchVias("listar?quepared=" +
-            version +
-            "&isbloque=Bloque&dificultad=amarillo");
-      } else if (color == Colors.black.value) {
-        colorDificultad = Colors.black;
-        fetchVias(
-            "listar?quepared=" + version + "&isbloque=Bloque&dificultad=negro");
+//check if there is connection
+    if (await InternetConnectionChecker().hasConnection) {
+      if (isBloque == false && isTrave == false) {
+        if (color == Colors.pinkAccent.value || color == Colors.pink.value) {
+          fetchVias("listar?quepared=" + version + "&dificultad=morado");
+          colorDificultad = Colors.pink;
+          notifyListeners();
+        } else if (color == Colors.orangeAccent.value ||
+            color == Colors.orange.value) {
+          colorDificultad = Colors.orange;
+          fetchVias("listar?quepared=" + version + "&dificultad=naranja");
+        } else if (color == Colors.green.value) {
+          fetchVias("listar?quepared=" + version + "&dificultad=verde");
+          colorDificultad = Colors.green;
+        } else if (color == Colors.yellow.value) {
+          colorDificultad = Colors.yellow;
+          fetchVias("listar?quepared=" + version + "&dificultad=amarillo");
+        } else if (color == Colors.black.value) {
+          colorDificultad = Colors.black;
+          fetchVias("listar?quepared=" + version + "&dificultad=negro");
+        }
       }
-    }
 
-//si está seleccionada la trave
-    if (isTrave == true) {
-      if (color == Colors.pinkAccent.value || color == Colors.pink.value) {
-        colorDificultad = Colors.pink;
-        fetchVias("listar?quepared=" +
-            version +
-            "&isbloque=Travesía&dificultad=morado");
-      } else if (color == Colors.orangeAccent.value ||
-          color == Colors.orange.value) {
-        colorDificultad = Colors.orange;
-        fetchVias("listar?quepared=" +
-            version +
-            "&isbloque=Travesía&dificultad=naranja");
-      } else if (color == Colors.green.value) {
-        colorDificultad = Colors.green;
-        fetchVias("listar?quepared=" +
-            version +
-            "&isbloque=Travesía&dificultad=verde");
-      } else if (color == Colors.yellow.value) {
-        colorDificultad = Colors.yellow;
-        fetchVias("listar?quepared=" +
-            version +
-            "&isbloque=Travesía&dificultad=amarillo");
-      } else if (color == Colors.black.value) {
-        colorDificultad = Colors.black;
-        fetchVias("listar?quepared=" +
-            version +
-            "&isbloque=Travesía&dificultad=negro");
+      //si está seleccionado el bloque
+      if (isBloque == true) {
+        if (color == Colors.pinkAccent.value || color == Colors.pink.value) {
+          colorDificultad = Colors.pink;
+          fetchVias("listar?quepared=" +
+              version +
+              "&isbloque=Bloque&dificultad=morado");
+        } else if (color == Colors.orangeAccent.value ||
+            color == Colors.orange.value) {
+          colorDificultad = Colors.orange;
+          fetchVias("listar?quepared=" +
+              version +
+              "&isbloque=Bloque&dificultad=naranja");
+        } else if (color == Colors.green.value) {
+          colorDificultad = Colors.green;
+          fetchVias("listar?quepared=" +
+              version +
+              "&isbloque=Bloque&dificultad=verde");
+        } else if (color == Colors.yellow.value) {
+          colorDificultad = Colors.yellow;
+          fetchVias("listar?quepared=" +
+              version +
+              "&isbloque=Bloque&dificultad=amarillo");
+        } else if (color == Colors.black.value) {
+          colorDificultad = Colors.black;
+          fetchVias("listar?quepared=" +
+              version +
+              "&isbloque=Bloque&dificultad=negro");
+        }
       }
-    }
 
-    editingController.text = "";
-    notifyListeners();
+      //si está seleccionada la trave
+      if (isTrave == true) {
+        if (color == Colors.pinkAccent.value || color == Colors.pink.value) {
+          colorDificultad = Colors.pink;
+          fetchVias("listar?quepared=" +
+              version +
+              "&isbloque=Travesía&dificultad=morado");
+        } else if (color == Colors.orangeAccent.value ||
+            color == Colors.orange.value) {
+          colorDificultad = Colors.orange;
+          fetchVias("listar?quepared=" +
+              version +
+              "&isbloque=Travesía&dificultad=naranja");
+        } else if (color == Colors.green.value) {
+          colorDificultad = Colors.green;
+          fetchVias("listar?quepared=" +
+              version +
+              "&isbloque=Travesía&dificultad=verde");
+        } else if (color == Colors.yellow.value) {
+          colorDificultad = Colors.yellow;
+          fetchVias("listar?quepared=" +
+              version +
+              "&isbloque=Travesía&dificultad=amarillo");
+        } else if (color == Colors.black.value) {
+          colorDificultad = Colors.black;
+          fetchVias("listar?quepared=" +
+              version +
+              "&isbloque=Travesía&dificultad=negro");
+        }
+      }
+
+      editingController.text = "";
+      notifyListeners();
+    } else {
+      //TODO: Poder filtrar por  dificultad en hive(ya estaba hecho tilín)
+      isBloque = false;
+      isTrave = false;
+      colorBbloque = t_unactive;
+      colorBtrave = t_unactive;
+      colorDificultad = t_unactive;
+      colorBAdd = t_unactive;
+    }
   }
 
   void filterbyblock(String isblock) {
@@ -232,14 +292,7 @@ class ViasListVM extends ChangeNotifier {
     filterbyblock("Bloque");
     colorBbloque = Theme.of(context).colorScheme.secondary;
     colorBtrave = Theme.of(context).colorScheme.primary;
-    ;
-    notifyListeners();
-  }
 
-  void quitarFiltroBloqueTrave(BuildContext context) {
-    filterbyblock("nofilter");
-    colorBbloque = Theme.of(context).colorScheme.primary;
-    colorBtrave = Theme.of(context).colorScheme.primary;
     notifyListeners();
   }
 
@@ -247,6 +300,13 @@ class ViasListVM extends ChangeNotifier {
     filterbyblock("Travesía");
     colorBtrave = Theme.of(context).colorScheme.secondary;
     colorBbloque = Theme.of(context).colorScheme.primary;
+    notifyListeners();
+  }
+
+  void quitarFiltroBloqueTrave(BuildContext context) {
+    filterbyblock("nofilter");
+    colorBbloque = Theme.of(context).colorScheme.primary;
+    colorBtrave = Theme.of(context).colorScheme.primary;
     notifyListeners();
   }
 
@@ -265,5 +325,15 @@ class ViasListVM extends ChangeNotifier {
       print('Connect -> no device selected');
     }
     notifyListeners();
+  }
+
+  void makeaCopy() async {
+    print('Making a coppy');
+    // await Delete BBDD
+    //make a loop till all viaAWS length and coppy d
+  }
+
+  Future<void> fetchViasFromHive(String version) async {
+    _setViasMainHive(version);
   }
 }

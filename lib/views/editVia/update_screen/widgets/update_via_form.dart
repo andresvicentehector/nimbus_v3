@@ -152,12 +152,11 @@ class _UpdateViaFormState extends State<UpdateViaForm> {
           SizedBox(height: 25.0),
           textoCabecera(
               widget.via.presas.length.toString() +
+                  ' ' +
                   context.resources.strings.editViaScreenNumberHolds,
               context),
           //Text('Presas: \n verde:16711680 \n rojo:65280 \n azul: 255 \n Blanco:16777215 \n amarillo:16776960 \n morado:65535'),
           SizedBox(height: 25.0),
-          Text(widget.via.presas.toString()),
-          SizedBox(height: 20.0),
           Padding(
             padding: const EdgeInsets.fromLTRB(8.0, 5.0, 8.0, 104.0),
             child: Container(

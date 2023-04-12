@@ -36,7 +36,7 @@
             "type": "dart",
             "flutterMode": "debug"
         }
-
+,
         {
             "name": " REl (SM G998B)",
             "request": "launch",

@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:Nimbus/template/AppContextExtension.dart';
-import 'package:Nimbus/viewModels/bluetoothSetings/changeLang_function.dart';
 import 'package:Nimbus/views/listadoVias/listado_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
@@ -102,7 +101,11 @@ class _Bluetooth_screen extends State<bluetooth_Screen> {
             Container(
               child: _bluetoothScreenBuilder(),
             ),
-            Navigation(selectedDevice: widget.selectedDevice, pos: pos)
+            Navigation(
+              selectedDevice: widget.selectedDevice,
+              pos: pos,
+              colorBadd: Theme.of(context).colorScheme.primary,
+            )
           ],
         ));
   }

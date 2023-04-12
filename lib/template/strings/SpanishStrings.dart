@@ -41,10 +41,10 @@ class SpanishStrings implements Strings {
 
   @override
   String get addViaScreenCommentTraveTittle =>
-      "Explica Brevemente como se hace:";
+      "Explica brevemente como se hace:";
 
   @override
-  String get addViaScreenDificultyTraveTittle => "Elige la dificultad";
+  String get addViaScreenDificultyTraveTittle => "Elige la Dificultad";
 
   @override
   String get addViaScreenNameTraveTittle => "Ponle un Nombre Chulo ";
@@ -138,7 +138,7 @@ class SpanishStrings implements Strings {
   String get editViaScreenDificultyTraveTittle => "Dificultad";
 
   @override
-  String get editViaScreenNameTraveTittle => "Nombre";
+  String get editViaScreenNameTraveTittle => "Nombre ";
 
   @override
   String get editViaScreenNumberHolds => "Presas con su código de color";

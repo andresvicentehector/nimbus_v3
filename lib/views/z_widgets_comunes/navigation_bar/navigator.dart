@@ -4,6 +4,7 @@ import 'package:Nimbus/views/bluettothSetings/setings_screen.dart';
 import 'package:Nimbus/views/addVia/add_presas_screen.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:Nimbus/views/escalarVia/escalar_screen.dart';
 import 'package:Nimbus/views/juegos/jugar_screen.dart';
@@ -17,8 +18,12 @@ import '../../../template/configuration/ConstantesPropias.dart';
 class Navigation extends StatefulWidget {
   final BluetoothDevice? selectedDevice;
   final pos;
+  final Color colorBadd;
 
-  const Navigation({required this.selectedDevice, required this.pos});
+  const Navigation(
+      {required this.selectedDevice,
+      required this.pos,
+      required this.colorBadd});
 
   @override
   State<Navigation> createState() => _NavigationState();
@@ -72,9 +77,9 @@ class _NavigationState extends State<Navigation> {
             height: 75,
             width: 75,
             child: FloatingActionButton(
-                backgroundColor: Theme.of(context).colorScheme.primary,
-                onPressed: () {
-                  if (true) {
+                backgroundColor: widget.colorBadd,
+                onPressed: () async {
+                  if (await InternetConnectionChecker().hasConnection) {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => AddPresas(
@@ -146,7 +151,9 @@ class _NavigationState extends State<Navigation> {
           height: 20,
           color: isSelected == pos
               ? Theme.of(context).colorScheme.secondary
-              : Theme.of(context).colorScheme.tertiary,
+              : MediaQuery.of(context).platformBrightness == Brightness.dark
+                  ? Theme.of(context).colorScheme.tertiary
+                  : Colors.black,
         ),
       ),
     );

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-const t8_colorPrimary = Colors.purple;
+const t8_colorPrimary = Color.fromARGB(255, 155, 136, 231);
 const t8_colorPrimaryDark = Color(0x9CB026FF);
 const t8_colorAccent = Color(0x9C27B0FF);
 
 const t8_color_red = Color(0xFFF12727);
 const t8_textColorPrimary = Color(0xFF333333);
-const t_unactive = Color(0xFF918F8F);
+const t_unactive = Color.fromARGB(255, 122, 122, 122);
 
 const t8_app_background = Color(0xFFf3f5f9);
 const t8_view_color = Color(0xFFDADADA);

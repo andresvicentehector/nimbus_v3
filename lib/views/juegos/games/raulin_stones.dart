@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:zoom_widget/zoom_widget.dart';
 
-import '../../z_widgets_comunes/wall/raulin_stones_wallBuilder/wall15_raulin.dart';
-import '../../z_widgets_comunes/wall/raulin_stones_wallBuilder/wall25_raulin.dart';
+import '../../wall/raulin_stones_wallBuilder/wall15_raulin.dart';
+import '../../wall/raulin_stones_wallBuilder/wall25_raulin.dart';
 
 class Raulin extends StatefulWidget {
   final BluetoothDevice server;

@@ -1,0 +1,5 @@
+import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+
+abstract class Bluetooth {
+  BluetoothDevice? server;
+}

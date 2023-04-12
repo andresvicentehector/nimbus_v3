@@ -26,7 +26,7 @@ class _ListadoScreenState extends State<ListadoScreen> {
   void initState() {
     super.initState();
 
-    viewModel.fetchVias("listar?quepared=" + version);
+    viewModel.checkIfDataConnection();
     viewModel.selectedDevice = null;
     viewModel.colorDificultad = Colors.transparent;
   }
@@ -71,7 +71,10 @@ class _ListadoScreenState extends State<ListadoScreen> {
                   status: viewModel.viasMain.status,
                   message: viewModel.viasMain.message,
                 ),
-                Navigation(selectedDevice: viewModel.selectedDevice, pos: pos),
+                Navigation(
+                    selectedDevice: viewModel.selectedDevice,
+                    pos: pos,
+                    colorBadd: viewModel.colorBAdd),
               ]));
         }));
   }

@@ -15,6 +15,9 @@ class WallShowCircle extends StatelessWidget {
           children: [
             Container(
                 decoration: BoxDecoration(
+                    color: numero == 10000
+                        ? Colors.transparent
+                        : Color.fromARGB(193, 126, 124, 124),
                     borderRadius: BorderRadius.circular(18),
                     border: Border.all(color: c2))),
             Center(
@@ -24,9 +27,9 @@ class WallShowCircle extends StatelessWidget {
                         style: TextStyle(
                           shadows: [
                             Shadow(
-                              blurRadius: 5,
-                              color: Colors.black,
-                              offset: Offset(0, 2),
+                              blurRadius: 1,
+                              color: Color.fromARGB(255, 0, 0, 0),
+                              offset: Offset(0.4, 0.5),
                             ),
                           ],
                           color: c2,

@@ -59,8 +59,8 @@ Widget dictadoInfo(BuildContext context) {
           child: Container(
               decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.primary,
-                  borderRadius: BorderRadius.circular(5.0)),
-              padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
+                  borderRadius: BorderRadius.circular(17.0)),
+              padding: EdgeInsets.fromLTRB(16, 5, 16, 5),
               child: Stack(
                 alignment: Alignment.center,
                 children: <Widget>[
@@ -147,8 +147,8 @@ Widget raulinInfo(BuildContext context) {
           child: Container(
               decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.primary,
-                  borderRadius: BorderRadius.circular(5.0)),
-              padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
+                  borderRadius: BorderRadius.circular(17.0)),
+              padding: EdgeInsets.fromLTRB(16, 5, 16, 5),
               child: Stack(
                 alignment: Alignment.center,
                 children: <Widget>[
@@ -236,8 +236,8 @@ Widget kimoInfo(BuildContext context) {
           child: Container(
               decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.primary,
-                  borderRadius: BorderRadius.circular(5.0)),
-              padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
+                  borderRadius: BorderRadius.circular(17)),
+              padding: EdgeInsets.fromLTRB(16, 5, 16, 5),
               child: Stack(
                 alignment: Alignment.center,
                 children: <Widget>[

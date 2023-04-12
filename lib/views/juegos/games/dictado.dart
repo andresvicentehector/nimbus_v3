@@ -3,13 +3,10 @@ import 'dart:typed_data';
 import 'package:Nimbus/template/AppContextExtension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
-import 'package:nb_utils/nb_utils.dart';
-
 import 'package:zoom_widget/zoom_widget.dart';
-
 import '../../../template/configuration/ConstantesPropias.dart';
-import '../../z_widgets_comunes/wall/dictado_wallBuilder/wall15_dictado.dart';
-import '../../z_widgets_comunes/wall/dictado_wallBuilder/wall25_dictado.dart';
+import '../../wall/dictado_wallBuilder/wall15_dictado.dart';
+import '../../wall/dictado_wallBuilder/wall25_dictado.dart';
 
 class Dictado extends StatefulWidget {
   final BluetoothDevice server;

@@ -6,8 +6,8 @@ import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
 import '../../template/configuration/ConstantesPropias.dart';
 import '../../views/addVia/addVia_screen/add_via_screen.dart';
-import '../../views/z_widgets_comunes/wall/add_edit_wallBuilder/wall15.dart';
-import '../../views/z_widgets_comunes/wall/add_edit_wallBuilder/wall25.dart';
+import '../../views/wall/add_edit_wallBuilder/wall15.dart';
+import '../../views/wall/add_edit_wallBuilder/wall25.dart';
 
 class AddPresasVM extends ChangeNotifier {
   static final clientID = 0;
@@ -28,7 +28,7 @@ class AddPresasVM extends ChangeNotifier {
     if (server == null) {
       isConnecting = false;
     } else {
-      BluetoothConnection.toAddress(server!.address).then((_connection) {
+      BluetoothConnection.toAddress(server.address).then((_connection) {
         //print('Connected to the device');
         connection = _connection;
         _sendMessage("clear");

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:Nimbus/template/colors/ColorsFixed.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
@@ -27,6 +28,9 @@ class EscalarViaVM extends ChangeNotifier {
 
   bool isConnecting = true;
   bool get isConnected => (connection?.isConnected ?? false);
+
+  late Color botonEditarColor = t_primary;
+  late Color botonEliminarColor = t_primary;
 
   bool isDisconnecting = false;
   late Widget pared;
@@ -57,7 +61,7 @@ class EscalarViaVM extends ChangeNotifier {
     if (server == null) {
       isConnecting = false;
     } else {
-      BluetoothConnection.toAddress(server!.address).then((_connection) {
+      BluetoothConnection.toAddress(server.address).then((_connection) {
         //print('Connected to the device');
         connection = _connection;
 
@@ -176,6 +180,17 @@ class EscalarViaVM extends ChangeNotifier {
     } else if (version == "15") {
       pared = Wall15Show(presas: presas);
     }
+  }
+
+  void checkDataConnection(BuildContext context) async {
+    if (await InternetConnectionChecker().hasConnection) {
+      botonEditarColor = Theme.of(context).colorScheme.primary;
+      botonEliminarColor = Theme.of(context).colorScheme.primary;
+    } else {
+      botonEditarColor = t_unactive;
+      botonEliminarColor = t_unactive;
+    }
+    notifyListeners();
   }
 }
 

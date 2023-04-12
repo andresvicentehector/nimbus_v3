@@ -1,10 +1,9 @@
 import "package:Nimbus/template/AppContextExtension.dart";
 import 'package:Nimbus/template/colors/ColorsFixed.dart';
 import 'package:flutter/material.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import '../../../models/ListadoVias/AWS/ViaAWS.dart';
 import '../../../template/configuration/ConstantesPropias.dart';
-
-import '../../z_widgets_comunes/utils/texto.dart';
 
 Widget circulo(dynamic _dificultadController) {
   return Container(
@@ -21,11 +20,15 @@ Widget descriptivoVia(dynamic _nameController, _autorController,
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
-      Text(
-        _nameController,
-        style: TextStyle(
-            color: Theme.of(context).colorScheme.tertiaryContainer,
-            fontSize: context.resources.dimensions.textSizeSMedium),
+      Container(
+        width: MediaQuery.of(context).size.width - 200,
+        child: Text(
+          _nameController,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+              color: Theme.of(context).colorScheme.tertiaryContainer,
+              fontSize: context.resources.dimensions.textSizeSMedium),
+        ),
       ),
       Text(
         _autorController,
@@ -45,7 +48,7 @@ Widget botonCargar(bool _isConnected, BuildContext context) {
           color: (_isConnected
               ? Theme.of(context).colorScheme.primary
               : t_unactive),
-          borderRadius: BorderRadius.circular(5.0)),
+          borderRadius: BorderRadius.circular(17.0)),
       padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
       child: Stack(
         alignment: Alignment.center,
@@ -79,31 +82,36 @@ Widget botonCargar(bool _isConnected, BuildContext context) {
       ));
 }
 
-Widget botonEditar(
-    String isBloque, Function _gotoEditScreen, BuildContext context) {
+Widget botonEditar(String isBloque, Function _gotoEditScreen,
+    BuildContext context, Color botonEditarColor) {
   return Expanded(
     flex: 9,
-    child: ElevatedButton(
-      onPressed: () async {
-        _gotoEditScreen();
+    child: GestureDetector(
+      onTap: () async {
+        if (await InternetConnectionChecker().hasConnection) {
+          _gotoEditScreen();
+        }
       },
       child: Container(
           decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primary,
-              borderRadius: BorderRadius.circular(16)),
+              color: botonEditarColor,
+              borderRadius: BorderRadius.circular(17.0)),
           padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
           child: Stack(
             alignment: Alignment.center,
             children: <Widget>[
               Center(
-                  child: texto(
+                  child: Text(
                       context.resources.strings.escalarViaScreenButtonEdit +
                           (isBloque == "Bloque"
                               ? context.resources.strings
                                   .editViaScreenBloqueSelection
                               : context.resources.strings
                                   .editViaScreenTraveSelection),
-                      context)),
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.tertiary,
+                        fontFamily: context.resources.fonts.tittle,
+                      ))),
               Align(
                 alignment: Alignment.topRight,
                 child: Container(
@@ -111,6 +119,7 @@ Widget botonEditar(
                     padding: const EdgeInsets.all(8.0),
                     child: Icon(
                       Icons.edit,
+                      color: Theme.of(context).colorScheme.tertiary,
                       size: 20,
                     ),
                   ),
@@ -122,23 +131,30 @@ Widget botonEditar(
   ); //boton de editar
 }
 
-Widget botonEliminar(BuildContext context, dynamic _nameController,
-    dynamic _idController, Function _cerrarConexion, Function _eliminarVia) {
+Widget botonEliminar(
+    BuildContext context,
+    dynamic _nameController,
+    dynamic _idController,
+    Function _cerrarConexion,
+    Function _eliminarVia,
+    Color botonEliminarColor) {
   return Expanded(
-    flex: 3,
-    child: ElevatedButton(
-        onPressed: () {
-          _cerrarConexion();
-          showDialog(
-            context: context,
-            builder: (BuildContext context) => _buildPopupDialogEliminar(
-                context, _nameController, _idController, _eliminarVia),
-          );
+    flex: 2,
+    child: GestureDetector(
+        onTap: () async {
+          if (await InternetConnectionChecker().hasConnection) {
+            _cerrarConexion();
+            showDialog(
+              context: context,
+              builder: (BuildContext context) => _buildPopupDialogEliminar(
+                  context, _nameController, _idController, _eliminarVia),
+            );
+          }
         },
         child: Container(
           decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primary,
-              borderRadius: BorderRadius.circular(16)),
+              color: botonEliminarColor,
+              borderRadius: BorderRadius.circular(17.0)),
           padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
           child: Stack(alignment: Alignment.center, children: [
             Container(
@@ -212,6 +228,7 @@ Widget esquematicoPared(double width, Widget pared) {
             Container(
               decoration: BoxDecoration(
                   color: Color.fromARGB(255, 95, 95, 95),
+                  borderRadius: BorderRadius.circular(17.0),
                   image: DecorationImage(
                     image: AssetImage(paredTrans),
                   )),

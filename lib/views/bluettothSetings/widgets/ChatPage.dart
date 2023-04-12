@@ -99,7 +99,7 @@ class _ChatPage extends State<ChatPage> {
             decoration: BoxDecoration(
                 color:
                     _message.whom == clientID ? Colors.blueAccent : Colors.grey,
-                borderRadius: BorderRadius.circular(7.0)),
+                borderRadius: BorderRadius.circular(17)),
           ),
         ],
         mainAxisAlignment: _message.whom == clientID

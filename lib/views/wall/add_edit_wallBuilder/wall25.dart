@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../../viewModels/addVia/add_presasVM.dart';
+import '../../../viewModels/editVia/edit_presas_VM.dart';
+import '../../../viewModels/wall/add_edit_wallBuilder_VM.dart';
 import 'button_add_edit.dart';
 
 const List<String> num25 = [
@@ -582,7 +586,21 @@ class Wall25 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _buildPared25();
+    Widget consum;
+    if (presas.isNotEmpty) {
+      consum = Consumer<EditPresasVM>(builder: (context, viewModel, _) {
+        return _buildPared25();
+      });
+    } else {
+      consum = Consumer<AddPresasVM>(builder: (context, viewModel, _) {
+        return _buildPared25();
+      });
+    }
+    AddEditWallVM viewModel = AddEditWallVM();
+    return ChangeNotifierProvider<AddEditWallVM>(
+      create: (BuildContext context) => viewModel,
+      child: consum,
+    );
   }
 
   Widget _buildPared25() {
