@@ -96,8 +96,10 @@ class BuilderListadoVias extends StatelessWidget {
                                               .platformBrightness ==
                                           Brightness.light
                                       ? [
-                                          Color.fromARGB(255, 179, 168, 221),
-                                          Color.fromARGB(225, 179, 168, 221),
+                                          Color.fromARGB(255, 117, 70, 226),
+                                          Color.fromARGB(255, 203, 194, 240),
+                                          // Color.fromARGB(255, 149, 154, 189),
+                                          //Color.fromARGB(255, 140, 130, 196)
                                         ]
                                       : [
                                           Color.fromARGB(255, 56, 52, 68),

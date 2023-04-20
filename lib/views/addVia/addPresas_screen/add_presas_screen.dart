@@ -5,10 +5,11 @@ import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:provider/provider.dart';
 import 'package:zoom_widget/zoom_widget.dart';
 
-import '../../template/configuration/ConstantesPropias.dart';
-import '../z_widgets_comunes/utils/texto.dart';
+import '../../../template/configuration/ConstantesPropias.dart';
+import '../../z_widgets_comunes/utils/texto.dart';
 
 class AddPresas extends StatefulWidget {
+  static final String id = "AddPresasScreen";
   final BluetoothDevice? server;
 
   const AddPresas({required this.server});
@@ -34,6 +35,14 @@ class _AddPresas extends State<AddPresas> {
       viewModel.connection?.dispose();
       viewModel.connection = null;
     }
+
+    if (viewModel.isConnecting) {
+      viewModel.isDisconnecting = true;
+      viewModel.connection?.dispose();
+      viewModel.connection = null;
+    }
+
+    viewModel.contador = 3;
 
     super.dispose();
   }

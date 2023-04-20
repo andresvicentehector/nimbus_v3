@@ -8,7 +8,7 @@ import Foundation
 import connectivity_plus
 import nb_utils
 import package_info
-import path_provider_macos
+import path_provider_foundation
 import shared_preferences_foundation
 import sqflite
 import url_launcher_macos

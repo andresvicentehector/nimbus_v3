@@ -27,8 +27,6 @@ class _ListadoScreenState extends State<ListadoScreen> {
     super.initState();
 
     viewModel.checkIfDataConnection();
-    viewModel.selectedDevice = null;
-    viewModel.colorDificultad = Colors.transparent;
   }
 
   void dispose() {

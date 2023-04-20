@@ -16,6 +16,7 @@ import '../z_widgets_comunes/utils/texto.dart';
 
 // ignore: camel_case_types
 class bluetooth_Screen extends StatefulWidget {
+  static final String id = "BluetoothSettings";
   final BluetoothDevice? selectedDevice;
 
   const bluetooth_Screen({this.selectedDevice});

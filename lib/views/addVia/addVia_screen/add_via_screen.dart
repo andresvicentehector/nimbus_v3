@@ -4,6 +4,7 @@ import 'package:Nimbus/views/addVia/addVia_screen/widgets/add_via_form.dart';
 import '../../z_widgets_comunes/utils/texto.dart';
 
 class AddScreen extends StatelessWidget {
+  static final String id = "AddViaScreen";
   final List<String> presas;
   const AddScreen({
     required this.presas,

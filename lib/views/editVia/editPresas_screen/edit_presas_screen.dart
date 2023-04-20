@@ -9,6 +9,7 @@ import '../../z_widgets_comunes/utils/texto.dart';
 import 'package:zoom_widget/zoom_widget.dart';
 
 class EditPresas extends StatefulWidget {
+  static final String id = 'EditPresas';
   final BluetoothConnection? connection;
   final Vias via;
   const EditPresas({required this.connection, required this.via});

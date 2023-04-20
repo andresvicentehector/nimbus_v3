@@ -5,6 +5,7 @@ import '../../models/ListadoVias/AWS/ViaAWS.dart';
 import '../z_widgets_comunes/utils/texto.dart';
 
 class EscalarScreen extends StatelessWidget {
+  static final String id = 'EscalarScreen';
   final Vias via;
   final BluetoothDevice? server;
 

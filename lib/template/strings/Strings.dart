@@ -122,4 +122,7 @@ abstract class Strings {
 
   String get escalarViaScreeDeleteDescription;
   String get escalarViaScreeDeleteDescriptionButton;
+
+  String get escalarViaScreenConnecting;
+  String get escalarViaScreenComeBacktoListView;
 }

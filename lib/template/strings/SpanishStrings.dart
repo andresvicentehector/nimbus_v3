@@ -248,4 +248,11 @@ class SpanishStrings implements Strings {
 
   @override
   String get bluetoothScreenBluetoothSettings => "Settings";
+
+  @override
+  String get escalarViaScreenConnecting => 'Conectando..';
+
+  @override
+  String get escalarViaScreenComeBacktoListView =>
+      'Vuelve a la pantalla anterior';
 }

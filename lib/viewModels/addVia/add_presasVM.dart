@@ -24,14 +24,22 @@ class AddPresasVM extends ChangeNotifier {
   bool isDisconnecting = false;
   bool falloConexion = false;
 
-  void connect(BluetoothDevice? server) {
+  int contador = 0;
+
+  Future<void> connect(BluetoothDevice? server) async {
     if (server == null) {
       isConnecting = false;
     } else {
       BluetoothConnection.toAddress(server.address).then((_connection) {
         //print('Connected to the device');
         connection = _connection;
-        _sendMessage("clear");
+        if (presas.isEmpty) {
+          _sendMessage('clear');
+          print('Que se le envia: se le envía un clear');
+        } else {
+          _sendMessage(presas.join(","));
+          print('Que se le envia:' + presas.join(","));
+        }
         notifyListeners();
         isConnecting = false;
         isDisconnecting = false;
@@ -44,13 +52,15 @@ class AddPresasVM extends ChangeNotifier {
           // If we except the disconnection, `onDone` should be fired as result.
           // If we didn't except this (no flag set), it means closing by remote.
           if (isDisconnecting) {
-            //print('Disconnecting locally!');
+            print('Disconnecting locally!');
             isConnecting = false;
             falloConexion = true;
           } else {
             print('Disconnected remotely!');
             isConnecting = false;
             falloConexion = true;
+            reconnect(server);
+            notifyListeners();
           }
           notifyListeners();
         });
@@ -58,9 +68,50 @@ class AddPresasVM extends ChangeNotifier {
         print('Cannot connect, exception occured');
         //print(e);
         isConnecting = false;
-        falloConexion = true;
-        notifyListeners();
+        if (contador >= 3) {
+          falloConexion = true;
+          notifyListeners();
+        } else {
+          reconnect(server);
+          notifyListeners();
+        }
+        contador++;
       });
+    }
+  }
+
+  Future<void> reconnect(BluetoothDevice? server) async {
+    if (isConnected) {
+      return;
+    }
+
+    if (server == null) {
+      return;
+    }
+
+    try {
+      print('reconecting');
+      isConnecting = true;
+      await connect(server);
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<void> reconnectandSendPresas(BluetoothDevice? server) async {
+    if (isConnected) {
+      return;
+    }
+
+    if (server == null) {
+      return;
+    }
+
+    try {
+      print('reconecting');
+      isConnecting = true;
+    } catch (e) {
+      throw e;
     }
   }
 

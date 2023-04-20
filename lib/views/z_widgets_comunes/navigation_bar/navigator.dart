@@ -1,7 +1,7 @@
 import 'package:Nimbus/views/listadoVias/listado_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:Nimbus/views/bluettothSetings/setings_screen.dart';
-import 'package:Nimbus/views/addVia/add_presas_screen.dart';
+import 'package:Nimbus/views/addVia/addPresas_screen/add_presas_screen.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -79,15 +79,13 @@ class _NavigationState extends State<Navigation> {
             child: FloatingActionButton(
                 backgroundColor: widget.colorBadd,
                 onPressed: () async {
-                  if (await InternetConnectionChecker().hasConnection) {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => AddPresas(
-                          server: widget.selectedDevice,
-                        ),
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => AddPresas(
+                        server: widget.selectedDevice,
                       ),
-                    );
-                  }
+                    ),
+                  );
                 },
                 child: animation),
           )

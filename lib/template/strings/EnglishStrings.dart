@@ -247,4 +247,10 @@ class EnglishStrings implements Strings {
 
   @override
   String get bluetoothScreenBluetoothSettings => "Settings";
+
+  @override
+  String get escalarViaScreenConnecting => "Connecting...";
+  @override
+  String get escalarViaScreenComeBacktoListView =>
+      'Go back to the list of routes';
 }

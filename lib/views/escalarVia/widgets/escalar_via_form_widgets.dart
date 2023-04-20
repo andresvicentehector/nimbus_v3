@@ -42,12 +42,15 @@ Widget descriptivoVia(dynamic _nameController, _autorController,
   );
 }
 
-Widget botonCargar(bool _isConnected, BuildContext context) {
+Widget botonCargar(bool _isConnected, bool _isConnecting,
+    bool _connectionFailed, BuildContext context) {
   return Container(
       decoration: BoxDecoration(
-          color: (_isConnected
-              ? Theme.of(context).colorScheme.primary
-              : t_unactive),
+          color: (_isConnecting
+              ? t_unactive
+              : _isConnected
+                  ? Theme.of(context).colorScheme.primary
+                  : t_unactive),
           borderRadius: BorderRadius.circular(17.0)),
       padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
       child: Stack(
@@ -55,9 +58,16 @@ Widget botonCargar(bool _isConnected, BuildContext context) {
         children: <Widget>[
           Center(
             child: Text(
-                (_isConnected
-                    ? context.resources.strings.escalarViaScreenButtonClimb
-                    : context.resources.strings.escalarViaScreenButtonConnect),
+                (_isConnecting
+                    ? context.resources.strings.escalarViaScreenConnecting
+                    : _connectionFailed
+                        ? context.resources.strings
+                            .escalarViaScreenComeBacktoListView
+                        : _isConnected
+                            ? context
+                                .resources.strings.escalarViaScreenButtonClimb
+                            : context.resources.strings
+                                .escalarViaScreenButtonConnect),
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.tertiary,
                   fontFamily: context.resources.fonts.tittle,
@@ -70,11 +80,17 @@ Widget botonCargar(bool _isConnected, BuildContext context) {
               height: 35,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Icon(
-                  _isConnected ? Icons.arrow_forward : Icons.arrow_upward,
-                  color: Theme.of(context).colorScheme.tertiary,
-                  size: 20,
-                ),
+                child: _isConnecting
+                    ? CircularProgressIndicator(
+                        color: Theme.of(context).colorScheme.tertiary,
+                        strokeWidth:
+                            2.0 // increase this value to make the indicator bigger
+                        )
+                    : Icon(
+                        _isConnected ? Icons.arrow_forward : Icons.arrow_back,
+                        color: Theme.of(context).colorScheme.tertiary,
+                        size: 20,
+                      ),
               ),
             ),
           ),
@@ -202,7 +218,12 @@ Widget _buildPopupDialogEliminar(BuildContext context, dynamic _nameController,
   );
 }
 
-Widget botoneraCargar(bool isConnected, Function _cargarViaTroncho, Vias via,
+Widget botoneraCargar(
+    bool isConnected,
+    bool isConnecting,
+    bool connectionFailed,
+    Function _cargarViaTroncho,
+    Vias via,
     BuildContext context) {
   return GestureDetector(
       onTap: () async {
@@ -212,7 +233,7 @@ Widget botoneraCargar(bool isConnected, Function _cargarViaTroncho, Vias via,
           indexData = via.sId;
         }
       },
-      child: botonCargar(isConnected, context));
+      child: botonCargar(isConnected, isConnecting, connectionFailed, context));
 }
 
 Widget esquematicoPared(double width, Widget pared) {

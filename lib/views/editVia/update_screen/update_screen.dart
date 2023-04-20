@@ -5,6 +5,7 @@ import '../../z_widgets_comunes/utils/texto.dart';
 import 'widgets/update_via_form.dart';
 
 class UpdateScreen extends StatelessWidget {
+  static final String id = 'UpdateScreen';
   final Vias via;
   final List<String> presas;
 

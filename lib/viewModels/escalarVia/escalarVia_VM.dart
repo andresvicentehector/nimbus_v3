@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:Nimbus/template/colors/ColorsFixed.dart';
@@ -24,16 +25,20 @@ class EscalarViaVM extends ChangeNotifier {
 
   final TextEditingController textEditingController =
       new TextEditingController();
-  //final ScrollController listScrollController = new ScrollController();
 
-  bool isConnecting = true;
+  late bool isConnecting = false;
   bool get isConnected => (connection?.isConnected ?? false);
+  late bool isDisconnecting = false;
+  late bool connectionFailed = false;
 
   late Color botonEditarColor = t_primary;
   late Color botonEliminarColor = t_primary;
 
-  bool isDisconnecting = false;
   late Widget pared;
+
+  late int contador = 0;
+
+  late Timer timer;
 
   void _deleteViasMain(ApiResponse<ViaAWS> response) {
     //print("Response :: $response");
@@ -57,10 +62,11 @@ class EscalarViaVM extends ChangeNotifier {
     }
   }
 
-  void connect(BluetoothDevice? server) {
+  Future<void> connect(BluetoothDevice? server) async {
     if (server == null) {
       isConnecting = false;
     } else {
+      isConnecting = true;
       BluetoothConnection.toAddress(server.address).then((_connection) {
         //print('Connected to the device');
         connection = _connection;
@@ -81,6 +87,15 @@ class EscalarViaVM extends ChangeNotifier {
       }).catchError((error) {
         //print('Cannot connect, exception occured');
         //print(error);
+        isConnecting = false;
+        if (contador >= 3) {
+          connectionFailed = true;
+          notifyListeners();
+        } else {
+          reconnect(server);
+          notifyListeners();
+        }
+        contador++;
       });
     }
   }
@@ -159,16 +174,62 @@ class EscalarViaVM extends ChangeNotifier {
     //print(troncho + ", ");
   }
 
-  void cerrarConexion() {
-    connection?.dispose();
+  Future<void> cerrarConexion() async {
+    isDisconnecting = true;
+    notifyListeners();
+
+    await connection?.close();
+    //isConnected = false;
+    isDisconnecting = false;
     notifyListeners();
   }
 
   Future eliminarVia(BuildContext context, String id) async {
     //  await box.delete(widget.xKey);
-
     await erraseVia(id);
     await Navigator.pushReplacementNamed(context, '/');
+    notifyListeners();
+  }
+
+  Future<void> reconnect(BluetoothDevice? server) async {
+    if (isConnected) {
+      return;
+    }
+
+    if (server == null) {
+      return;
+    }
+
+    try {
+      print('reconecting');
+      isConnecting = true;
+      await connect(server);
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<void> startTimeoutTimer(BluetoothDevice? server) async {
+    const timeoutDuration = Duration(seconds: 6);
+
+    Timer(timeoutDuration, () {
+      if (isConnecting || isConnected || isDisconnecting) {
+        return;
+      }
+
+      reconnect(server).catchError((e) {
+        print('Failed to reconnect: $e');
+      });
+    });
+    notifyListeners();
+  }
+
+  Future<void> startGoBackHomeTimer(BuildContext context) async {
+    const timeoutDuration = Duration(minutes: 10);
+
+    timer = Timer(timeoutDuration, () {
+      Navigator.pushReplacementNamed(context, 'ListadoScreen');
+    });
     notifyListeners();
   }
 

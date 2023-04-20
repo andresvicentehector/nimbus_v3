@@ -35,8 +35,11 @@ class _EscalarViaState extends State<EscalarVia> {
   @override
   void initState() {
     super.initState();
+    viewModel.startGoBackHomeTimer(context);
     viewModel.checkDataConnection(context);
     viewModel.connect(widget.server);
+    viewModel.startTimeoutTimer(widget.server);
+    //viewModel.startGoBackHomeTimer(context);
     _nameController = widget.via.name;
     _idController = widget.via.sId;
     _autorController = widget.via.autor;
@@ -52,6 +55,14 @@ class _EscalarViaState extends State<EscalarVia> {
       viewModel.connection?.dispose();
       viewModel.connection = null;
     }
+    if (viewModel.isConnecting) {
+      viewModel.isDisconnecting = true;
+      viewModel.connection?.dispose();
+      viewModel.connection = null;
+    }
+
+    viewModel.contador = 3;
+    viewModel.timer.cancel();
 
     super.dispose();
   }
@@ -83,8 +94,13 @@ class _EscalarViaState extends State<EscalarVia> {
                 _comentarioController,
                 SizedBox(height: 20.0),
 
-                botoneraCargar(viewModel.isConnected,
-                    viewModel.cargarViaTroncho, widget.via, context),
+                botoneraCargar(
+                    viewModel.isConnected,
+                    viewModel.isConnecting,
+                    viewModel.connectionFailed,
+                    viewModel.cargarViaTroncho,
+                    widget.via,
+                    context),
 
                 Divider(
                   height: 24,
@@ -113,6 +129,8 @@ class _EscalarViaState extends State<EscalarVia> {
   }
 
   _navigatetoEditPresas() {
+    viewModel.timer.cancel();
+    viewModel.contador = 3;
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) =>

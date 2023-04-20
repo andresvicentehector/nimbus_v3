@@ -9,6 +9,8 @@ import '../z_widgets_comunes/navigation_bar/navigator.dart';
 import 'jugar_screen_utils.dart';
 
 class JugarScreen extends StatelessWidget {
+  static final String id = 'JugarScreen';
+
   final BluetoothDevice? selectedDevice;
 
   const JugarScreen({required this.selectedDevice});
