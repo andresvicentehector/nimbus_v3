@@ -67,6 +67,7 @@ dependencies:
     sdk: flutter
   animated_background: ^2.0.0
   hexcolor: ^3.0.1
+  is_lock_screen: ^2.0.0
 
 
 dev_dependencies:
