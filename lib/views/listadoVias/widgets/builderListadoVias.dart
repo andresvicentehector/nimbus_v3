@@ -25,10 +25,10 @@ class BuilderListadoVias extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (status) {
       case Status.LOADING:
-        print("ESTADO::LOADING");
+        //print("ESTADO::LOADING");
         return LoadingWidget();
       case Status.ERROR:
-        print("ESTADO :: ERROR LOADING");
+        //print("ESTADO :: ERROR LOADING");
         return Column(
           children: [
             MyErrorWidget(message ?? "NA"),

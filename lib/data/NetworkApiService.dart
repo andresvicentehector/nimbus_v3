@@ -35,7 +35,7 @@ class NetworkApiService extends BaseApiService {
 
   Future postResponse(Map<String, dynamic> body, String endpoint) async {
     dynamic responseJson;
-    print(body);
+    //print(body);
     final bodyenco = jsonEncode(body);
     final Map<String, String> headers = {
       'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ class NetworkApiService extends BaseApiService {
 
   Future putResponse(Map<String, dynamic> body, String endpoint) async {
     dynamic responseJson;
-    print(body);
+    //print(body);
     final bodyenco = jsonEncode(body);
     // Define the headers for the PUT request
     final Map<String, String> headers = {
@@ -72,7 +72,7 @@ class NetworkApiService extends BaseApiService {
           ),
           headers: headers,
           body: bodyenco); //+ url
-      print("la URL TOLI :$baseUrl+ $endpoint"); //+ url
+      //print("la URL TOLI :$baseUrl+ $endpoint"); //+ url
 
       responseJson = returnResponse(response);
     } on SocketException {

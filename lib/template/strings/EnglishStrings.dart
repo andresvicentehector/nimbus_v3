@@ -253,4 +253,202 @@ class EnglishStrings implements Strings {
   @override
   String get escalarViaScreenComeBacktoListView =>
       'Go back to the list of routes';
+
+  @override
+  String get escalarViaScreenSomeoneisConnected =>
+      "Someone  is  already  connected";
+
+  @override
+  String get loginScreenSingIn => 'Hello';
+
+  @override
+  String get loginScreenWellcome => 'Signin into your account';
+
+  @override
+  String get loginScreenCreateAnAcount => "Create";
+
+  @override
+  String get loginScreenDontHaveAnAcount => "Don't have an account? ";
+
+  @override
+  String get loginScreenForgotPassword => "Forgot your password?";
+
+  @override
+  String get loginScreenInsertPassword => "Insert Password";
+
+  @override
+  String get loginScreenInsertUserName => "Insert User Name";
+
+  @override
+  String get loginScreenPassword => "Password";
+
+  @override
+  String get loginScreenSignIn => "Login";
+
+  @override
+  String get loginScreenUserName => "Username";
+
+  @override
+  String get loginScreenAccessWithGoogle => "Access with Google";
+
+  @override
+  String get registerScreenAcceptTerms => " I accept all terms and conditions";
+
+  @override
+  String get registerScreenEmail => "Email Address";
+
+  @override
+  String get registerScreenName => "Full name";
+
+  @override
+  String get registerScreenNick => "UserName";
+
+  @override
+  String get registerScreenPassword => "Password";
+
+  @override
+  String get registerScreenRegister => "Register";
+
+  @override
+  String get registerScreenWritteEmail => "Enter your Email";
+
+  @override
+  String get registerScreenWritteName => "Enter your name and surname";
+
+  @override
+  String get registerScreenWritteNick => "Enter a nick ";
+
+  @override
+  String get registerScreenWrittePassword => "Enter your password";
+
+  @override
+  String get registerScreenRepeatPassword => "Repeat your Password";
+
+  @override
+  String get registerScreenWritteRepeatPassword => "Enter your Password again";
+
+  @override
+  String get registerScreenEnterValidEmail => "Enter a valid email address";
+
+  @override
+  String get registerScreenEnterValidPassword => "Enter a password";
+
+  @override
+  String get registerScreenEnterValidPasswordMayusAndNumber =>
+      "Must contain a number + capital letter + 8 chars ";
+
+  @override
+  String get registerScreenPasswordDontMatch => "Password not match ";
+
+  @override
+  String get registerScreenYouMustAcceptTerms =>
+      "You need to accept terms and conditions";
+
+  @override
+  String get profileScreenAppBar => "User Profile";
+
+  @override
+  String get profileScreenDrawerAppbar => "Nimbus Wall ";
+
+  @override
+  String get profileScreenDrawerChangePassword => "Change Password";
+
+  @override
+  String get profileScreenDrawerLogOut => "Log Out";
+
+  @override
+  String get profileScreenDrawerSettings => "Settings";
+
+  @override
+  String get profileScreenEmail => "Email";
+
+  @override
+  String get profileScreenUserInfo => "User Info:";
+
+  @override
+  String get profileScreenDrawerEditUser => "Edit User Info";
+
+  @override
+  String get forgotPasswordEmail => "Email";
+
+  @override
+  String get forgotPasswordEmailCantBeEmpty => "Email can't be empty";
+
+  @override
+  String get forgotPasswordEmailDescription => "Enter your email";
+
+  @override
+  String get forgotPasswordEmailValidation => "Enter a valid email address";
+
+  @override
+  String get forgotPasswordSendButton => "Send";
+
+  @override
+  String get forgotPasswordText =>
+      "We will send you and email to change your password";
+
+  @override
+  String get forgotPasswordsubtittle =>
+      "Enter the email address associated with your account";
+
+  @override
+  String get forgotPasswordtittle => "Forgot Password?";
+
+  @override
+  String get forgotPasswordLogin => "Login";
+
+  @override
+  String get forgotPasswordRemember => "Remember your Password? ";
+
+  @override
+  String get changePasswordAppBar => "Change your password";
+
+  @override
+  String get changePasswordChange => "Change";
+
+  @override
+  String get changePasswordEnterPassword => "Enter your new password";
+
+  @override
+  String get changePasswordEnterRepeatPassword => "Repeat password";
+
+  @override
+  String get changePasswordPassword => "New password";
+
+  @override
+  String get changePasswordRepeatPassword => "Repeat your new password";
+
+  @override
+  String get changePasswordSubTittle =>
+      "Type the new password you want to change in the fields";
+
+  @override
+  String get changePasswordTittle => "new password?";
+
+  @override
+  String get changeUserInfoAppBar => "Edit your info";
+
+  @override
+  String get changeUserInfoEmail => "Email";
+
+  @override
+  String get changeUserInfoEnterValidEmail => "Enter a valid email";
+
+  @override
+  String get changeUserInfoName => "Full Name";
+
+  @override
+  String get changeUserInfoNick => "UserName";
+
+  @override
+  String get changeUserInfoRegister => "Change  Info";
+
+  @override
+  String get changeUserInfoWritteEmail => "Enter your new email";
+
+  @override
+  String get changeUserInfoWritteName => "Enter your full name";
+
+  @override
+  String get changeUserInfoWritteNick => "Writte the username";
 }

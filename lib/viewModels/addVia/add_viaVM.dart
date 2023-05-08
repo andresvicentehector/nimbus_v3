@@ -66,10 +66,10 @@ class AddViaVM extends ChangeNotifier {
     int versionint = int.parse(version);
 
     Map<String, dynamic> body = {
-      'name': '${nameController.text}',
-      'autor': '${autorController.text}',
+      'name': '${nameController.text.trimRight()}',
+      'autor': '${autorController.text.trimRight()}',
       'dificultad': dificultadController,
-      'comentario': '${comentarioController.text}',
+      'comentario': '${comentarioController.text.trimRight()}',
       'presas': presas,
       'quepared': versionint,
       'isbloque': '$isBloqueControler'

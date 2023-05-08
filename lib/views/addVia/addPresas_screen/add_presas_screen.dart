@@ -126,7 +126,9 @@ class _AddPresas extends State<AddPresas> {
             semanticLabel: "Guardar",
           ),
           onPressed: () async {
-            viewModel.navigatetoAddScreen(context);
+            if (viewModel.presas.isNotEmpty) {
+              viewModel.navigatetoAddScreen(context);
+            }
           },
         ),
       ],

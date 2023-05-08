@@ -66,6 +66,7 @@ dependencies:
   flutter_localizations: 
     sdk: flutter
   animated_background: ^2.0.0
+  hexcolor: ^3.0.1
 
 
 dev_dependencies:

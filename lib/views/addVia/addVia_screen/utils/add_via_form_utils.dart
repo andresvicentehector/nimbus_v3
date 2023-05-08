@@ -1,4 +1,5 @@
 import 'package:Nimbus/template/AppContextExtension.dart';
+import 'package:Nimbus/views/z_widgets_comunes/utils/navigationFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:select_form_field/select_form_field.dart';
 import 'package:flutter_color_picker_wheel/models/button_behaviour.dart';
@@ -102,7 +103,7 @@ Widget botoneraAdd(BuildContext context, GlobalKey<FormState> _viaFormKey,
             _addInfo(presas);
 
             //await createBackup(context);
-            Navigator.pushReplacementNamed(context, '/');
+            navigateToListadoScreener(context);
           }
         },
         child: _estiloBotoneraAdd(context),
@@ -146,9 +147,10 @@ Widget _estiloBotoneraAdd(BuildContext context) {
       ));
 }
 
-Widget entradaFormulario(BuildContext context, TextEditingController controller,
-    String? fieldValidator(String? value)) {
+Widget entradaFormulario(FocusNode focusNode, BuildContext context,
+    TextEditingController controller, String? fieldValidator(String? value)) {
   return TextFormField(
+    focusNode: focusNode,
     style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 0.9),
     controller: controller,
     validator: fieldValidator,

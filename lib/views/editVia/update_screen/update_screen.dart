@@ -12,9 +12,19 @@ class UpdateScreen extends StatelessWidget {
   const UpdateScreen({required this.via, required this.presas});
 
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _appBarBuilder(context),
-      body: _updateViaFormBuilder(),
+    final focusNode1 = FocusNode();
+    final focusNode2 = FocusNode();
+    final focusNode3 = FocusNode();
+    return GestureDetector(
+      onTap: () {
+        focusNode1.unfocus();
+        focusNode2.unfocus();
+        focusNode3.unfocus();
+      },
+      child: Scaffold(
+        appBar: _appBarBuilder(context),
+        body: _updateViaFormBuilder(focusNode1, focusNode2, focusNode3),
+      ),
     );
   }
 
@@ -26,12 +36,21 @@ class UpdateScreen extends StatelessWidget {
     );
   }
 
-  Widget _updateViaFormBuilder() {
+  Widget _updateViaFormBuilder(
+    focusNode1,
+    focusNode2,
+    focusNode3,
+  ) {
     return SingleChildScrollView(
       child: Padding(
           padding: const EdgeInsets.fromLTRB(8.0, 40.0, 8.0, 10.0),
           child: SingleChildScrollView(
-            child: UpdateViaForm(via: via, presas: presas),
+            child: UpdateViaForm(
+                focusNode1: focusNode1,
+                focusNode2: focusNode2,
+                focusNode3: focusNode3,
+                via: via,
+                presas: presas),
           )),
     );
   }

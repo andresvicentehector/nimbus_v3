@@ -71,7 +71,7 @@ Future<Color> _checkIfConnection(BuildContext context) async {
     colorBadd = Theme.of(context).colorScheme.primary;
     return colorBadd;
   } else {
-    print('No hay conexión de datos');
+    //print('No hay conexión de datos');
     colorBadd = t_unactive;
     return colorBadd;
   }

@@ -9,7 +9,6 @@ import 'package:hive/hive.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:sidebarx/sidebarx.dart';
 import '../../data/response/ApiResponse.dart';
-import '../../models/ListadoVias/hive/via.dart';
 import '../../repository/vias/ViaRepoImp.dart';
 import '../../template/colors/ColorsFixed.dart';
 import '../../template/configuration/ConstantesPropias.dart';
@@ -57,7 +56,7 @@ class ViasListVM extends ChangeNotifier {
         fetchVias("listar?quepared=" + version);
         compareAWSwithHive();
       } else {
-        print('No hay conexión de datos');
+        //print('No hay conexión de datos');
         colorBbloque = t_unactive;
         colorBtrave = t_unactive;
         colorDificultad = t_unactive;
@@ -69,7 +68,7 @@ class ViasListVM extends ChangeNotifier {
         fetchVias("listar?quepared=" + version);
         compareAWSwithHive();
       } else {
-        print('No hay conexión de datos');
+        //print('No hay conexión de datos');
         colorBbloque = t_unactive;
         colorBtrave = t_unactive;
         colorDificultad = t_unactive;
@@ -99,7 +98,7 @@ class ViasListVM extends ChangeNotifier {
           makeaCopy();
         }
       } else {
-        print('Comparación FAILED');
+        //print('Comparación FAILED');
       }
     } else {
       if (isOnline == true) {
@@ -107,14 +106,14 @@ class ViasListVM extends ChangeNotifier {
           makeaCopy();
         }
       } else {
-        print('Comparación FAILED');
+        //print('Comparación FAILED');
       }
     }
   }
 
 //the only way to access to movie list from the ui
   Future<void> fetchVias(String query) async {
-    print("query " + query);
+    //print("query " + query);
 
     if (!kIsWeb) {
       if (await InternetConnectionChecker().hasConnection) {
@@ -126,7 +125,7 @@ class ViasListVM extends ChangeNotifier {
             .onError((error, stackTrace) =>
                 _setViasMain(ApiResponse.error(error.toString())));
       } else {
-        print('No hay conexión de datos');
+        //print('No hay conexión de datos');
         colorBbloque = t_unactive;
         colorBtrave = t_unactive;
         colorDificultad = t_unactive;
@@ -143,7 +142,7 @@ class ViasListVM extends ChangeNotifier {
             .onError((error, stackTrace) =>
                 _setViasMain(ApiResponse.error(error.toString())));
       } else {
-        print('No hay conexión de datos');
+        //print('No hay conexión de datos');
         colorBbloque = t_unactive;
         colorBtrave = t_unactive;
         colorDificultad = t_unactive;
@@ -194,7 +193,7 @@ class ViasListVM extends ChangeNotifier {
         } else {
           fetchVias(
               "buscar?buscar=${_searchController.text}&quepared=" + version);
-          print(version + "/${_searchController.text}");
+          //print(version + "/${_searchController.text}");
           notifyListeners();
         }
 
@@ -220,7 +219,7 @@ class ViasListVM extends ChangeNotifier {
         } else {
           fetchVias(
               "buscar?buscar=${_searchController.text}&quepared=" + version);
-          print(version + "/${_searchController.text}");
+          //print(version + "/${_searchController.text}");
           notifyListeners();
         }
 
@@ -494,15 +493,15 @@ class ViasListVM extends ChangeNotifier {
     );
 
     if (selectedDevice != null) {
-      print('Connect -> selected ' + selectedDevice!.address);
+      //print('Connect -> selected ' + selectedDevice!.address);
     } else {
-      print('Connect -> no device selected');
+      //print('Connect -> no device selected');
     }
     notifyListeners();
   }
 
   void makeaCopy() async {
-    print('Making a coppy');
+    //print('Making a coppy');
     // await Delete BBDD
     //make a loop till all viaAWS length and coppy d
   }

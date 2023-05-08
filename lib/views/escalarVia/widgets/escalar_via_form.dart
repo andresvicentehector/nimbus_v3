@@ -2,10 +2,10 @@ import 'package:Nimbus/viewModels/escalarVia/escalarVia_VM.dart';
 import 'package:Nimbus/views/escalarVia/widgets/escalar_via_form_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
-import 'package:Nimbus/views/editVia/editPresas_screen/edit_presas_screen.dart';
 
 import 'package:provider/provider.dart';
 import '../../../models/ListadoVias/AWS/ViaAWS.dart';
+import '../../z_widgets_comunes/utils/navigationFunctions.dart';
 
 class EscalarVia extends StatefulWidget {
   final Vias via;
@@ -95,6 +95,7 @@ class _EscalarViaState extends State<EscalarVia> {
                 SizedBox(height: 20.0),
 
                 botoneraCargar(
+                    widget.server,
                     viewModel.isConnected,
                     viewModel.isConnecting,
                     viewModel.connectionFailed,
@@ -131,11 +132,6 @@ class _EscalarViaState extends State<EscalarVia> {
   _navigatetoEditPresas() {
     viewModel.timer.cancel();
     viewModel.contador = 3;
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) =>
-            EditPresas(connection: viewModel.connection, via: widget.via),
-      ),
-    );
+    navigateToEditPresasScreener(context, viewModel.connection, widget.via);
   }
 }

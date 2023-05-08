@@ -2,18 +2,24 @@ import 'package:Nimbus/template/AppContextExtension.dart';
 import 'package:Nimbus/viewModels/editVia/update_screen_VM.dart';
 import 'package:Nimbus/views/editVia/update_screen/utils/update_via_form_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_color_picker_wheel/models/button_behaviour.dart';
-import 'package:flutter_color_picker_wheel/flutter_color_picker_wheel.dart';
-import 'package:select_form_field/select_form_field.dart';
 
 import '../../../../models/ListadoVias/AWS/ViaAWS.dart';
 import '../../../../viewModels/bluetoothSetings/backup_functions.dart';
+import '../../../z_widgets_comunes/utils/navigationFunctions.dart';
 
 class UpdateViaForm extends StatefulWidget {
   final Vias via;
   final List<String> presas;
+  final focusNode1;
+  final focusNode2;
+  final focusNode3;
 
-  const UpdateViaForm({required this.via, required this.presas});
+  const UpdateViaForm(
+      {required this.via,
+      required this.presas,
+      this.focusNode1,
+      this.focusNode2,
+      this.focusNode3});
 
   @override
   _UpdateViaFormState createState() => _UpdateViaFormState();
@@ -37,21 +43,15 @@ class _UpdateViaFormState extends State<UpdateViaForm> {
     viewModel.isBloqueController = widget.via.isbloque!;
   }
 
+  void dispose() {
+    super.dispose();
+    widget.focusNode1.dispose();
+    widget.focusNode2.dispose();
+    widget.focusNode3.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final List<Map<String, dynamic>> _items = [
-      {
-        'value': "Bloque",
-        'label': context.resources.strings.addViaScreenBloqueSelection,
-        //'icon': Icon(Icons.fiber_manual_record),
-        'textStyle': TextStyle(color: Theme.of(context).colorScheme.primary),
-      },
-      {
-        'value': 'Travesía',
-        'label': context.resources.strings.addViaScreenTraveSelection,
-        //'icon': Icon(Icons.grade),
-      },
-    ];
     return Form(
       key: _viaFormKey,
       child: Column(
@@ -62,76 +62,43 @@ class _UpdateViaFormState extends State<UpdateViaForm> {
               context),
           SizedBox(height: 27.0),
 
-          SelectFormField(
-              type: SelectFormFieldType.dropdown,
-              changeIcon: true,
-              dialogTitle: 'Selecciona',
-              dialogCancelBtn: 'CANCEL',
-              items: _items,
-              initialValue: widget.via.isbloque,
-              onChanged: (val) => viewModel.setBloque(val),
-              validator: (val) {
-                viewModel.isBloqueController = val ?? widget.via.isbloque!;
-                return null;
-              },
-              onSaved: (val) =>
-                  viewModel.isBloqueController = val ?? widget.via.isbloque!),
+          selectorBloqueTravesia(context, widget.via.isbloque,
+              viewModel.setBloque, viewModel.isBloqueController),
 
           SizedBox(height: 27.0),
 
           textoCabecera(
               context.resources.strings.editViaScreenNameTraveTittle +
                   (viewModel.isBloqueController == "Bloque"
-                      ? "del Bloque"
-                      : "de la travesía"),
+                      ? context.resources.strings
+                              .addViaScreenDELBloqueSelection +
+                          context.resources.strings.editViaScreenBloqueSelection
+                      : context.resources.strings
+                              .addViaScreenDELATraveSelection +
+                          context
+                              .resources.strings.editViaScreenTraveSelection),
               context),
-          TextFormField(
-            controller: viewModel.nameController,
-            validator: viewModel.fieldValidator,
-          ),
+
+          entradaFormulario(widget.focusNode1, context,
+              viewModel.nameController, viewModel.fieldValidator),
+
           SizedBox(height: 20.0),
           textoCabecera(
               context.resources.strings.editViaScreenBAutorTraveTittle,
               context),
-          TextFormField(
-            controller: viewModel.autorController,
-            validator: viewModel.fieldValidator,
-          ),
+
+          entradaFormulario(widget.focusNode2, context,
+              viewModel.autorController, viewModel.fieldValidator),
           SizedBox(height: 20.0),
           textoCabecera(
               context.resources.strings.editViaScreenDificultyTraveTittle,
               context),
           SizedBox(height: 20.0),
 
-          WheelColorPicker(
-            onSelect: (Color newColor) {
-              viewModel.setNewColor(newColor);
-            },
-            behaviour: ButtonBehaviour.clickToOpen,
-            defaultColor: Color(widget.via.dificultad),
-            animationConfig: fanLikeAnimationConfig,
-            colorList: const [
-              [
-                Colors.black,
-              ],
-              [Colors.pinkAccent, Colors.pink],
-              [
-                Colors.orangeAccent,
-                Colors.orange,
-              ],
-              [
-                Colors.yellow,
-              ],
-              [
-                Colors.green,
-              ],
-            ],
-            buttonSize: 80,
-            pieceHeight: 18,
-            innerRadius: 80,
-          ),
+          colorPicker(viewModel.setNewColor, widget.via.dificultad),
 
           SizedBox(height: 25.0),
+
           Divider(
             thickness: 2.0,
           ),
@@ -140,15 +107,10 @@ class _UpdateViaFormState extends State<UpdateViaForm> {
           textoCabecera(
               context.resources.strings.editViaScreenCommentTraveTittle,
               context),
-          TextFormField(
-            style:
-                DefaultTextStyle.of(context).style.apply(fontSizeFactor: 0.9),
-            controller: viewModel.comentarioController,
-            validator: viewModel.fieldValidator,
-            keyboardType: TextInputType.multiline,
-            minLines: 1, //Normal textInputField will be displayed
-            maxLines: 10, // when user presses enter it will adapt to it
-          ),
+
+          entradaFormulario(widget.focusNode3, context,
+              viewModel.comentarioController, viewModel.fieldValidator),
+
           SizedBox(height: 25.0),
           textoCabecera(
               widget.via.presas.length.toString() +
@@ -166,15 +128,15 @@ class _UpdateViaFormState extends State<UpdateViaForm> {
                 onTap: () async {
                   if (_viaFormKey.currentState!.validate()) {
                     await viewModel.updateInfo(
-                        viewModel.nameController.text,
-                        viewModel.autorController.text,
+                        viewModel.nameController.text.trimRight(),
+                        viewModel.autorController.text.trimRight(),
                         viewModel.dificultadController,
-                        viewModel.comentarioController.text,
+                        viewModel.comentarioController.text.trimRight(),
                         viewModel.isBloqueController,
                         widget.via.presas,
                         widget.via.sId!);
                     await createBackup(context);
-                    await Navigator.pushReplacementNamed(context, '/');
+                    navigateToListadoScreener(context);
                   }
                 },
                 child: botonAnyadir(context),

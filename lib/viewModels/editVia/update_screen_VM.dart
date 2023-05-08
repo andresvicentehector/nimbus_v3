@@ -39,9 +39,6 @@ class UpdateScreenVM extends ChangeNotifier {
   Future<void> actualizarVia(Map<String, dynamic> body, String id) async {
     String endpoint = "editar/$id";
 
-    //http://35.180.113.93:3000/editar/$id
-    //6418a9e902efddee4f7cca81
-
     if (await InternetConnectionChecker().hasConnection) {
       _updateMain(ApiResponse.loading());
 

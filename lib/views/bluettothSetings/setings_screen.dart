@@ -1,15 +1,14 @@
 import 'dart:async';
 import 'package:Nimbus/template/AppContextExtension.dart';
-import 'package:Nimbus/views/listadoVias/listado_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:hive/hive.dart';
 import 'package:Nimbus/views/bluettothSetings/widgets/DiscoveryPage.dart';
 import 'package:Nimbus/views/bluettothSetings/widgets/SelectBondedDevicePage.dart';
 import 'package:Nimbus/template/configuration/ConstantesPropias.dart';
-import 'package:Nimbus/viewModels/bluetoothSetings/backup_functions.dart';
+import 'package:provider/provider.dart';
 
-import '../../viewModels/bluetoothSetings/changeVersion_functions.dart';
+import '../../viewModels/bluetoothSetings/setings_VM.dart';
 import '../../viewModels/juegos/navigator_MaterialPage_functions.dart';
 import '../z_widgets_comunes/navigation_bar/navigator.dart';
 import '../z_widgets_comunes/utils/texto.dart';
@@ -27,26 +26,14 @@ class bluetooth_Screen extends StatefulWidget {
 
 // ignore: camel_case_types
 class _Bluetooth_screen extends State<bluetooth_Screen> {
-  BluetoothState _bluetoothState = BluetoothState.UNKNOWN;
-  late final Box box;
-  String _address = "...";
-  String _name = "...";
-  var isSelected = 4;
-  late var width;
-
-  Timer? _discoverableTimeoutTimer;
-
-  bool _autoAcceptPairingRequests = false;
-
+  SettingsVM viewModel = SettingsVM();
   @override
   void initState() {
     super.initState();
-    box = Hive.box('Viabox');
+    viewModel.box = Hive.box('Viabox');
     // Get current state
     FlutterBluetoothSerial.instance.state.then((state) {
-      setState(() {
-        _bluetoothState = state;
-      });
+      viewModel.setBluetoothState(state);
     });
 
     Future.doWhile(() async {
@@ -59,28 +46,22 @@ class _Bluetooth_screen extends State<bluetooth_Screen> {
     }).then((_) {
       // Update the address field
       FlutterBluetoothSerial.instance.address.then((address) {
-        setState(() {
-          _address = address!;
-        });
+        viewModel.setAdressState(address);
       });
     });
 
     FlutterBluetoothSerial.instance.name.then((name) {
-      setState(() {
-        _name = name!;
-      });
+      viewModel.setBluetoothNameState(name);
     });
 
     // Listen for futher state changes
     FlutterBluetoothSerial.instance
         .onStateChanged()
         .listen((BluetoothState state) {
-      setState(() {
-        _bluetoothState = state;
+      viewModel.setBluetoothState(state);
 
-        // Discoverable mode is disabled when Bluetooth gets disabled
-        _discoverableTimeoutTimer = null;
-      });
+      // Discoverable mode is disabled when Bluetooth gets disabled
+      viewModel.discoverableTimeoutTimer = null;
     });
   }
 
@@ -88,7 +69,7 @@ class _Bluetooth_screen extends State<bluetooth_Screen> {
   void dispose() {
     FlutterBluetoothSerial.instance.setPairingRequestHandler(null);
 
-    _discoverableTimeoutTimer?.cancel();
+    viewModel.discoverableTimeoutTimer?.cancel();
     super.dispose();
   }
 
@@ -99,9 +80,13 @@ class _Bluetooth_screen extends State<bluetooth_Screen> {
         appBar: _appBarBuilder(),
         body: Stack(
           children: [
-            Container(
-              child: _bluetoothScreenBuilder(),
-            ),
+            ChangeNotifierProvider<SettingsVM>(
+                create: (BuildContext context) => viewModel,
+                child: Consumer<SettingsVM>(builder: (context, viewModel, _) {
+                  return Container(
+                    child: _bluetoothScreenBuilder(),
+                  );
+                })),
             Navigation(
               selectedDevice: widget.selectedDevice,
               pos: pos,
@@ -124,11 +109,25 @@ class _Bluetooth_screen extends State<bluetooth_Screen> {
     return ListView(
       children: <Widget>[
         Divider(),
-        ListTile(title: Text(context.resources.strings.bluetoothScreenGeneral)),
+        ListTile(
+          title: Text(context.resources.strings.bluetoothScreenGeneral),
+          trailing: ElevatedButton(
+            child: Text(
+              "LOGIN",
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.tertiary,
+                fontFamily: context.resources.fonts.tittle,
+              ),
+            ),
+            onPressed: () {
+              viewModel.navigateToLoginScreen(context);
+            },
+          ),
+        ),
         SwitchListTile(
           title:
               Text(context.resources.strings.bluetoothScreenActivateBluetooth),
-          value: _bluetoothState.isEnabled,
+          value: viewModel.bluetoothState.isEnabled,
           onChanged: (bool value) {
             // Do the request and update with the true value then
             future() async {
@@ -140,13 +139,13 @@ class _Bluetooth_screen extends State<bluetooth_Screen> {
             }
 
             future().then((_) {
-              setState(() {});
+              //iewModel.notifyListeners();
             });
           },
         ),
         ListTile(
           title: Text(context.resources.strings.bluetoothScreenBluetoothStatus),
-          subtitle: Text(_bluetoothState.toString()),
+          subtitle: Text(viewModel.bluetoothState.toString()),
           trailing: ElevatedButton(
             child: Text(
               context.resources.strings.bluetoothScreenBluetoothSettings,
@@ -163,22 +162,20 @@ class _Bluetooth_screen extends State<bluetooth_Screen> {
         ListTile(
           title: Text(
               context.resources.strings.bluetoothScreenLocalAdapterAddress),
-          subtitle: Text(_address),
+          subtitle: Text(viewModel.address),
         ),
         ListTile(
           title:
               Text(context.resources.strings.bluetoothScreenLocalAdapterName),
-          subtitle: Text(_name),
+          subtitle: Text(viewModel.name),
           onLongPress: null,
         ),
         SwitchListTile(
           title: Text(context.resources.strings.bluetoothScreenInsertPin),
           subtitle: const Text('Pin 1234'),
-          value: _autoAcceptPairingRequests,
+          value: viewModel.autoAcceptPairingRequests,
           onChanged: (bool value) {
-            setState(() {
-              _autoAcceptPairingRequests = value;
-            });
+            viewModel.setAutoAcceptPairingRequest(value);
             if (value) {
               FlutterBluetoothSerial.instance
                   .setPairingRequestHandler((BluetoothPairingRequest request) {
@@ -260,15 +257,7 @@ class _Bluetooth_screen extends State<bluetooth_Screen> {
               style: TextStyle(color: Theme.of(context).colorScheme.tertiary),
             ),
             onPressed: () {
-              setState(() {
-                changeVersion(version);
-
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) {
-                    return ListadoScreen();
-                  },
-                ));
-              });
+              viewModel.navigateToListadoScreen(context, version);
             },
           ),
         ),
@@ -280,9 +269,7 @@ class _Bluetooth_screen extends State<bluetooth_Screen> {
               style: TextStyle(color: Theme.of(context).colorScheme.tertiary),
             ),
             onPressed: () {
-              setState(() {
-                createBackup(context);
-              });
+              viewModel.createBackup(context);
             },
           ),
         ),
@@ -293,9 +280,7 @@ class _Bluetooth_screen extends State<bluetooth_Screen> {
               style: TextStyle(color: Theme.of(context).colorScheme.tertiary),
             ),
             onPressed: () {
-              setState(() {
-                restoreBackup(context);
-              });
+              viewModel.restoreBackup(context);
             },
           ),
         ),

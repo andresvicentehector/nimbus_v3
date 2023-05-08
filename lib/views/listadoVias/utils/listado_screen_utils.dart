@@ -18,7 +18,7 @@ Widget textoDescriptivo(var viaData, BuildContext context) {
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
       SizedBox(
-        width: 270,
+        // width: 270,
         child: Text(
           viaData.name,
           maxLines: 4,
@@ -110,14 +110,16 @@ Widget botonerafiltrosSearchColor(
     Color colorBbloque,
     Color colorBtrave,
     bool isTrave,
-    bool isBloque) {
+    bool isBloque,
+    FocusNode focusNode) {
   return Row(
     children: [
       Expanded(
         flex: 9,
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(10.0, 6.0, 5.0, 6.0),
+          padding: const EdgeInsets.fromLTRB(10.0, 8.0, 5.0, 6.0),
           child: TextField(
+              focusNode: focusNode,
               controller: editingController,
               decoration: InputDecoration(
                   hintText: context.resources.strings.homeScreenSearchNameAutor,

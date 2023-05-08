@@ -8,7 +8,16 @@ import '../utils/add_via_form_utils.dart';
 class AddViaForm extends StatefulWidget {
   final BluetoothDevice? server;
   final List<String> presas;
-  const AddViaForm({Key? key, this.server, required this.presas})
+  final focusNode1;
+  final focusNode2;
+  final focusNode3;
+  const AddViaForm(
+      {Key? key,
+      this.server,
+      required this.presas,
+      this.focusNode1,
+      this.focusNode2,
+      this.focusNode3})
       : super(key: key);
 
   @override
@@ -22,6 +31,13 @@ class _AddViaFormState extends State<AddViaForm> {
   @override
   void initState() {
     super.initState();
+  }
+
+  void dispose() {
+    super.dispose();
+    widget.focusNode1.dispose();
+    widget.focusNode2.dispose();
+    widget.focusNode3.dispose();
   }
 
   @override
@@ -47,8 +63,8 @@ class _AddViaFormState extends State<AddViaForm> {
             texto(
                 context, context.resources.strings.addViaScreenNameTraveTittle),
 
-            entradaFormulario(
-                context, viewModel.nameController, viewModel.fieldValidator),
+            entradaFormulario(widget.focusNode1, context,
+                viewModel.nameController, viewModel.fieldValidator),
 
             SizedBox(height: 25.0),
 
@@ -57,8 +73,8 @@ class _AddViaFormState extends State<AddViaForm> {
               context.resources.strings.addViaScreenAutorTraveTittle,
             ),
 
-            entradaFormulario(
-                context, viewModel.autorController, viewModel.fieldValidator),
+            entradaFormulario(widget.focusNode2, context,
+                viewModel.autorController, viewModel.fieldValidator),
 
             SizedBox(height: 25.0),
 
@@ -78,8 +94,8 @@ class _AddViaFormState extends State<AddViaForm> {
             texto2(context,
                 context.resources.strings.addViaScreenCommentTraveTittle),
 
-            entradaFormulario(context, viewModel.comentarioController,
-                viewModel.fieldValidator),
+            entradaFormulario(widget.focusNode3, context,
+                viewModel.comentarioController, viewModel.fieldValidator),
 
             SizedBox(height: 27.0),
 

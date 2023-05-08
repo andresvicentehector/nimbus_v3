@@ -76,7 +76,10 @@ class _EditPresas extends State<EditPresas> {
         ElevatedButton(
           child: Icon(Icons.save_sharp, color: Colors.greenAccent),
           onPressed: () async {
-            viewModel.navigateUpdateVia(context, widget.via, widget.via.presas);
+            if (widget.via.presas.isNotEmpty) {
+              viewModel.navigateUpdateVia(
+                  context, widget.via, widget.via.presas);
+            }
           },
         ),
       ],

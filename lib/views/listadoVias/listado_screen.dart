@@ -1,5 +1,6 @@
 import 'package:Nimbus/template/AppContextExtension.dart';
 import 'package:Nimbus/views/listadoVias/widgets/builderListadoVias.dart';
+import 'package:Nimbus/views/listadoVias/widgets/builderListadoViasLarge.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:Nimbus/views/z_widgets_comunes/navigation_bar/navigator.dart';
@@ -20,6 +21,7 @@ class ListadoScreen extends StatefulWidget {
 class _ListadoScreenState extends State<ListadoScreen> {
   ViasListVM viewModel = ViasListVM();
   final _key = GlobalKey<ScaffoldState>();
+  final _focusNode = FocusNode();
   var pos = 1;
 
   @override
@@ -31,6 +33,7 @@ class _ListadoScreenState extends State<ListadoScreen> {
 
   void dispose() {
     super.dispose();
+    _focusNode.dispose();
   }
 
   @override
@@ -38,42 +41,55 @@ class _ListadoScreenState extends State<ListadoScreen> {
     return ChangeNotifierProvider<ViasListVM>(
         create: (BuildContext context) => viewModel,
         child: Consumer<ViasListVM>(builder: (context, viewModel, _) {
-          return Scaffold(
-              key: _key,
-              drawer: SideBarX(
-                controller: viewModel.controllerSideBar,
-                filtrofunction: viewModel.filterbylevel,
-              ),
-              appBar: _appBarBuilder(),
-              body: Stack(children: [
-                Column(
-                  children: [
-                    botonerafiltrosSearchColor(
-                        viewModel.editingController,
-                        viewModel.filterbyName,
-                        viewModel.quitarFiltroBloqueTrave,
-                        viewModel.colorDificultad,
-                        _key,
-                        viewModel.filterbyblock,
-                        context,
-                        viewModel.colorBbloque,
-                        viewModel.colorBtrave,
-                        viewModel.isTrave,
-                        viewModel.isBloque),
-                    botoneraBloqueVia(viewModel, context),
-                  ],
+          return GestureDetector(
+            onTap: () {
+              _focusNode.unfocus();
+            },
+            child: Scaffold(
+                key: _key,
+                drawer: SideBarX(
+                  controller: viewModel.controllerSideBar,
+                  filtrofunction: viewModel.filterbylevel,
                 ),
-                BuilderListadoVias(
-                  via: viewModel.viasMain.data?.vias,
-                  selectedDevice: viewModel.selectedDevice,
-                  status: viewModel.viasMain.status,
-                  message: viewModel.viasMain.message,
-                ),
-                Navigation(
-                    selectedDevice: viewModel.selectedDevice,
-                    pos: pos,
-                    colorBadd: viewModel.colorBAdd),
-              ]));
+                appBar: _appBarBuilder(),
+                body: Stack(children: [
+                  Column(
+                    children: [
+                      botonerafiltrosSearchColor(
+                          viewModel.editingController,
+                          viewModel.filterbyName,
+                          viewModel.quitarFiltroBloqueTrave,
+                          viewModel.colorDificultad,
+                          _key,
+                          viewModel.filterbyblock,
+                          context,
+                          viewModel.colorBbloque,
+                          viewModel.colorBtrave,
+                          viewModel.isTrave,
+                          viewModel.isBloque,
+                          _focusNode),
+                      botoneraBloqueVia(viewModel, context),
+                    ],
+                  ),
+                  MediaQuery.of(context).size.width <= 800
+                      ? BuilderListadoVias(
+                          via: viewModel.viasMain.data?.vias,
+                          selectedDevice: viewModel.selectedDevice,
+                          status: viewModel.viasMain.status,
+                          message: viewModel.viasMain.message,
+                        )
+                      : BuilderListadoViasLarge(
+                          via: viewModel.viasMain.data?.vias,
+                          selectedDevice: viewModel.selectedDevice,
+                          status: viewModel.viasMain.status,
+                          message: viewModel.viasMain.message,
+                        ),
+                  Navigation(
+                      selectedDevice: viewModel.selectedDevice,
+                      pos: pos,
+                      colorBadd: viewModel.colorBAdd),
+                ])),
+          );
         }));
   }
 

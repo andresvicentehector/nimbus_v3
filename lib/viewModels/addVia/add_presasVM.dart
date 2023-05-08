@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:Nimbus/views/z_widgets_comunes/utils/navigationFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
 import '../../template/configuration/ConstantesPropias.dart';
-import '../../views/addVia/addVia_screen/add_via_screen.dart';
 import '../../views/wall/add_edit_wallBuilder/wall15.dart';
 import '../../views/wall/add_edit_wallBuilder/wall25.dart';
 
@@ -35,10 +35,10 @@ class AddPresasVM extends ChangeNotifier {
         connection = _connection;
         if (presas.isEmpty) {
           _sendMessage('clear');
-          print('Que se le envia: se le envía un clear');
+          //print('Que se le envia: se le envía un clear');
         } else {
           _sendMessage(presas.join(","));
-          print('Que se le envia:' + presas.join(","));
+          //print('Que se le envia:' + presas.join(","));
         }
         notifyListeners();
         isConnecting = false;
@@ -52,11 +52,11 @@ class AddPresasVM extends ChangeNotifier {
           // If we except the disconnection, `onDone` should be fired as result.
           // If we didn't except this (no flag set), it means closing by remote.
           if (isDisconnecting) {
-            print('Disconnecting locally!');
+            //print('Disconnecting locally!');
             isConnecting = false;
             falloConexion = true;
           } else {
-            print('Disconnected remotely!');
+            //print('Disconnected remotely!');
             isConnecting = false;
             falloConexion = true;
             reconnect(server);
@@ -65,7 +65,7 @@ class AddPresasVM extends ChangeNotifier {
           notifyListeners();
         });
       }).catchError((e) {
-        print('Cannot connect, exception occured');
+        //print('Cannot connect, exception occured');
         //print(e);
         isConnecting = false;
         if (contador >= 3) {
@@ -90,7 +90,7 @@ class AddPresasVM extends ChangeNotifier {
     }
 
     try {
-      print('reconecting');
+      //print('reconecting');
       isConnecting = true;
       await connect(server);
     } catch (e) {
@@ -108,7 +108,7 @@ class AddPresasVM extends ChangeNotifier {
     }
 
     try {
-      print('reconecting');
+      //print('reconecting');
       isConnecting = true;
     } catch (e) {
       throw e;
@@ -191,15 +191,7 @@ class AddPresasVM extends ChangeNotifier {
 
   void navigatetoAddScreen(BuildContext context) async {
     connection?.dispose();
-    await Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) {
-          return AddScreen(
-            presas: presas,
-          );
-        },
-      ),
-    );
+    navigateToAddScreener(context, presas);
   }
 }
 

@@ -125,4 +125,91 @@ abstract class Strings {
 
   String get escalarViaScreenConnecting;
   String get escalarViaScreenComeBacktoListView;
+  String get escalarViaScreenSomeoneisConnected;
+
+  //loginScreen
+
+  String get loginScreenWellcome;
+  String get loginScreenSingIn;
+  String get loginScreenUserName;
+  String get loginScreenInsertUserName;
+  String get loginScreenPassword;
+  String get loginScreenInsertPassword;
+  String get loginScreenForgotPassword;
+  String get loginScreenSignIn;
+  String get loginScreenDontHaveAnAcount;
+  String get loginScreenCreateAnAcount;
+  String get loginScreenAccessWithGoogle;
+
+  //RegisterScreen
+
+  String get registerScreenName;
+  String get registerScreenWritteName;
+  String get registerScreenNick;
+  String get registerScreenWritteNick;
+  String get registerScreenEmail;
+  String get registerScreenWritteEmail;
+  String get registerScreenPassword;
+  String get registerScreenWrittePassword;
+  String get registerScreenRepeatPassword;
+  String get registerScreenWritteRepeatPassword;
+  String get registerScreenEnterValidEmail;
+  String get registerScreenEnterValidPassword;
+  String get registerScreenEnterValidPasswordMayusAndNumber;
+  String get registerScreenPasswordDontMatch;
+  String get registerScreenYouMustAcceptTerms;
+
+  String get registerScreenAcceptTerms;
+  String get registerScreenRegister;
+
+  //ProfileScreen
+
+  String get profileScreenAppBar;
+  String get profileScreenUserInfo;
+  String get profileScreenEmail;
+  String get profileScreenDrawerAppbar;
+  String get profileScreenDrawerSettings;
+  String get profileScreenDrawerLogOut;
+  String get profileScreenDrawerEditUser;
+  String get profileScreenDrawerChangePassword;
+
+  //forgotPasword
+
+  String get forgotPasswordtittle;
+  String get forgotPasswordsubtittle;
+  String get forgotPasswordText;
+  String get forgotPasswordEmail;
+  String get forgotPasswordEmailDescription;
+  String get forgotPasswordEmailValidation;
+  String get forgotPasswordSendButton;
+  String get forgotPasswordEmailCantBeEmpty;
+  String get forgotPasswordRemember;
+  String get forgotPasswordLogin;
+
+  //forgotPassword Verification
+
+  //Change Password
+  String get changePasswordAppBar;
+  String get changePasswordTittle;
+  String get changePasswordSubTittle;
+  String get changePasswordPassword;
+  String get changePasswordEnterPassword;
+  String get changePasswordRepeatPassword;
+  String get changePasswordEnterRepeatPassword;
+  String get changePasswordChange;
+
+  //change User Info
+
+  //RegisterScreen
+  String get changeUserInfoAppBar;
+  String get changeUserInfoName;
+  String get changeUserInfoWritteName;
+  String get changeUserInfoNick;
+  String get changeUserInfoWritteNick;
+  String get changeUserInfoEmail;
+  String get changeUserInfoWritteEmail;
+
+  String get changeUserInfoEnterValidEmail;
+
+  String get changeUserInfoRegister;
 }

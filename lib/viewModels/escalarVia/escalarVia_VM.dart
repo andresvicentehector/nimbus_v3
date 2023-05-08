@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:Nimbus/template/colors/ColorsFixed.dart';
+import 'package:Nimbus/views/z_widgets_comunes/utils/navigationFunctions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
@@ -48,7 +49,7 @@ class EscalarViaVM extends ChangeNotifier {
 
   //the only way to access to movie list from the ui
   Future<void> erraseVia(String id) async {
-    print("id " + id);
+    //print("id " + id);
     if (await InternetConnectionChecker().hasConnection) {
       _deleteViasMain(ApiResponse.loading());
 
@@ -77,9 +78,9 @@ class EscalarViaVM extends ChangeNotifier {
 
         connection!.input!.listen(_onDataReceived).onDone(() {
           if (isDisconnecting) {
-            print('Disconnecting locally!');
+            //print('Disconnecting locally!');
           } else {
-            print('Disconnected remotely!');
+            //print('Disconnected remotely!');
           }
 
           notifyListeners();
@@ -187,7 +188,7 @@ class EscalarViaVM extends ChangeNotifier {
   Future eliminarVia(BuildContext context, String id) async {
     //  await box.delete(widget.xKey);
     await erraseVia(id);
-    await Navigator.pushReplacementNamed(context, '/');
+    navigateToListadoScreener(context);
     notifyListeners();
   }
 
@@ -201,7 +202,7 @@ class EscalarViaVM extends ChangeNotifier {
     }
 
     try {
-      print('reconecting');
+      //print('reconecting');
       isConnecting = true;
       await connect(server);
     } catch (e) {
@@ -218,7 +219,7 @@ class EscalarViaVM extends ChangeNotifier {
       }
 
       reconnect(server).catchError((e) {
-        print('Failed to reconnect: $e');
+        //print('Failed to reconnect: $e');
       });
     });
     notifyListeners();

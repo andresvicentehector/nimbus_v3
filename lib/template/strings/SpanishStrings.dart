@@ -255,4 +255,202 @@ class SpanishStrings implements Strings {
   @override
   String get escalarViaScreenComeBacktoListView =>
       'Vuelve a la pantalla anterior';
+
+  @override
+  String get escalarViaScreenSomeoneisConnected => "Alguien  está  conectado";
+
+  @override
+  String get loginScreenSingIn => "Inicia sesión en tu cuenta";
+
+  @override
+  String get loginScreenWellcome => "Hola!";
+
+  @override
+  String get loginScreenInsertUserName => "Introduce tu usuario";
+
+  @override
+  String get loginScreenUserName => "User Name";
+
+  @override
+  String get loginScreenInsertPassword => "Introduce la contraseña";
+
+  @override
+  String get loginScreenPassword => "Password";
+
+  @override
+  String get loginScreenForgotPassword => "Olvidaste la contraseña?";
+
+  @override
+  String get loginScreenCreateAnAcount => "Regístrate";
+
+  @override
+  String get loginScreenDontHaveAnAcount => "No tienes cuenta? ";
+
+  @override
+  String get loginScreenSignIn => "Accede";
+
+  @override
+  String get loginScreenAccessWithGoogle => "Continua con Google";
+  @override
+  String get registerScreenAcceptTerms => " Acepto los términos y condiciones";
+
+  @override
+  String get registerScreenEmail => "Email ";
+
+  @override
+  String get registerScreenName => "Nombre Completo";
+
+  @override
+  String get registerScreenNick => "UserName";
+
+  @override
+  String get registerScreenPassword => "Password";
+
+  @override
+  String get registerScreenRegister => "Regístrate";
+
+  @override
+  String get registerScreenWritteEmail => "Introduce tu email";
+
+  @override
+  String get registerScreenWritteName => "Introduce tu nombre y apellidos";
+
+  @override
+  String get registerScreenWritteNick => "Así te encontrarán en la app";
+
+  @override
+  String get registerScreenWrittePassword => "Introduce tu contraseña";
+
+  @override
+  String get registerScreenRepeatPassword => "Repite tu contraseña";
+
+  @override
+  String get registerScreenWritteRepeatPassword =>
+      "Introduce tu contraseña de nuevo";
+
+  @override
+  String get registerScreenEnterValidEmail => "Introduce un email válido";
+
+  @override
+  String get registerScreenEnterValidPassword => "Introduce una contraseña";
+
+  @override
+  String get registerScreenEnterValidPasswordMayusAndNumber =>
+      "Debe contener un número, una mayúscula y 8 o más carácteres";
+
+  @override
+  String get registerScreenPasswordDontMatch => "Las contraseñas no coinciden";
+
+  @override
+  String get registerScreenYouMustAcceptTerms =>
+      "Debes aceptar los términos y condiciones";
+
+  @override
+  String get profileScreenAppBar => "Usuario";
+
+  @override
+  String get profileScreenDrawerAppbar => "Nimbus Wall";
+
+  @override
+  String get profileScreenDrawerChangePassword => "Cambiar Contraseña";
+
+  @override
+  String get profileScreenDrawerLogOut => "Cerrar Sesión";
+
+  @override
+  String get profileScreenDrawerSettings => "Settings";
+
+  @override
+  String get profileScreenEmail => "Email";
+
+  @override
+  String get profileScreenUserInfo => "Tus datos de usuario:";
+
+  @override
+  String get profileScreenDrawerEditUser => "Editar Información";
+
+  @override
+  String get forgotPasswordEmail => "Email";
+
+  @override
+  String get forgotPasswordEmailCantBeEmpty =>
+      "Este campo no puede quedar vacío";
+
+  @override
+  String get forgotPasswordEmailDescription => "Escribe tu email";
+
+  @override
+  String get forgotPasswordEmailValidation => "Introduce un email válido";
+
+  @override
+  String get forgotPasswordSendButton => "Enviar";
+
+  @override
+  String get forgotPasswordText =>
+      "Te enviaremos un email para cambiar tu contraseña";
+
+  @override
+  String get forgotPasswordsubtittle =>
+      "Introduce el email asociado a tu cuenta";
+
+  @override
+  String get forgotPasswordtittle => "Olvidaste la contraseña?";
+
+  @override
+  String get forgotPasswordLogin => "Login";
+
+  @override
+  String get forgotPasswordRemember => "Recuerdas tu contraseña? ";
+
+  @override
+  String get changePasswordAppBar => "Cambia tu contraseña";
+
+  @override
+  String get changePasswordChange => "Cambiar";
+
+  @override
+  String get changePasswordEnterPassword => "Introduce la contraseña";
+
+  @override
+  String get changePasswordEnterRepeatPassword => "Repítela";
+
+  @override
+  String get changePasswordPassword => "Nueva Contraseña";
+
+  @override
+  String get changePasswordRepeatPassword => "Repite la contraseña";
+
+  @override
+  String get changePasswordSubTittle =>
+      "Introduce la nueva contraseña en los campos";
+
+  @override
+  String get changePasswordTittle => "Contraseña nueva?";
+
+  @override
+  String get changeUserInfoAppBar => "Edita tu información";
+
+  @override
+  String get changeUserInfoEmail => "Email";
+
+  @override
+  String get changeUserInfoEnterValidEmail => "Introduce un email válido";
+
+  @override
+  String get changeUserInfoName => "Nombre Completo";
+
+  @override
+  String get changeUserInfoNick => "Nombre de usuario";
+
+  @override
+  String get changeUserInfoRegister => "Cambiar";
+
+  @override
+  String get changeUserInfoWritteEmail => "Introduce tu nuevo email";
+
+  @override
+  String get changeUserInfoWritteName => "Introduce tu nombre completo";
+
+  @override
+  String get changeUserInfoWritteNick => "Escribe tu nombre de usuario";
 }

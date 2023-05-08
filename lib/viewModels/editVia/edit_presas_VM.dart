@@ -26,7 +26,7 @@ class EditPresasVM extends ChangeNotifier {
   void mandarPresasAPared(
       BluetoothConnection? connection, List<String> presas) {
     if (connection != null) {
-      print('hector hemos enviao');
+      //print('hector hemos enviao');
       sendMessage(presas.join(","));
     }
   }

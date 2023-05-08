@@ -4,7 +4,6 @@ import 'package:Nimbus/views/bluettothSetings/setings_screen.dart';
 import 'package:Nimbus/views/addVia/addPresas_screen/add_presas_screen.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:Nimbus/views/escalarVia/escalar_screen.dart';
 import 'package:Nimbus/views/juegos/jugar_screen.dart';
@@ -102,11 +101,11 @@ class _NavigationState extends State<Navigation> {
         });
 
         if (pos == 1) {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => ListadoScreen(),
-            ),
-          );
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                builder: (context) => ListadoScreen(),
+              ),
+              (route) => false);
         } else if (pos == 2) {
           if (indexData != null && widget.selectedDevice != null) {
             Navigator.of(context).push(
